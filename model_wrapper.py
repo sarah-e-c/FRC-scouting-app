@@ -140,7 +140,7 @@ class FRCModel():
             print(X.columns)
             
             self.y_test = X.pop('winning_alliance').map(lambda x: x+1)
-            X = X.pop('event_key')
+            X.pop('event_key')
 
         self.predict_weeks=included_weeks
         return self.model.predict(X)
