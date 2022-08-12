@@ -1,0 +1,10 @@
+level_0,comp_level,event_key,key,match_number,set_number,winning_alliance,team_keys,team_alliance,Teammate1,Teammate2,Teammate3,Opponent1,Opponent2,Opponent3,Taxied,Hang,TeamAutoLower,TeamAutoUpper,TeamTeleopLower,TeamTeleopUpper,TotalTeamPoints,WonGame,Week
+1221,qm,2022casd,2022casd_qm8,8,1,red,"['frc6695', 'frc5474', 'frc5025', 'frc3328', 'frc4139', 'frc8891']",blue,frc3328,frc4139,frc8891,frc6695,frc5474,frc5025,No,None,0,0,0,0,15,No,2
+1149,qm,2022casd,2022casd_qm14,14,1,red,"['frc4419', 'frc8891', 'frc2102', 'frc3341', 'frc2710', 'frc3020']",red,frc4419,frc8891,frc2102,frc3341,frc2710,frc3020,No,None,0,4,0,10,62,Yes,2
+1157,qm,2022casd,2022casd_qm21,21,1,red,"['frc4919', 'frc4160', 'frc2658', 'frc8891', 'frc5851', 'frc3008']",blue,frc8891,frc5851,frc3008,frc4919,frc4160,frc2658,No,None,0,1,0,3,24,No,2
+1172,qm,2022casd,2022casd_qm35,35,1,blue,"['frc4114', 'frc1266', 'frc4738', 'frc3647', 'frc3255', 'frc8891']",blue,frc3647,frc3255,frc8891,frc4114,frc1266,frc4738,Yes,None,0,2,1,15,66,Yes,2
+1181,qm,2022casd,2022casd_qm43,43,1,red,"['frc3882', 'frc8891', 'frc6560', 'frc8870', 'frc812', 'frc968']",red,frc3882,frc8891,frc6560,frc8870,frc812,frc968,Yes,None,0,2,0,10,50,Yes,2
+1190,qm,2022casd,2022casd_qm51,51,1,red,"['frc1197', 'frc2658', 'frc8891', 'frc4019', 'frc3882', 'frc1572']",red,frc1197,frc2658,frc8891,frc4019,frc3882,frc1572,Yes,None,1,1,16,2,48,Yes,2
+1198,qm,2022casd,2022casd_qm59,59,1,red,"['frc1972', 'frc4984', 'frc3704', 'frc8891', 'frc3965', 'frc8119']",blue,frc8891,frc3965,frc8119,frc1972,frc4984,frc3704,Yes,None,1,0,11,0,21,No,2
+1204,qm,2022casd,2022casd_qm64,64,1,blue,"['frc4019', 'frc8891', 'frc8870', 'frc1622', 'frc3965', 'frc4270']",red,frc4019,frc8891,frc8870,frc1622,frc3965,frc4270,Yes,None,1,0,3,0,25,No,2
+1213,qm,2022casd,2022casd_qm72,72,1,red,"['frc8891', 'frc1622', 'frc5285', 'frc7415', 'frc3749', 'frc8006']",red,frc8891,frc1622,frc5285,frc7415,frc3749,frc8006,Yes,None,0,2,0,3,45,Yes,2

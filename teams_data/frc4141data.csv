@@ -1,0 +1,12 @@
+level_0,comp_level,event_key,key,match_number,set_number,winning_alliance,team_keys,team_alliance,Teammate1,Teammate2,Teammate3,Opponent1,Opponent2,Opponent3,Taxied,Hang,TeamAutoLower,TeamAutoUpper,TeamTeleopLower,TeamTeleopUpper,TotalTeamPoints,WonGame,Week
+836,qm,2022caoc,2022caoc_qm2,2,1,blue,"['frc4141', 'frc8521', 'frc7230', 'frc3309', 'frc867', 'frc1661']",red,frc4141,frc8521,frc7230,frc3309,frc867,frc1661,Yes,None,1,0,7,0,17,No,1
+900,qm,2022caoc,2022caoc_qm8,8,1,red,"['frc8521', 'frc7157', 'frc1339', 'frc4141', 'frc5500', 'frc7042']",blue,frc4141,frc5500,frc7042,frc8521,frc7157,frc1339,Yes,None,0,1,0,5,32,No,1
+833,qm,2022caoc,2022caoc_qm17,17,1,blue,"['frc3952', 'frc4141', 'frc3476', 'frc2429', 'frc4322', 'frc5199']",red,frc3952,frc4141,frc3476,frc2429,frc4322,frc5199,Yes,None,1,4,4,13,73,No,1
+840,qm,2022caoc,2022caoc_qm23,23,1,red,"['frc3880', 'frc3020', 'frc5802', 'frc4141', 'frc1339', 'frc597']",blue,frc4141,frc1339,frc597,frc3880,frc3020,frc5802,Yes,None,1,4,13,2,51,No,1
+846,qm,2022caoc,2022caoc_qm29,29,1,blue,"['frc4079', 'frc3020', 'frc4141', 'frc4999', 'frc4322', 'frc597']",red,frc4079,frc3020,frc4141,frc4999,frc4322,frc597,Yes,None,0,0,2,1,10,No,1
+859,qm,2022caoc,2022caoc_qm40,40,1,blue,"['frc8888', 'frc4141', 'frc687', 'frc6499', 'frc294', 'frc7157']",red,frc8888,frc4141,frc687,frc6499,frc294,frc7157,Yes,None,2,0,5,0,19,No,1
+865,qm,2022caoc,2022caoc_qm46,46,1,red,"['frc4201', 'frc5805', 'frc3473', 'frc7157', 'frc867', 'frc4141']",blue,frc7157,frc867,frc4141,frc4201,frc5805,frc3473,Yes,None,0,2,2,12,40,No,1
+872,qm,2022caoc,2022caoc_qm52,52,1,red,"['frc1339', 'frc7447', 'frc5835', 'frc4141', 'frc4123', 'frc4201']",blue,frc4141,frc4123,frc4201,frc1339,frc7447,frc5835,Yes,None,2,0,7,6,35,No,1
+877,qm,2022caoc,2022caoc_qm57,57,1,red,"['frc6072', 'frc4400', 'frc4201', 'frc5805', 'frc3408', 'frc4141']",blue,frc5805,frc3408,frc4141,frc6072,frc4400,frc4201,Yes,None,1,0,0,2,10,No,1
+885,qm,2022caoc,2022caoc_qm64,64,1,blue,"['frc6220', 'frc6072', 'frc3408', 'frc7447', 'frc4322', 'frc4141']",blue,frc7447,frc4322,frc4141,frc6220,frc6072,frc3408,Yes,None,1,1,4,4,30,Yes,1
+895,qm,2022caoc,2022caoc_qm73,73,1,blue,"['frc5199', 'frc4123', 'frc5500', 'frc4276', 'frc4141', 'frc987']",blue,frc4276,frc4141,frc987,frc5199,frc4123,frc5500,Yes,Low,1,5,0,13,75,Yes,1

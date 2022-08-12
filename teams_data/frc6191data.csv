@@ -1,0 +1,11 @@
+level_0,comp_level,event_key,key,match_number,set_number,winning_alliance,team_keys,team_alliance,Teammate1,Teammate2,Teammate3,Opponent1,Opponent2,Opponent3,Taxied,Hang,TeamAutoLower,TeamAutoUpper,TeamTeleopLower,TeamTeleopUpper,TotalTeamPoints,WonGame,Week
+12228,qm,2022tant,2022tant_qm2,2,1,blue,"['frc8585', 'frc8595', 'frc6083', 'frc6947', 'frc6191', 'frc8806']",blue,frc6947,frc6191,frc8806,frc8585,frc8595,frc6083,No,None,0,1,0,1,34,Yes,0
+12218,qm,2022tant,2022tant_qm10,10,1,red,"['frc7741', 'frc6191', 'frc7497', 'frc8806', 'frc7130', 'frc7551']",red,frc7741,frc6191,frc7497,frc8806,frc7130,frc7551,Yes,None,0,0,0,5,34,Yes,0
+12226,qm,2022tant,2022tant_qm18,18,1,red,"['frc7632', 'frc7645', 'frc8584', 'frc6191', 'frc8805', 'frc8585']",blue,frc6191,frc8805,frc8585,frc7632,frc7645,frc8584,No,None,1,1,0,0,6,No,0
+12231,qm,2022tant,2022tant_qm22,22,1,red,"['frc8807', 'frc8020', 'frc7589', 'frc7645', 'frc6191', 'frc7130']",blue,frc7645,frc6191,frc7130,frc8807,frc8020,frc7589,Yes,None,2,0,2,1,41,No,0
+12236,qm,2022tant,2022tant_qm27,27,1,red,"['frc7741', 'frc8805', 'frc6998', 'frc7527', 'frc8569', 'frc6191']",blue,frc7527,frc8569,frc6191,frc7741,frc8805,frc6998,Yes,None,0,0,0,4,33,No,0
+12241,qm,2022tant,2022tant_qm31,31,1,blue,"['frc8790', 'frc8169', 'frc6191', 'frc7497', 'frc7636', 'frc7527']",red,frc8790,frc8169,frc6191,frc7497,frc7636,frc7527,Yes,None,0,1,0,3,16,No,0
+12248,qm,2022tant,2022tant_qm38,38,1,blue,"['frc6191', 'frc7709', 'frc7526', 'frc8584', 'frc8723', 'frc8790']",red,frc6191,frc7709,frc7526,frc8584,frc8723,frc8790,No,None,0,2,0,6,28,No,0
+12253,qm,2022tant,2022tant_qm42,42,1,red,"['frc7551', 'frc7673', 'frc8894', 'frc6191', 'frc8584', 'frc8503']",blue,frc6191,frc8584,frc8503,frc7551,frc7673,frc8894,Yes,None,0,1,0,1,12,No,0
+12264,qm,2022tant,2022tant_qm52,52,1,red,"['frc8725', 'frc7632', 'frc6191', 'frc8270', 'frc7526', 'frc8121']",red,frc8725,frc7632,frc6191,frc8270,frc7526,frc8121,Yes,None,0,2,1,11,43,Yes,0
+12269,qm,2022tant,2022tant_qm57,57,1,blue,"['frc6191', 'frc8176', 'frc7589', 'frc8121', 'frc8585', 'frc8129']",red,frc6191,frc8176,frc7589,frc8121,frc8585,frc8129,No,None,1,0,0,4,18,No,0

@@ -1,0 +1,12 @@
+level_0,comp_level,event_key,key,match_number,set_number,winning_alliance,team_keys,team_alliance,Teammate1,Teammate2,Teammate3,Opponent1,Opponent2,Opponent3,Taxied,Hang,TeamAutoLower,TeamAutoUpper,TeamTeleopLower,TeamTeleopUpper,TotalTeamPoints,WonGame,Week
+4252,qm,2022lake,2022lake_qm3,3,1,red,"['frc3932', 'frc2221', 'frc3606', 'frc5965', 'frc1912', 'frc2183']",red,frc3932,frc2221,frc3606,frc5965,frc1912,frc2183,Yes,None,1,1,2,7,51,Yes,4
+4234,qm,2022lake,2022lake_qm13,13,1,red,"['frc1421', 'frc364', 'frc3606', 'frc5863', 'frc2183', 'frc5785']",red,frc1421,frc364,frc3606,frc5863,frc2183,frc5785,No,None,0,4,0,20,85,Yes,4
+4242,qm,2022lake,2022lake_qm20,20,1,blue,"['frc4336', 'frc3606', 'frc2183', 'frc3753', 'frc3468', 'frc233']",red,frc4336,frc3606,frc2183,frc3753,frc3468,frc233,Yes,None,1,2,6,3,38,No,4
+4249,qm,2022lake,2022lake_qm27,27,1,red,"['frc7661', 'frc4336', 'frc2221', 'frc5785', 'frc3606', 'frc8808']",blue,frc5785,frc3606,frc8808,frc7661,frc4336,frc2221,Yes,None,2,0,3,0,17,No,4
+4257,qm,2022lake,2022lake_qm34,34,1,red,"['frc2992', 'frc4087', 'frc3616', 'frc456', 'frc5872', 'frc3606']",blue,frc456,frc5872,frc3606,frc2992,frc4087,frc3616,No,None,3,1,12,2,36,No,4
+4265,qm,2022lake,2022lake_qm41,41,1,blue,"['frc8808', 'frc4355', 'frc8118', 'frc3606', 'frc8732', 'frc118']",blue,frc3606,frc8732,frc118,frc8808,frc4355,frc8118,Yes,None,1,4,6,23,97,Yes,4
+4269,qm,2022lake,2022lake_qm45,45,1,blue,"['frc3606', 'frc3753', 'frc1912', 'frc456', 'frc1421', 'frc5997']",red,frc3606,frc3753,frc1912,frc456,frc1421,frc5997,Yes,None,1,1,5,7,51,No,4
+4278,qm,2022lake,2022lake_qm53,53,1,red,"['frc8418', 'frc8044', 'frc4978', 'frc3606', 'frc4355', 'frc3468']",blue,frc3606,frc4355,frc3468,frc8418,frc8044,frc4978,Yes,None,2,0,5,2,25,No,4
+4287,qm,2022lake,2022lake_qm61,61,1,red,"['frc2221', 'frc5872', 'frc1818', 'frc8418', 'frc3606', 'frc7428']",blue,frc8418,frc3606,frc7428,frc2221,frc5872,frc1818,Yes,None,1,1,4,0,20,No,4
+4291,qm,2022lake,2022lake_qm65,65,1,red,"['frc8044', 'frc3606', 'frc2992', 'frc7094', 'frc1818', 'frc7834']",red,frc8044,frc3606,frc2992,frc7094,frc1818,frc7834,Yes,None,1,5,1,33,114,Yes,4
+4301,qm,2022lake,2022lake_qm74,74,1,red,"['frc3606', 'frc2080', 'frc4087', 'frc2078', 'frc2190', 'frc1421']",red,frc3606,frc2080,frc4087,frc2078,frc2190,frc1421,Yes,None,1,3,9,10,59,Yes,4

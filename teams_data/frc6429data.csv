@@ -1,0 +1,23 @@
+level_0,comp_level,event_key,key,match_number,set_number,winning_alliance,team_keys,team_alliance,Teammate1,Teammate2,Teammate3,Opponent1,Opponent2,Opponent3,Taxied,Hang,TeamAutoLower,TeamAutoUpper,TeamTeleopLower,TeamTeleopUpper,TotalTeamPoints,WonGame,Week
+12378,qf,2022tuis,2022tuis_qf1m1,1,1,blue,"['frc7536', 'frc6232', 'frc6025', 'frc6429', 'frc2905', 'frc5993']",blue,frc6429,frc2905,frc5993,frc7536,frc6232,frc6025,Yes,Mid,1,0,1,3,59,Yes,2
+12379,qf,2022tuis,2022tuis_qf1m2,2,1,red,"['frc7536', 'frc6232', 'frc6025', 'frc6429', 'frc2905', 'frc5993']",blue,frc6429,frc2905,frc5993,frc7536,frc6232,frc6025,Yes,Mid,0,1,0,2,39,No,2
+12398,qm,2022tuis,2022tuis_qm2,2,1,blue,"['frc6429', 'frc7569', 'frc7439', 'frc7600', 'frc6431', 'frc8599']",red,frc6429,frc7569,frc7439,frc7600,frc6431,frc8599,Yes,Mid,1,0,1,0,17,No,2
+12477,qm,2022tuis3,2022tuis3_qm2,2,1,blue,"['frc6429', 'frc8034', 'frc6014', 'frc7228', 'frc6436', 'frc6064']",red,frc6429,frc8034,frc6014,frc7228,frc6436,frc6064,No,None,0,0,1,1,5,No,0
+12380,qf,2022tuis,2022tuis_qf1m3,3,1,red,"['frc7536', 'frc6232', 'frc6025', 'frc6429', 'frc2905', 'frc5993']",blue,frc6429,frc2905,frc5993,frc7536,frc6232,frc6025,Yes,None,1,1,2,4,26,No,2
+12521,qm,2022tuis3,2022tuis3_qm8,8,1,red,"['frc7570', 'frc8555', 'frc8828', 'frc6429', 'frc7458', 'frc7285']",blue,frc6429,frc7458,frc7285,frc7570,frc8555,frc8828,No,None,0,4,0,7,46,No,0
+12450,qm,2022tuis,2022tuis_qm9,9,1,red,"['frc8209', 'frc8743', 'frc6429', 'frc3390', 'frc8310', 'frc8862']",red,frc8209,frc8743,frc6429,frc3390,frc8310,frc8862,Yes,None,0,0,0,3,22,Yes,2
+12469,qm,2022tuis3,2022tuis3_qm12,12,1,blue,"['frc8264', 'frc6838', 'frc6025', 'frc7285', 'frc6436', 'frc6429']",blue,frc7285,frc6436,frc6429,frc8264,frc6838,frc6025,Yes,None,2,2,0,9,50,Yes,0
+12476,qm,2022tuis3,2022tuis3_qm19,19,1,blue,"['frc8166', 'frc8599', 'frc8079', 'frc7570', 'frc6429', 'frc8785']",blue,frc7570,frc6429,frc8785,frc8166,frc8599,frc8079,Yes,None,2,0,3,2,35,Yes,0
+12400,qm,2022tuis,2022tuis_qm21,21,1,red,"['frc8146', 'frc8795', 'frc6064', 'frc8863', 'frc6429', 'frc8407']",blue,frc8863,frc6429,frc8407,frc8146,frc8795,frc6064,No,Mid,0,0,1,2,11,No,2
+12482,qm,2022tuis3,2022tuis3_qm24,24,1,blue,"['frc6429', 'frc8079', 'frc8861', 'frc6014', 'frc6025', 'frc8555']",red,frc6429,frc8079,frc8861,frc6014,frc6025,frc8555,No,None,0,0,0,0,10,No,0
+12486,qm,2022tuis3,2022tuis3_qm28,28,1,red,"['frc7444', 'frc2905', 'frc8054', 'frc8828', 'frc6025', 'frc6429']",blue,frc8828,frc6025,frc6429,frc7444,frc2905,frc8054,Yes,None,0,1,1,5,19,No,0
+12407,qm,2022tuis,2022tuis_qm28,28,1,blue,"['frc6429', 'frc5655', 'frc7466', 'frc6417', 'frc8784', 'frc8863']",red,frc6429,frc5655,frc7466,frc6417,frc8784,frc8863,No,Mid,0,0,1,1,11,No,2
+12494,qm,2022tuis3,2022tuis3_qm35,35,1,red,"['frc6948', 'frc6429', 'frc8599', 'frc8861', 'frc8881', 'frc6989']",red,frc6948,frc6429,frc8599,frc8861,frc8881,frc6989,Yes,None,0,2,0,4,43,Yes,0
+12416,qm,2022tuis,2022tuis_qm36,36,1,red,"['frc8500', 'frc6232', 'frc8146', 'frc6429', 'frc4191', 'frc6902']",blue,frc6429,frc4191,frc6902,frc8500,frc6232,frc8146,Yes,None,0,3,0,3,24,No,2
+12498,qm,2022tuis3,2022tuis3_qm39,39,1,blue,"['frc6988', 'frc8881', 'frc6429', 'frc6948', 'frc6989', 'frc8799']",red,frc6988,frc8881,frc6429,frc6948,frc6989,frc8799,No,None,0,0,0,0,4,No,0
+12426,qm,2022tuis,2022tuis_qm45,45,1,red,"['frc7719', 'frc5993', 'frc8149', 'frc8146', 'frc6429', 'frc8070']",blue,frc8146,frc6429,frc8070,frc7719,frc5993,frc8149,Yes,Mid,1,2,1,0,21,No,2
+12506,qm,2022tuis3,2022tuis3_qm46,46,1,blue,"['frc6429', 'frc4972', 'frc2905', 'frc8881', 'frc7544', 'frc8599']",red,frc6429,frc4972,frc2905,frc8881,frc7544,frc8599,Yes,None,0,0,0,2,8,No,0
+12509,qm,2022tuis3,2022tuis3_qm49,49,1,red,"['frc6436', 'frc7458', 'frc6948', 'frc7444', 'frc8159', 'frc6429']",blue,frc7444,frc8159,frc6429,frc6436,frc7458,frc6948,Yes,None,0,1,0,2,26,No,0
+12432,qm,2022tuis,2022tuis_qm50,50,1,red,"['frc8755', 'frc7035', 'frc6429', 'frc4191', 'frc8042', 'frc5773']",red,frc8755,frc7035,frc6429,frc4191,frc8042,frc5773,Yes,None,1,1,3,3,31,Yes,2
+12516,qm,2022tuis3,2022tuis3_qm55,55,1,blue,"['frc8557', 'frc6429', 'frc6989', 'frc2905', 'frc7228', 'frc8861']",red,frc8557,frc6429,frc6989,frc2905,frc7228,frc8861,Yes,None,0,1,0,1,14,No,0
+12445,qm,2022tuis,2022tuis_qm62,62,1,red,"['frc8759', 'frc2905', 'frc6429', 'frc7742', 'frc7576', 'frc8220']",red,frc8759,frc2905,frc6429,frc7742,frc7576,frc8220,Yes,None,0,3,1,5,43,Yes,2

@@ -1,0 +1,11 @@
+level_0,comp_level,event_key,key,match_number,set_number,winning_alliance,team_keys,team_alliance,Teammate1,Teammate2,Teammate3,Opponent1,Opponent2,Opponent3,Taxied,Hang,TeamAutoLower,TeamAutoUpper,TeamTeleopLower,TeamTeleopUpper,TotalTeamPoints,WonGame,Week
+10237,qm,2022nyny,2022nyny_qm3,3,1,red,"['frc5298', 'frc20', 'frc7272', 'frc395', 'frc1601', 'frc4012']",blue,frc395,frc1601,frc4012,frc5298,frc20,frc7272,No,None,2,0,0,1,12,No,-1
+10217,qm,2022nyny,2022nyny_qm11,11,1,blue,"['frc2895', 'frc4012', 'frc6969', 'frc4122', 'frc6880', 'frc4571']",red,frc2895,frc4012,frc6969,frc4122,frc6880,frc4571,No,None,0,0,3,0,5,No,-1
+10227,qm,2022nyny,2022nyny_qm20,20,1,red,"['frc6911', 'frc7668', 'frc1796', 'frc335', 'frc4012', 'frc4027']",blue,frc335,frc4012,frc4027,frc6911,frc7668,frc1796,No,None,0,2,0,6,30,No,-1
+10233,qm,2022nyny,2022nyny_qm26,26,1,blue,"['frc2344', 'frc369', 'frc4012', 'frc7668', 'frc3004', 'frc694']",red,frc2344,frc369,frc4012,frc7668,frc3004,frc694,No,None,0,0,4,2,16,No,-1
+10242,qm,2022nyny,2022nyny_qm34,34,1,red,"['frc2601', 'frc3017', 'frc5421', 'frc4012', 'frc8346', 'frc6593']",blue,frc4012,frc8346,frc6593,frc2601,frc3017,frc5421,No,None,0,0,0,0,2,No,-1
+10253,qm,2022nyny,2022nyny_qm44,44,1,blue,"['frc3760', 'frc1601', 'frc743', 'frc6636', 'frc694', 'frc4012']",blue,frc6636,frc694,frc4012,frc3760,frc1601,frc743,No,None,0,4,0,22,74,Yes,-1
+10262,qm,2022nyny,2022nyny_qm52,52,1,blue,"['frc2895', 'frc334', 'frc335', 'frc4012', 'frc3204', 'frc20']",blue,frc4012,frc3204,frc20,frc2895,frc334,frc335,Yes,None,0,2,2,11,48,Yes,-1
+10275,qm,2022nyny,2022nyny_qm64,64,1,blue,"['frc6873', 'frc4012', 'frc1155', 'frc3950', 'frc2265', 'frc4299']",red,frc6873,frc4012,frc1155,frc3950,frc2265,frc4299,Yes,None,2,0,2,7,26,No,-1
+10284,qm,2022nyny,2022nyny_qm72,72,1,blue,"['frc2265', 'frc4012', 'frc7730', 'frc5806', 'frc354', 'frc8739']",red,frc2265,frc4012,frc7730,frc5806,frc354,frc8739,Yes,None,0,0,0,2,32,No,-1
+10290,qm,2022nyny,2022nyny_qm78,78,1,red,"['frc4012', 'frc5806', 'frc3760', 'frc7036', 'frc7504', 'frc8346']",red,frc4012,frc5806,frc3760,frc7036,frc7504,frc8346,Yes,None,0,1,0,4,30,Yes,-1

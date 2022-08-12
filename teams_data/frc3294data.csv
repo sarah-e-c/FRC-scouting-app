@@ -1,0 +1,12 @@
+level_0,comp_level,event_key,key,match_number,set_number,winning_alliance,team_keys,team_alliance,Teammate1,Teammate2,Teammate3,Opponent1,Opponent2,Opponent3,Taxied,Hang,TeamAutoLower,TeamAutoUpper,TeamTeleopLower,TeamTeleopUpper,TotalTeamPoints,WonGame,Week
+7564,qf,2022mndu,2022mndu_qf3m1,1,3,red,"['frc876', 'frc4607', 'frc2239', 'frc2264', 'frc3294', 'frc1675']",blue,frc2264,frc3294,frc1675,frc876,frc4607,frc2239,Yes,None,1,2,3,9,60,No,0
+7569,qm,2022mndu,2022mndu_qm1,1,1,blue,"['frc4741', 'frc5464', 'frc3294', 'frc2052', 'frc4656', 'frc6574']",red,frc4741,frc5464,frc3294,frc2052,frc4656,frc6574,Yes,Low,2,0,3,2,36,No,0
+7565,qf,2022mndu,2022mndu_qf3m2,2,3,red,"['frc876', 'frc4607', 'frc2239', 'frc2264', 'frc3294', 'frc1675']",blue,frc2264,frc3294,frc1675,frc876,frc4607,frc2239,Yes,Low,0,3,0,9,65,No,0
+7570,qm,2022mndu,2022mndu_qm10,10,1,blue,"['frc7048', 'frc6146', 'frc3122', 'frc4674', 'frc3294', 'frc3740']",blue,frc4674,frc3294,frc3740,frc7048,frc6146,frc3122,Yes,Mid,2,0,0,11,57,Yes,0
+7582,qm,2022mndu,2022mndu_qm21,21,1,red,"['frc5143', 'frc3197', 'frc3294', 'frc4230', 'frc7893', 'frc5348']",red,frc5143,frc3197,frc3294,frc4230,frc7893,frc5348,Yes,Low,3,0,5,6,53,Yes,0
+7592,qm,2022mndu,2022mndu_qm30,30,1,blue,"['frc5253', 'frc3276', 'frc6318', 'frc2531', 'frc5348', 'frc3294']",blue,frc2531,frc5348,frc3294,frc5253,frc3276,frc6318,Yes,Mid,3,1,2,10,44,Yes,0
+7604,qm,2022mndu,2022mndu_qm41,41,1,red,"['frc3294', 'frc5653', 'frc2264', 'frc2175', 'frc6047', 'frc3102']",red,frc3294,frc5653,frc2264,frc2175,frc6047,frc3102,Yes,Mid,1,3,1,8,64,Yes,0
+7622,qm,2022mndu,2022mndu_qm58,58,1,blue,"['frc2861', 'frc5464', 'frc5125', 'frc2526', 'frc3294', 'frc3058']",blue,frc2526,frc3294,frc3058,frc2861,frc5464,frc5125,Yes,Low,1,0,7,7,53,Yes,0
+7631,qm,2022mndu,2022mndu_qm66,66,1,red,"['frc3294', 'frc3275', 'frc4511', 'frc3291', 'frc5143', 'frc4009']",red,frc3294,frc3275,frc4511,frc3291,frc5143,frc4009,Yes,Mid,2,0,0,11,52,Yes,0
+7638,qm,2022mndu,2022mndu_qm72,72,1,blue,"['frc3294', 'frc5690', 'frc4238', 'frc5847', 'frc4511', 'frc4181']",red,frc3294,frc5690,frc4238,frc5847,frc4511,frc4181,Yes,Mid,2,0,2,4,30,No,0
+7644,qm,2022mndu,2022mndu_qm78,78,1,red,"['frc2227', 'frc3294', 'frc2977', 'frc3197', 'frc7311', 'frc2264']",red,frc2227,frc3294,frc2977,frc3197,frc7311,frc2264,Yes,Mid,1,1,4,8,59,Yes,0

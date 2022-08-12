@@ -1,0 +1,11 @@
+level_0,comp_level,event_key,key,match_number,set_number,winning_alliance,team_keys,team_alliance,Teammate1,Teammate2,Teammate3,Opponent1,Opponent2,Opponent3,Taxied,Hang,TeamAutoLower,TeamAutoUpper,TeamTeleopLower,TeamTeleopUpper,TotalTeamPoints,WonGame,Week
+10421,qm,2022nytr,2022nytr_qm3,3,1,blue,"['frc229', 'frc250', 'frc358', 'frc20', 'frc5149', 'frc263']",red,frc229,frc250,frc358,frc20,frc5149,frc263,Yes,None,0,0,0,2,8,No,1
+10402,qm,2022nytr,2022nytr_qm12,12,1,red,"['frc358', 'frc3044', 'frc4122', 'frc810', 'frc250', 'frc287']",blue,frc810,frc250,frc287,frc358,frc3044,frc4122,No,None,1,0,3,1,19,No,1
+10409,qm,2022nytr,2022nytr_qm19,19,1,red,"['frc7031', 'frc3314', 'frc7030', 'frc250', 'frc806', 'frc7718']",blue,frc250,frc806,frc7718,frc7031,frc3314,frc7030,No,None,0,0,0,3,10,No,1
+10418,qm,2022nytr,2022nytr_qm27,27,1,red,"['frc5881', 'frc145', 'frc6823', 'frc250', 'frc6300', 'frc5016']",blue,frc250,frc6300,frc5016,frc5881,frc145,frc6823,Yes,None,0,0,0,5,22,No,1
+10425,qm,2022nytr,2022nytr_qm33,33,1,blue,"['frc6402', 'frc6806', 'frc250', 'frc2234', 'frc287', 'frc2607']",red,frc6402,frc6806,frc250,frc2234,frc287,frc2607,Yes,None,0,0,0,2,18,No,1
+10433,qm,2022nytr,2022nytr_qm40,40,1,blue,"['frc3314', 'frc263', 'frc250', 'frc6401', 'frc2791', 'frc2601']",red,frc3314,frc263,frc250,frc6401,frc2791,frc2601,Yes,None,0,3,2,4,49,No,1
+10437,qm,2022nytr,2022nytr_qm44,44,1,red,"['frc5881', 'frc250', 'frc2234', 'frc1676', 'frc806', 'frc28']",red,frc5881,frc250,frc2234,frc1676,frc806,frc28,No,None,0,2,1,1,35,Yes,1
+10445,qm,2022nytr,2022nytr_qm51,51,1,red,"['frc2614', 'frc2095', 'frc263', 'frc2601', 'frc6621', 'frc250']",blue,frc2601,frc6621,frc250,frc2614,frc2095,frc263,Yes,None,1,1,7,3,37,No,1
+10456,qm,2022nytr,2022nytr_qm61,61,1,blue,"['frc7030', 'frc250', 'frc1860', 'frc4458', 'frc358', 'frc3015']",red,frc7030,frc250,frc1860,frc4458,frc358,frc3015,Yes,None,1,2,8,9,48,No,1
+10464,qm,2022nytr,2022nytr_qm69,69,1,red,"['frc250', 'frc333', 'frc1493', 'frc1860', 'frc6402', 'frc709']",red,frc250,frc333,frc1493,frc1860,frc6402,frc709,Yes,Traversal,1,4,8,17,91,Yes,1

@@ -1,0 +1,5 @@
+level_0,comp_level,event_key,key,match_number,set_number,winning_alliance,team_keys,team_alliance,Teammate1,Teammate2,Teammate3,Opponent1,Opponent2,Opponent3,Taxied,Hang,TeamAutoLower,TeamAutoUpper,TeamTeleopLower,TeamTeleopUpper,TotalTeamPoints,WonGame,Week
+99,qf,2022arli,2022arli_qf1m1,1,1,red,"['frc4635', 'frc16', 'frc6586', 'frc9988', 'frc9987', 'frc9989']",blue,frc9988,frc9987,frc9989,frc4635,frc16,frc6586,No,None,0,0,0,0,0,No,4
+14187,qf,2022waspo,2022waspo_qf1m1,1,1,red,"['frc3663', 'frc4089', 'frc8532', 'frc9988', 'frc9986', 'frc9990']",blue,frc9988,frc9986,frc9990,frc3663,frc4089,frc8532,No,None,4,0,13,9,39,No,4
+100,qf,2022arli,2022arli_qf1m2,2,1,red,"['frc4635', 'frc16', 'frc6586', 'frc9988', 'frc9987', 'frc9989']",blue,frc9988,frc9987,frc9989,frc4635,frc16,frc6586,No,None,0,0,0,0,0,No,4
+14188,qf,2022waspo,2022waspo_qf1m2,2,1,red,"['frc3663', 'frc4089', 'frc8532', 'frc9988', 'frc9986', 'frc9990']",blue,frc9988,frc9986,frc9990,frc3663,frc4089,frc8532,No,None,1,0,0,0,0,No,4

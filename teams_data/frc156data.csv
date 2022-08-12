@@ -1,0 +1,12 @@
+level_0,comp_level,event_key,key,match_number,set_number,winning_alliance,team_keys,team_alliance,Teammate1,Teammate2,Teammate3,Opponent1,Opponent2,Opponent3,Taxied,Hang,TeamAutoLower,TeamAutoUpper,TeamTeleopLower,TeamTeleopUpper,TotalTeamPoints,WonGame,Week
+11585,qm,2022paca,2022paca_qm7,7,1,blue,"['frc4467', 'frc5842', 'frc2053', 'frc2603', 'frc156', 'frc7515']",blue,frc2603,frc156,frc7515,frc4467,frc5842,frc2053,Yes,None,1,1,1,5,39,Yes,2
+11523,qm,2022paca,2022paca_qm13,13,1,red,"['frc1787', 'frc3954', 'frc144', 'frc156', 'frc3504', 'frc5492']",blue,frc156,frc3504,frc5492,frc1787,frc3954,frc144,No,None,2,0,8,0,35,No,2
+11531,qm,2022paca,2022paca_qm20,20,1,red,"['frc27', 'frc3539', 'frc3814', 'frc4050', 'frc4269', 'frc156']",blue,frc4050,frc4269,frc156,frc27,frc3539,frc3814,Yes,Mid,2,0,11,5,37,No,2
+11543,qm,2022paca,2022paca_qm31,31,1,blue,"['frc1708', 'frc2252', 'frc156', 'frc379', 'frc3201', 'frc695']",red,frc1708,frc2252,frc156,frc379,frc3201,frc695,Yes,Mid,0,4,2,2,34,No,2
+11549,qm,2022paca,2022paca_qm37,37,1,blue,"['frc1787', 'frc156', 'frc120', 'frc6834', 'frc4085', 'frc2252']",red,frc1787,frc156,frc120,frc6834,frc4085,frc2252,Yes,None,0,2,10,15,69,No,2
+11559,qm,2022paca,2022paca_qm46,46,1,red,"['frc5492', 'frc378', 'frc2614', 'frc3260', 'frc156', 'frc4145']",blue,frc3260,frc156,frc4145,frc5492,frc378,frc2614,Yes,High,0,0,0,13,52,No,2
+11565,qm,2022paca,2022paca_qm51,51,1,blue,"['frc117', 'frc3260', 'frc3201', 'frc156', 'frc554', 'frc5842']",blue,frc156,frc554,frc5842,frc117,frc3260,frc3201,Yes,Mid,0,2,1,7,50,Yes,2
+11573,qm,2022paca,2022paca_qm59,59,1,red,"['frc325', 'frc156', 'frc5740', 'frc4027', 'frc1708', 'frc302']",red,frc325,frc156,frc5740,frc4027,frc1708,frc302,Yes,Mid,0,2,0,15,65,Yes,2
+11579,qm,2022paca,2022paca_qm64,64,1,blue,"['frc291', 'frc4145', 'frc7460', 'frc7274', 'frc117', 'frc156']",blue,frc7274,frc117,frc156,frc291,frc4145,frc7460,Yes,Mid,0,0,2,0,33,Yes,2
+11591,qm,2022paca,2022paca_qm75,75,1,blue,"['frc156', 'frc4991', 'frc2656', 'frc4150', 'frc325', 'frc4269']",red,frc156,frc4991,frc2656,frc4150,frc325,frc4269,Yes,High,1,2,2,6,61,No,2
+11599,qm,2022paca,2022paca_qm82,82,1,blue,"['frc4547', 'frc6032', 'frc2051', 'frc7165', 'frc4150', 'frc156']",blue,frc7165,frc4150,frc156,frc4547,frc6032,frc2051,Yes,High,0,0,7,8,52,Yes,2

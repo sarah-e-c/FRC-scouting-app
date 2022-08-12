@@ -1,0 +1,21 @@
+level_0,comp_level,event_key,key,match_number,set_number,winning_alliance,team_keys,team_alliance,Teammate1,Teammate2,Teammate3,Opponent1,Opponent2,Opponent3,Taxied,Hang,TeamAutoLower,TeamAutoUpper,TeamTeleopLower,TeamTeleopUpper,TotalTeamPoints,WonGame,Week
+7766,qf,2022mnmi,2022mnmi_qf3m1,1,3,red,"['frc7028', 'frc2052', 'frc3082', 'frc4198', 'frc3018', 'frc4207']",blue,frc4198,frc3018,frc4207,frc7028,frc2052,frc3082,Yes,Traversal,0,6,1,9,93,No,-1
+7767,qf,2022mnmi,2022mnmi_qf3m2,2,3,red,"['frc7028', 'frc2052', 'frc3082', 'frc4198', 'frc3018', 'frc4207']",blue,frc4198,frc3018,frc4207,frc7028,frc2052,frc3082,Yes,Traversal,0,4,0,9,70,No,-1
+7998,qm,2022mnst,2022mnst_qm3,3,1,red,"['frc3130', 'frc8516', 'frc2470', 'frc3018', 'frc3883', 'frc3184']",blue,frc3018,frc3883,frc3184,frc3130,frc8516,frc2470,Yes,None,0,2,0,13,70,No,-1
+7847,qm,2022mnmi,2022mnmi_qm8,8,1,red,"['frc3018', 'frc2470', 'frc4198', 'frc7068', 'frc3630', 'frc2823']",red,frc3018,frc2470,frc4198,frc7068,frc3630,frc2823,Yes,High,0,5,0,19,95,Yes,-1
+7978,qm,2022mnst,2022mnst_qm11,11,1,red,"['frc3018', 'frc2847', 'frc2169', 'frc2220', 'frc3184', 'frc1816']",red,frc3018,frc2847,frc2169,frc2220,frc3184,frc1816,Yes,Traversal,0,3,0,20,94,Yes,-1
+7982,qm,2022mnst,2022mnst_qm15,15,1,blue,"['frc3018', 'frc5434', 'frc5653', 'frc2502', 'frc2169', 'frc2531']",red,frc3018,frc5434,frc5653,frc2502,frc2169,frc2531,Yes,Mid,0,6,0,19,104,No,-1
+7776,qm,2022mnmi,2022mnmi_qm15,15,1,blue,"['frc2502', 'frc4539', 'frc3018', 'frc3691', 'frc4198', 'frc2202']",red,frc2502,frc4539,frc3018,frc3691,frc4198,frc2202,Yes,None,0,7,2,17,95,No,-1
+7989,qm,2022mnst,2022mnst_qm21,21,1,blue,"['frc5434', 'frc2503', 'frc3293', 'frc2220', 'frc3018', 'frc4607']",blue,frc2220,frc3018,frc4607,frc5434,frc2503,frc3293,Yes,None,0,4,1,25,103,Yes,-1
+7783,qm,2022mnmi,2022mnmi_qm21,21,1,red,"['frc5541', 'frc4536', 'frc7028', 'frc3082', 'frc2518', 'frc3018']",blue,frc3082,frc2518,frc3018,frc5541,frc4536,frc7028,Yes,None,2,3,2,6,36,No,-1
+7995,qm,2022mnst,2022mnst_qm27,27,1,red,"['frc2531', 'frc3018', 'frc3630', 'frc3883', 'frc4728', 'frc5690']",red,frc2531,frc3018,frc3630,frc3883,frc4728,frc5690,Yes,Low,0,4,0,16,92,Yes,-1
+7796,qm,2022mnmi,2022mnmi_qm33,33,1,blue,"['frc7849', 'frc3751', 'frc2498', 'frc3018', 'frc3038', 'frc8878']",blue,frc3018,frc3038,frc8878,frc7849,frc3751,frc2498,Yes,Traversal,3,2,17,3,73,Yes,-1
+8004,qm,2022mnst,2022mnst_qm35,35,1,blue,"['frc5914', 'frc5653', 'frc2491', 'frc6453', 'frc3206', 'frc3018']",blue,frc6453,frc3206,frc3018,frc5914,frc5653,frc2491,Yes,High,1,4,5,14,79,Yes,-1
+8010,qm,2022mnst,2022mnst_qm40,40,1,blue,"['frc1816', 'frc6749', 'frc3018', 'frc2509', 'frc2052', 'frc6453']",red,frc1816,frc6749,frc3018,frc2509,frc2052,frc6453,Yes,Traversal,0,3,0,10,57,No,-1
+7809,qm,2022mnmi,2022mnmi_qm45,45,1,blue,"['frc3082', 'frc2264', 'frc3407', 'frc3630', 'frc3018', 'frc5434']",blue,frc3630,frc3018,frc5434,frc3082,frc2264,frc3407,Yes,None,0,3,0,9,60,Yes,-1
+8016,qm,2022mnst,2022mnst_qm46,46,1,blue,"['frc2503', 'frc2883', 'frc3018', 'frc3082', 'frc5434', 'frc3130']",red,frc2503,frc2883,frc3018,frc3082,frc5434,frc3130,Yes,None,1,4,0,26,91,No,-1
+7819,qm,2022mnmi,2022mnmi_qm54,54,1,red,"['frc2879', 'frc4632', 'frc3018', 'frc4624', 'frc3278', 'frc4229']",red,frc2879,frc4632,frc3018,frc4624,frc3278,frc4229,Yes,Traversal,1,5,4,0,51,Yes,-1
+7826,qm,2022mnmi,2022mnmi_qm60,60,1,red,"['frc3202', 'frc3018', 'frc4207', 'frc5299', 'frc3038', 'frc4632']",red,frc3202,frc3018,frc4207,frc5299,frc3038,frc4632,Yes,Traversal,1,7,2,6,80,Yes,-1
+7841,qm,2022mnmi,2022mnmi_qm74,74,1,red,"['frc525', 'frc5434', 'frc2181', 'frc3018', 'frc8516', 'frc3454']",blue,frc3018,frc8516,frc3454,frc525,frc5434,frc2181,Yes,High,0,3,1,4,52,No,-1
+7850,qm,2022mnmi,2022mnmi_qm82,82,1,blue,"['frc8787', 'frc2508', 'frc4539', 'frc4778', 'frc3018', 'frc2500']",blue,frc4778,frc3018,frc2500,frc8787,frc2508,frc4539,Yes,Traversal,0,4,0,13,71,Yes,-1
+7857,qm,2022mnmi,2022mnmi_qm89,89,1,red,"['frc3018', 'frc2052', 'frc6420', 'frc7038', 'frc3871', 'frc2515']",red,frc3018,frc2052,frc6420,frc7038,frc3871,frc2515,No,Traversal,0,5,0,32,113,Yes,-1

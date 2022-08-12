@@ -1,0 +1,11 @@
+level_0,comp_level,event_key,key,match_number,set_number,winning_alliance,team_keys,team_alliance,Teammate1,Teammate2,Teammate3,Opponent1,Opponent2,Opponent3,Taxied,Hang,TeamAutoLower,TeamAutoUpper,TeamTeleopLower,TeamTeleopUpper,TotalTeamPoints,WonGame,Week
+8433,qm,2022mxmo,2022mxmo_qm3,3,1,blue,"['frc6017', 'frc8244', 'frc8741', 'frc4775', 'frc8293', 'frc4371']",red,frc6017,frc8244,frc8741,frc4775,frc8293,frc4371,Yes,None,1,0,4,0,8,No,1
+8476,qm,2022mxmo,2022mxmo_qm8,8,1,blue,"['frc5696', 'frc8244', 'frc3510', 'frc6702', 'frc6647', 'frc8741']",blue,frc6702,frc6647,frc8741,frc5696,frc8244,frc3510,No,None,0,0,2,6,24,Yes,1
+8421,qm,2022mxmo,2022mxmo_qm19,19,1,,"['frc5948', 'frc5932', 'frc8741', 'frc3354', 'frc2283', 'frc5959']",red,frc5948,frc5932,frc8741,frc3354,frc2283,frc5959,No,None,0,0,1,0,3,Tie,1
+8430,qm,2022mxmo,2022mxmo_qm27,27,1,blue,"['frc5959', 'frc6832', 'frc8741', 'frc6606', 'frc3933', 'frc6694']",red,frc5959,frc6832,frc8741,frc6606,frc3933,frc6694,Yes,None,1,1,1,2,34,No,1
+8436,qm,2022mxmo,2022mxmo_qm32,32,1,red,"['frc3478', 'frc4723', 'frc3933', 'frc8741', 'frc5696', 'frc4403']",blue,frc8741,frc5696,frc4403,frc3478,frc4723,frc3933,No,None,0,0,0,7,22,No,1
+8443,qm,2022mxmo,2022mxmo_qm39,39,1,blue,"['frc4775', 'frc8741', 'frc5716', 'frc4635', 'frc3794', 'frc5932']",red,frc4775,frc8741,frc5716,frc4635,frc3794,frc5932,No,None,0,1,7,0,27,No,1
+8450,qm,2022mxmo,2022mxmo_qm45,45,1,red,"['frc7421', 'frc6348', 'frc6676', 'frc8740', 'frc8741', 'frc8776']",blue,frc8740,frc8741,frc8776,frc7421,frc6348,frc6676,No,None,0,0,0,0,6,No,1
+8454,qm,2022mxmo,2022mxmo_qm49,49,1,red,"['frc8740', 'frc5716', 'frc6702', 'frc8741', 'frc5887', 'frc4782']",blue,frc8741,frc5887,frc4782,frc8740,frc5716,frc6702,No,None,0,0,4,1,10,No,1
+8463,qm,2022mxmo,2022mxmo_qm57,57,1,red,"['frc6606', 'frc8741', 'frc4635', 'frc8734', 'frc5133', 'frc5948']",red,frc6606,frc8741,frc4635,frc8734,frc5133,frc5948,No,None,0,3,0,17,67,Yes,1
+8473,qm,2022mxmo,2022mxmo_qm66,66,1,red,"['frc8776', 'frc2283', 'frc4731', 'frc8741', 'frc7725', 'frc4010']",blue,frc8741,frc7725,frc4010,frc8776,frc2283,frc4731,No,None,0,1,0,1,18,No,1

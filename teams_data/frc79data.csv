@@ -1,0 +1,22 @@
+level_0,comp_level,event_key,key,match_number,set_number,winning_alliance,team_keys,team_alliance,Teammate1,Teammate2,Teammate3,Opponent1,Opponent2,Opponent3,Taxied,Hang,TeamAutoLower,TeamAutoUpper,TeamTeleopLower,TeamTeleopUpper,TotalTeamPoints,WonGame,Week
+2352,qm,2022flta,2022flta_qm2,2,1,red,"['frc1421', 'frc79', 'frc6473', 'frc3039', 'frc6722', 'frc8044']",red,frc1421,frc79,frc6473,frc3039,frc6722,frc8044,Yes,None,2,0,7,4,46,Yes,2
+2252,qm,2022flor,2022flor_qm2,2,1,red,"['frc4118', 'frc744', 'frc4024', 'frc801', 'frc1056', 'frc79']",blue,frc801,frc1056,frc79,frc4118,frc744,frc4024,Yes,None,0,0,11,3,19,No,1
+2407,qm,2022flta,2022flta_qm7,7,1,blue,"['frc5722', 'frc6184', 'frc79', 'frc8778', 'frc1421', 'frc5276']",red,frc5722,frc6184,frc79,frc8778,frc1421,frc5276,Yes,None,2,0,5,0,13,No,2
+2245,qm,2022flor,2022flor_qm13,13,1,red,"['frc4065', 'frc7072', 'frc1884', 'frc79', 'frc6850', 'frc6968']",blue,frc79,frc6850,frc6968,frc4065,frc7072,frc1884,No,None,0,0,5,0,5,No,1
+2347,qm,2022flta,2022flta_qm15,15,1,red,"['frc4065', 'frc4179', 'frc4576', 'frc8732', 'frc79', 'frc5816']",blue,frc8732,frc79,frc5816,frc4065,frc4179,frc4576,Yes,None,2,0,3,6,25,No,2
+2251,qm,2022flor,2022flor_qm19,19,1,,"['frc5145', 'frc5557', 'frc1523', 'frc8753', 'frc5472', 'frc79']",blue,frc8753,frc5472,frc79,frc5145,frc5557,frc1523,No,None,0,1,0,2,22,Tie,1
+2357,qm,2022flta,2022flta_qm24,24,1,blue,"['frc8788', 'frc7431', 'frc5997', 'frc4336', 'frc5276', 'frc79']",blue,frc4336,frc5276,frc79,frc8788,frc7431,frc5997,Yes,None,2,1,5,1,37,Yes,2
+2362,qm,2022flta,2022flta_qm29,29,1,red,"['frc386', 'frc2992', 'frc5410', 'frc79', 'frc7431', 'frc4179']",blue,frc79,frc7431,frc4179,frc386,frc2992,frc5410,Yes,None,1,0,2,5,24,No,2
+2266,qm,2022flor,2022flor_qm32,32,1,red,"['frc4065', 'frc5816', 'frc79', 'frc6527', 'frc1649', 'frc4013']",red,frc4065,frc5816,frc79,frc6527,frc1649,frc4013,Yes,None,1,0,9,0,29,Yes,1
+2370,qm,2022flta,2022flta_qm36,36,1,blue,"['frc6145', 'frc386', 'frc79', 'frc7431', 'frc5816', 'frc8778']",red,frc6145,frc386,frc79,frc7431,frc5816,frc8778,Yes,None,1,0,3,1,19,No,2
+2375,qm,2022flta,2022flta_qm40,40,1,red,"['frc6473', 'frc5816', 'frc4013', 'frc6722', 'frc79', 'frc5410']",blue,frc6722,frc79,frc5410,frc6473,frc5816,frc4013,Yes,None,1,2,6,4,30,No,2
+2279,qm,2022flor,2022flor_qm44,44,1,red,"['frc4481', 'frc8775', 'frc3242', 'frc79', 'frc6527', 'frc3937']",blue,frc79,frc6527,frc3937,frc4481,frc8775,frc3242,Yes,None,1,2,2,11,46,No,1
+2380,qm,2022flta,2022flta_qm45,45,1,blue,"['frc79', 'frc4576', 'frc2992', 'frc456', 'frc8044', 'frc8841']",red,frc79,frc4576,frc2992,frc456,frc8044,frc8841,Yes,None,0,2,0,11,40,No,2
+2387,qm,2022flta,2022flta_qm51,51,1,blue,"['frc3140', 'frc1902', 'frc6184', 'frc79', 'frc4013', 'frc456']",blue,frc79,frc4013,frc456,frc3140,frc1902,frc6184,Yes,None,2,1,23,0,41,Yes,2
+2291,qm,2022flor,2022flor_qm55,55,1,red,"['frc1592', 'frc6743', 'frc5283', 'frc3627', 'frc79', 'frc8841']",blue,frc3627,frc79,frc8841,frc1592,frc6743,frc5283,Yes,None,1,2,2,7,32,No,1
+2395,qm,2022flta,2022flta_qm59,59,1,red,"['frc1912', 'frc5722', 'frc386', 'frc8841', 'frc34', 'frc79']",blue,frc8841,frc34,frc79,frc1912,frc5722,frc386,Yes,None,1,1,7,5,31,No,2
+2298,qm,2022flor,2022flor_qm61,61,1,blue,"['frc6322', 'frc79', 'frc86', 'frc180', 'frc16', 'frc7611']",red,frc6322,frc79,frc86,frc180,frc16,frc7611,Yes,None,1,0,0,7,37,No,1
+2400,qm,2022flta,2022flta_qm63,63,1,blue,"['frc79', 'frc4562', 'frc86', 'frc1421', 'frc4187', 'frc5722']",red,frc79,frc4562,frc86,frc1421,frc4187,frc5722,Yes,None,1,0,13,6,39,No,2
+2404,qm,2022flta,2022flta_qm67,67,1,blue,"['frc8778', 'frc79', 'frc4187', 'frc86', 'frc2556', 'frc8044']",red,frc8778,frc79,frc4187,frc86,frc2556,frc8044,Yes,None,2,0,9,0,19,No,2
+2305,qm,2022flor,2022flor_qm68,68,1,blue,"['frc79', 'frc5145', 'frc2797', 'frc1797', 'frc6722', 'frc2425']",red,frc79,frc5145,frc2797,frc1797,frc6722,frc2425,Yes,None,2,0,5,0,21,No,1
+2320,qm,2022flor,2022flor_qm81,81,1,blue,"['frc2383', 'frc79', 'frc1884', 'frc7500', 'frc8753', 'frc3164']",red,frc2383,frc79,frc1884,frc7500,frc8753,frc3164,Yes,None,1,2,1,8,31,No,1

@@ -1,0 +1,11 @@
+level_0,comp_level,event_key,key,match_number,set_number,winning_alliance,team_keys,team_alliance,Teammate1,Teammate2,Teammate3,Opponent1,Opponent2,Opponent3,Taxied,Hang,TeamAutoLower,TeamAutoUpper,TeamTeleopLower,TeamTeleopUpper,TotalTeamPoints,WonGame,Week
+10184,qm,2022nyli2,2022nyli2_qm6,6,1,blue,"['frc2872', 'frc5298', 'frc287', 'frc527', 'frc564', 'frc3950']",blue,frc527,frc564,frc3950,frc2872,frc5298,frc287,Yes,Mid,3,1,14,9,87,Yes,3
+10133,qm,2022nyli2,2022nyli2_qm13,13,1,red,"['frc7717', 'frc2791', 'frc287', 'frc564', 'frc353', 'frc5736']",blue,frc564,frc353,frc5736,frc7717,frc2791,frc287,Yes,None,1,2,5,6,47,No,3
+10138,qm,2022nyli2,2022nyli2_qm18,18,1,red,"['frc564', 'frc6806', 'frc810', 'frc871', 'frc7717', 'frc884']",red,frc564,frc6806,frc810,frc871,frc7717,frc884,Yes,None,1,2,8,8,54,Yes,3
+10143,qm,2022nyli2,2022nyli2_qm22,22,1,blue,"['frc7444', 'frc564', 'frc514', 'frc871', 'frc7759', 'frc1468']",red,frc7444,frc564,frc514,frc871,frc7759,frc1468,Yes,None,0,1,14,6,61,No,3
+10149,qm,2022nyli2,2022nyli2_qm28,28,1,blue,"['frc6024', 'frc871', 'frc564', 'frc870', 'frc694', 'frc5736']",red,frc6024,frc871,frc564,frc870,frc694,frc5736,Yes,Mid,1,0,6,1,49,No,3
+10158,qm,2022nyli2,2022nyli2_qm36,36,1,red,"['frc564', 'frc694', 'frc2791', 'frc601', 'frc7718', 'frc333']",red,frc564,frc694,frc2791,frc601,frc7718,frc333,Yes,None,1,4,3,18,86,Yes,3
+10166,qm,2022nyli2,2022nyli2_qm43,43,1,red,"['frc5099', 'frc7718', 'frc564', 'frc3624', 'frc533', 'frc5599']",red,frc5099,frc7718,frc564,frc3624,frc533,frc5599,Yes,Mid,3,0,15,0,43,Yes,3
+10176,qm,2022nyli2,2022nyli2_qm52,52,1,red,"['frc3171', 'frc333', 'frc426', 'frc271', 'frc564', 'frc7759']",blue,frc271,frc564,frc7759,frc3171,frc333,frc426,Yes,None,1,0,7,0,25,No,3
+10180,qm,2022nyli2,2022nyli2_qm56,56,1,red,"['frc1796', 'frc333', 'frc564', 'frc514', 'frc1554', 'frc1751']",red,frc1796,frc333,frc564,frc514,frc1554,frc1751,Yes,Mid,1,2,4,13,54,Yes,3
+10191,qm,2022nyli2,2022nyli2_qm66,66,1,red,"['frc263', 'frc527', 'frc2875', 'frc7318', 'frc1751', 'frc564']",blue,frc7318,frc1751,frc564,frc263,frc527,frc2875,Yes,Mid,2,0,14,0,28,No,3

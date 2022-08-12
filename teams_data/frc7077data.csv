@@ -1,0 +1,12 @@
+level_0,comp_level,event_key,key,match_number,set_number,winning_alliance,team_keys,team_alliance,Teammate1,Teammate2,Teammate3,Opponent1,Opponent2,Opponent3,Taxied,Hang,TeamAutoLower,TeamAutoUpper,TeamTeleopLower,TeamTeleopUpper,TotalTeamPoints,WonGame,Week
+9968,qm,2022nvlv,2022nvlv_qm3,3,1,red,"['frc498', 'frc5800', 'frc7077', 'frc5429', 'frc6825', 'frc7423']",red,frc498,frc5800,frc7077,frc5429,frc6825,frc7423,Yes,None,1,0,0,8,38,Yes,4
+10019,qm,2022nvlv,2022nvlv_qm9,9,1,,"['frc60', 'frc4738', 'frc7654', 'frc6825', 'frc6995', 'frc7077']",blue,frc6825,frc6995,frc7077,frc60,frc4738,frc7654,Yes,None,0,4,10,6,59,Tie,4
+9953,qm,2022nvlv,2022nvlv_qm16,16,1,red,"['frc988', 'frc8005', 'frc4183', 'frc7077', 'frc5429', 'frc7424']",blue,frc7077,frc5429,frc7424,frc988,frc8005,frc4183,Yes,None,1,0,9,0,19,No,4
+9962,qm,2022nvlv,2022nvlv_qm24,24,1,blue,"['frc5472', 'frc6647', 'frc5800', 'frc2383', 'frc7077', 'frc2403']",blue,frc2383,frc7077,frc2403,frc5472,frc6647,frc5800,Yes,None,0,4,1,19,77,Yes,4
+9971,qm,2022nvlv,2022nvlv_qm32,32,1,red,"['frc8005', 'frc3009', 'frc6995', 'frc7077', 'frc8387', 'frc6824']",blue,frc7077,frc8387,frc6824,frc8005,frc3009,frc6995,No,None,1,1,1,0,9,No,4
+9983,qm,2022nvlv,2022nvlv_qm43,43,1,blue,"['frc7183', 'frc7077', 'frc3009', 'frc6821', 'frc3859', 'frc8005']",red,frc7183,frc7077,frc3009,frc6821,frc3859,frc8005,Yes,None,1,0,8,0,37,No,4
+9991,qm,2022nvlv,2022nvlv_qm50,50,1,blue,"['frc8087', 'frc7077', 'frc3859', 'frc6647', 'frc7426', 'frc2102']",red,frc8087,frc7077,frc3859,frc6647,frc7426,frc2102,Yes,None,1,1,0,8,48,No,4
+9996,qm,2022nvlv,2022nvlv_qm55,55,1,red,"['frc4183', 'frc991', 'frc987', 'frc4322', 'frc7077', 'frc6647']",blue,frc4322,frc7077,frc6647,frc4183,frc991,frc987,Yes,None,0,4,12,5,44,No,4
+10002,qm,2022nvlv,2022nvlv_qm60,60,1,blue,"['frc7077', 'frc6821', 'frc1388', 'frc6519', 'frc7425', 'frc4415']",red,frc7077,frc6821,frc1388,frc6519,frc7425,frc4415,Yes,None,0,0,0,5,26,No,4
+10009,qm,2022nvlv,2022nvlv_qm67,67,1,blue,"['frc6519', 'frc988', 'frc7077', 'frc6415', 'frc5472', 'frc5049']",red,frc6519,frc988,frc7077,frc6415,frc5472,frc5049,Yes,None,0,0,0,0,18,No,4
+10017,qm,2022nvlv,2022nvlv_qm74,74,1,blue,"['frc7422', 'frc8005', 'frc8717', 'frc7077', 'frc3309', 'frc5472']",blue,frc7077,frc3309,frc5472,frc7422,frc8005,frc8717,Yes,None,0,4,2,9,67,Yes,4

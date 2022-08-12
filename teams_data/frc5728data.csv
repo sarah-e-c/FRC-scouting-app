@@ -1,0 +1,12 @@
+level_0,comp_level,event_key,key,match_number,set_number,winning_alliance,team_keys,team_alliance,Teammate1,Teammate2,Teammate3,Opponent1,Opponent2,Opponent3,Taxied,Hang,TeamAutoLower,TeamAutoUpper,TeamTeleopLower,TeamTeleopUpper,TotalTeamPoints,WonGame,Week
+505,qm,2022cada,2022cada_qm5,5,1,red,"['frc5728', 'frc8091', 'frc1160', 'frc7137', 'frc4904', 'frc1836']",red,frc5728,frc8091,frc1160,frc7137,frc4904,frc1836,Yes,None,1,0,0,6,32,Yes,3
+466,qm,2022cada,2022cada_qm14,14,1,blue,"['frc5728', 'frc5700', 'frc2367', 'frc6918', 'frc3598', 'frc1458']",red,frc5728,frc5700,frc2367,frc6918,frc3598,frc1458,Yes,None,0,1,8,2,39,No,3
+471,qm,2022cada,2022cada_qm19,19,1,red,"['frc8048', 'frc7419', 'frc3598', 'frc5728', 'frc6662', 'frc5419']",blue,frc5728,frc6662,frc5419,frc8048,frc7419,frc3598,Yes,None,0,4,0,8,52,No,3
+479,qm,2022cada,2022cada_qm26,26,1,blue,"['frc3257', 'frc7667', 'frc6981', 'frc687', 'frc7137', 'frc5728']",blue,frc687,frc7137,frc5728,frc3257,frc7667,frc6981,Yes,None,0,0,0,1,28,Yes,3
+486,qm,2022cada,2022cada_qm32,32,1,red,"['frc7539', 'frc8020', 'frc751', 'frc5728', 'frc3189', 'frc6981']",blue,frc5728,frc3189,frc6981,frc7539,frc8020,frc751,Yes,None,0,1,1,0,27,No,3
+491,qm,2022cada,2022cada_qm37,37,1,blue,"['frc751', 'frc5728', 'frc973', 'frc7157', 'frc2288', 'frc1678']",red,frc751,frc5728,frc973,frc7157,frc2288,frc1678,Yes,None,0,6,0,24,106,No,3
+499,qm,2022cada,2022cada_qm44,44,1,blue,"['frc3257', 'frc4904', 'frc5728', 'frc254', 'frc5274', 'frc7539']",red,frc3257,frc4904,frc5728,frc254,frc5274,frc7539,Yes,None,0,1,0,5,34,No,3
+508,qm,2022cada,2022cada_qm52,52,1,blue,"['frc6619', 'frc2288', 'frc299', 'frc3598', 'frc7157', 'frc5728']",blue,frc3598,frc7157,frc5728,frc6619,frc2288,frc299,Yes,None,0,4,0,10,63,Yes,3
+517,qm,2022cada,2022cada_qm60,60,1,red,"['frc2551', 'frc7157', 'frc687', 'frc701', 'frc5728', 'frc8048']",blue,frc701,frc5728,frc8048,frc2551,frc7157,frc687,Yes,None,2,1,11,7,47,No,3
+524,qm,2022cada,2022cada_qm67,67,1,red,"['frc5458', 'frc254', 'frc3669', 'frc2288', 'frc1836', 'frc5728']",blue,frc2288,frc1836,frc5728,frc5458,frc254,frc3669,Yes,None,2,1,7,2,44,No,3
+537,qm,2022cada,2022cada_qm79,79,1,blue,"['frc2204', 'frc5728', 'frc7667', 'frc5700', 'frc2035', 'frc766']",red,frc2204,frc5728,frc7667,frc5700,frc2035,frc766,Yes,None,0,1,5,13,39,No,3

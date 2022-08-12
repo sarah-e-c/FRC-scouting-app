@@ -1,0 +1,13 @@
+level_0,comp_level,event_key,key,match_number,set_number,winning_alliance,team_keys,team_alliance,Teammate1,Teammate2,Teammate3,Opponent1,Opponent2,Opponent3,Taxied,Hang,TeamAutoLower,TeamAutoUpper,TeamTeleopLower,TeamTeleopUpper,TotalTeamPoints,WonGame,Week
+9691,qm,2022njfla,2022njfla_qm2,2,1,blue,"['frc6945', 'frc223', 'frc222', 'frc1143', 'frc4653', 'frc2590']",red,frc6945,frc223,frc222,frc1143,frc4653,frc2590,Yes,None,2,1,4,0,22,No,1
+9746,qm,2022njfla,2022njfla_qm7,7,1,red,"['frc219', 'frc222', 'frc8075', 'frc11', 'frc4652', 'frc6945']",blue,frc11,frc4652,frc6945,frc219,frc222,frc8075,No,None,0,1,4,0,14,No,1
+9685,qm,2022njfla,2022njfla_qm14,14,1,red,"['frc1257', 'frc5490', 'frc6945', 'frc223', 'frc4652', 'frc193']",red,frc1257,frc5490,frc6945,frc223,frc4652,frc193,Yes,None,2,0,23,0,37,Yes,1
+9692,qm,2022njfla,2022njfla_qm20,20,1,red,"['frc4361', 'frc1403', 'frc8588', 'frc6945', 'frc2554', 'frc1143']",blue,frc6945,frc2554,frc1143,frc4361,frc1403,frc8588,No,None,1,0,4,0,14,No,1
+9703,qm,2022njfla,2022njfla_qm30,30,1,blue,"['frc1089', 'frc6945', 'frc1168', 'frc193', 'frc2590', 'frc6016']",red,frc1089,frc6945,frc1168,frc193,frc2590,frc6016,No,None,0,3,1,6,35,No,1
+9709,qm,2022njfla,2022njfla_qm36,36,1,red,"['frc1279', 'frc4361', 'frc1989', 'frc2070', 'frc1811', 'frc6945']",blue,frc2070,frc1811,frc6945,frc1279,frc4361,frc1989,No,None,2,0,5,0,19,No,1
+9714,qm,2022njfla,2022njfla_qm40,40,1,red,"['frc834', 'frc1672', 'frc8771', 'frc6945', 'frc219', 'frc6016']",blue,frc6945,frc219,frc6016,frc834,frc1672,frc8771,No,None,1,1,0,4,18,No,1
+9722,qm,2022njfla,2022njfla_qm48,48,1,red,"['frc4652', 'frc4573', 'frc8588', 'frc6945', 'frc102', 'frc1989']",blue,frc6945,frc102,frc1989,frc4652,frc4573,frc8588,No,None,0,1,0,0,8,No,1
+9728,qm,2022njfla,2022njfla_qm53,53,1,blue,"['frc8075', 'frc6945', 'frc4361', 'frc6860', 'frc5666', 'frc5438']",red,frc8075,frc6945,frc4361,frc6860,frc5666,frc5438,No,Mid,0,1,3,1,19,No,1
+9733,qm,2022njfla,2022njfla_qm58,58,1,,"['frc2600', 'frc1811', 'frc11', 'frc8117', 'frc6945', 'frc2458']",blue,frc8117,frc6945,frc2458,frc2600,frc1811,frc11,No,None,1,0,8,3,36,Tie,1
+9742,qm,2022njfla,2022njfla_qm66,66,1,blue,"['frc193', 'frc3515', 'frc6945', 'frc102', 'frc8588', 'frc3142']",red,frc193,frc3515,frc6945,frc102,frc8588,frc3142,Yes,None,0,0,1,5,21,No,1
+9747,qm,2022njfla,2022njfla_qm70,70,1,blue,"['frc5666', 'frc6945', 'frc1279', 'frc102', 'frc193', 'frc8771']",red,frc5666,frc6945,frc1279,frc102,frc193,frc8771,No,None,0,1,0,7,26,No,1

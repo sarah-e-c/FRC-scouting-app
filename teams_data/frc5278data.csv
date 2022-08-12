@@ -1,0 +1,11 @@
+level_0,comp_level,event_key,key,match_number,set_number,winning_alliance,team_keys,team_alliance,Teammate1,Teammate2,Teammate3,Opponent1,Opponent2,Opponent3,Taxied,Hang,TeamAutoLower,TeamAutoUpper,TeamTeleopLower,TeamTeleopUpper,TotalTeamPoints,WonGame,Week
+7891,qm,2022mnmi2,2022mnmi2_qm2,2,1,red,"['frc2143', 'frc4174', 'frc3276', 'frc7258', 'frc5278', 'frc4549']",blue,frc7258,frc5278,frc4549,frc2143,frc4174,frc3276,Yes,None,2,0,11,0,21,No,-1
+7886,qm,2022mnmi2,2022mnmi2_qm15,15,1,blue,"['frc4693', 'frc6749', 'frc5278', 'frc2512', 'frc2987', 'frc5626']",red,frc4693,frc6749,frc5278,frc2512,frc2987,frc5626,Yes,None,1,0,14,3,38,No,-1
+7898,qm,2022mnmi2,2022mnmi2_qm26,26,1,blue,"['frc4215', 'frc2606', 'frc5278', 'frc3100', 'frc3313', 'frc3926']",red,frc4215,frc2606,frc5278,frc3100,frc3313,frc3926,Yes,None,2,0,23,0,39,No,-1
+7908,qm,2022mnmi2,2022mnmi2_qm35,35,1,red,"['frc2987', 'frc5278', 'frc3042', 'frc3007', 'frc7273', 'frc2227']",red,frc2987,frc5278,frc3042,frc3007,frc7273,frc2227,Yes,None,1,0,19,9,66,Yes,-1
+7914,qm,2022mnmi2,2022mnmi2_qm40,40,1,red,"['frc5275', 'frc6749', 'frc3848', 'frc5278', 'frc3883', 'frc2549']",blue,frc5278,frc3883,frc2549,frc5275,frc6749,frc3848,Yes,None,2,1,10,6,66,No,-1
+7919,qm,2022mnmi2,2022mnmi2_qm45,45,1,red,"['frc5278', 'frc3007', 'frc3610', 'frc3130', 'frc2175', 'frc4648']",red,frc5278,frc3007,frc3610,frc3130,frc2175,frc4648,Yes,None,2,0,8,1,36,Yes,-1
+7931,qm,2022mnmi2,2022mnmi2_qm56,56,1,red,"['frc2667', 'frc5464', 'frc4663', 'frc2239', 'frc4225', 'frc5278']",blue,frc2239,frc4225,frc5278,frc2667,frc5464,frc4663,Yes,Mid,1,2,4,3,42,No,-1
+7947,qm,2022mnmi2,2022mnmi2_qm70,70,1,blue,"['frc8234', 'frc5278', 'frc2883', 'frc5271', 'frc5638', 'frc2509']",red,frc8234,frc5278,frc2883,frc5271,frc5638,frc2509,Yes,None,2,1,6,7,42,No,-1
+7954,qm,2022mnmi2,2022mnmi2_qm77,77,1,blue,"['frc3206', 'frc2177', 'frc2129', 'frc3313', 'frc4663', 'frc5278']",blue,frc3313,frc4663,frc5278,frc3206,frc2177,frc2129,Yes,High,2,2,10,5,63,Yes,-1
+7960,qm,2022mnmi2,2022mnmi2_qm82,82,1,red,"['frc6146', 'frc3883', 'frc3928', 'frc5278', 'frc2654', 'frc2472']",blue,frc5278,frc2654,frc2472,frc6146,frc3883,frc3928,Yes,Traversal,2,2,7,8,70,No,-1

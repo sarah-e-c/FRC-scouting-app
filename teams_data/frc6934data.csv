@@ -1,0 +1,12 @@
+level_0,comp_level,event_key,key,match_number,set_number,winning_alliance,team_keys,team_alliance,Teammate1,Teammate2,Teammate3,Opponent1,Opponent2,Opponent3,Taxied,Hang,TeamAutoLower,TeamAutoUpper,TeamTeleopLower,TeamTeleopUpper,TotalTeamPoints,WonGame,Week
+1455,qm,2022cave,2022cave_qm2,2,1,blue,"['frc1388', 'frc6934', 'frc6398', 'frc8', 'frc3925', 'frc3512']",red,frc1388,frc6934,frc6398,frc8,frc3925,frc3512,No,Low,1,2,7,5,39,No,1
+1516,qm,2022cave,2022cave_qm8,8,1,blue,"['frc6934', 'frc5136', 'frc3925', 'frc2584', 'frc8533', 'frc599']",red,frc6934,frc5136,frc3925,frc2584,frc8533,frc599,Yes,None,1,1,9,2,33,No,1
+1454,qm,2022cave,2022cave_qm19,19,1,red,"['frc7327', 'frc5869', 'frc5124', 'frc8533', 'frc5419', 'frc6934']",blue,frc8533,frc5419,frc6934,frc7327,frc5869,frc5124,No,None,0,1,1,1,13,No,1
+1460,qm,2022cave,2022cave_qm24,24,1,red,"['frc2813', 'frc7327', 'frc2135', 'frc4711', 'frc6934', 'frc359']",blue,frc4711,frc6934,frc359,frc2813,frc7327,frc2135,No,Mid,1,2,0,11,52,No,1
+1469,qm,2022cave,2022cave_qm32,32,1,blue,"['frc6934', 'frc399', 'frc8', 'frc696', 'frc980', 'frc1622']",red,frc6934,frc399,frc8,frc696,frc980,frc1622,Yes,None,0,0,0,0,29,No,1
+1475,qm,2022cave,2022cave_qm38,38,1,blue,"['frc1622', 'frc6934', 'frc3256', 'frc7323', 'frc359', 'frc4270']",red,frc1622,frc6934,frc3256,frc7323,frc359,frc4270,No,Mid,0,0,0,0,16,No,1
+1482,qm,2022cave,2022cave_qm44,44,1,red,"['frc5419', 'frc4501', 'frc1138', 'frc1515', 'frc6764', 'frc6934']",blue,frc1515,frc6764,frc6934,frc5419,frc4501,frc1138,Yes,Mid,0,2,0,6,30,No,1
+1486,qm,2022cave,2022cave_qm48,48,1,blue,"['frc6059', 'frc6934', 'frc7327', 'frc5089', 'frc6764', 'frc8']",red,frc6059,frc6934,frc7327,frc5089,frc6764,frc8,Yes,None,0,0,0,2,14,No,1
+1493,qm,2022cave,2022cave_qm54,54,1,red,"['frc6934', 'frc4414', 'frc5089', 'frc6059', 'frc1138', 'frc5818']",red,frc6934,frc4414,frc5089,frc6059,frc1138,frc5818,Yes,None,0,4,0,21,80,Yes,1
+1504,qm,2022cave,2022cave_qm64,64,1,red,"['frc3925', 'frc2584', 'frc3759', 'frc5818', 'frc691', 'frc6934']",blue,frc5818,frc691,frc6934,frc3925,frc2584,frc3759,Yes,None,1,0,6,1,30,No,1
+1509,qm,2022cave,2022cave_qm69,69,1,red,"['frc4711', 'frc5136', 'frc5026', 'frc1138', 'frc4270', 'frc6934']",blue,frc1138,frc4270,frc6934,frc4711,frc5136,frc5026,Yes,None,0,0,3,2,25,No,1

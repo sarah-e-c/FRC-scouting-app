@@ -1,0 +1,11 @@
+level_0,comp_level,event_key,key,match_number,set_number,winning_alliance,team_keys,team_alliance,Teammate1,Teammate2,Teammate3,Opponent1,Opponent2,Opponent3,Taxied,Hang,TeamAutoLower,TeamAutoUpper,TeamTeleopLower,TeamTeleopUpper,TotalTeamPoints,WonGame,Week
+8985,qm,2022ndgf,2022ndgf_qm2,2,1,blue,"['frc877', 'frc8188', 'frc2531', 'frc8255', 'frc8586', 'frc5653']",blue,frc8255,frc8586,frc5653,frc877,frc8188,frc2531,No,None,2,0,0,4,31,Yes,3
+8975,qm,2022ndgf,2022ndgf_qm10,10,1,blue,"['frc8586', 'frc3298', 'frc6628', 'frc2450', 'frc3630', 'frc3313']",red,frc8586,frc3298,frc6628,frc2450,frc3630,frc3313,Yes,None,1,0,4,0,16,No,3
+8984,qm,2022ndgf,2022ndgf_qm19,19,1,red,"['frc3058', 'frc8887', 'frc3277', 'frc8586', 'frc5658', 'frc6709']",blue,frc8586,frc5658,frc6709,frc3058,frc8887,frc3277,No,None,0,0,0,1,10,No,3
+8997,qm,2022ndgf,2022ndgf_qm30,30,1,red,"['frc5653', 'frc6453', 'frc4238', 'frc3300', 'frc4480', 'frc8586']",blue,frc3300,frc4480,frc8586,frc5653,frc6453,frc4238,Yes,Low,0,0,5,0,21,No,3
+9005,qm,2022ndgf,2022ndgf_qm38,38,1,red,"['frc2883', 'frc6628', 'frc2538', 'frc8586', 'frc6175', 'frc5929']",blue,frc8586,frc6175,frc5929,frc2883,frc6628,frc2538,Yes,None,0,0,1,0,19,No,3
+9011,qm,2022ndgf,2022ndgf_qm43,43,1,red,"['frc2654', 'frc8586', 'frc3130', 'frc3275', 'frc5929', 'frc3134']",red,frc2654,frc8586,frc3130,frc3275,frc5929,frc3134,Yes,None,1,0,0,10,38,Yes,3
+9019,qm,2022ndgf,2022ndgf_qm50,50,1,red,"['frc2508', 'frc5172', 'frc3298', 'frc7038', 'frc8586', 'frc3293']",blue,frc7038,frc8586,frc3293,frc2508,frc5172,frc3298,Yes,Low,0,0,1,2,21,No,3
+9031,qm,2022ndgf,2022ndgf_qm61,61,1,blue,"['frc8422', 'frc8586', 'frc2883', 'frc5913', 'frc4539', 'frc7028']",red,frc8422,frc8586,frc2883,frc5913,frc4539,frc7028,Yes,None,0,1,2,7,41,No,3
+9036,qm,2022ndgf,2022ndgf_qm66,66,1,blue,"['frc8298', 'frc7038', 'frc4674', 'frc8887', 'frc5913', 'frc8586']",blue,frc8887,frc5913,frc8586,frc8298,frc7038,frc4674,Yes,Low,0,2,1,6,46,Yes,3
+9052,qm,2022ndgf,2022ndgf_qm80,80,1,blue,"['frc3297', 'frc2508', 'frc8586', 'frc4360', 'frc876', 'frc4239']",red,frc3297,frc2508,frc8586,frc4360,frc876,frc4239,Yes,Low,1,0,0,8,53,No,3

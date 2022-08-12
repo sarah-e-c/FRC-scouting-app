@@ -1,0 +1,25 @@
+level_0,comp_level,event_key,key,match_number,set_number,winning_alliance,team_keys,team_alliance,Teammate1,Teammate2,Teammate3,Opponent1,Opponent2,Opponent3,Taxied,Hang,TeamAutoLower,TeamAutoUpper,TeamTeleopLower,TeamTeleopUpper,TotalTeamPoints,WonGame,Week
+13347,qm,2022txirv,2022txirv_qm2,2,1,red,"['frc5417', 'frc5682', 'frc3310', 'frc148', 'frc6369', 'frc8507']",red,frc5417,frc5682,frc3310,frc148,frc6369,frc8507,No,None,0,6,1,18,107,Yes,3
+12884,qm,2022txcha,2022txcha_qm5,5,1,red,"['frc7492', 'frc4295', 'frc8576', 'frc7312', 'frc5682', 'frc3035']",blue,frc7312,frc5682,frc3035,frc7492,frc4295,frc8576,No,None,0,0,6,0,16,No,1
+12902,qm,2022txcha,2022txcha_qm8,8,1,red,"['frc1255', 'frc5892', 'frc8370', 'frc5682', 'frc4295', 'frc6645']",blue,frc5682,frc4295,frc6645,frc1255,frc5892,frc8370,No,None,0,0,0,0,0,No,1
+13419,qm,2022txirv,2022txirv_qm9,9,1,red,"['frc5417', 'frc7506', 'frc3282', 'frc7535', 'frc6768', 'frc5682']",blue,frc7535,frc6768,frc5682,frc5417,frc7506,frc3282,Yes,Mid,2,0,0,0,20,No,3
+12846,qm,2022txcha,2022txcha_qm15,15,1,blue,"['frc5261', 'frc4332', 'frc7312', 'frc5682', 'frc8150', 'frc5892']",blue,frc5682,frc8150,frc5892,frc5261,frc4332,frc7312,No,None,1,1,4,5,24,Yes,1
+12849,qm,2022txcha,2022txcha_qm18,18,1,red,"['frc4332', 'frc4295', 'frc118', 'frc7616', 'frc5682', 'frc4597']",blue,frc7616,frc5682,frc4597,frc4332,frc4295,frc118,No,None,0,0,0,0,15,No,1
+13346,qm,2022txirv,2022txirv_qm19,19,1,red,"['frc2848', 'frc6901', 'frc2950', 'frc3676', 'frc7621', 'frc5682']",blue,frc3676,frc7621,frc5682,frc2848,frc6901,frc2950,Yes,Mid,0,0,1,2,21,No,3
+12855,qm,2022txcha,2022txcha_qm23,23,1,red,"['frc8177', 'frc5894', 'frc5682', 'frc8370', 'frc6645', 'frc7616']",red,frc8177,frc5894,frc5682,frc8370,frc6645,frc7616,Yes,None,0,1,0,8,36,Yes,1
+13356,qm,2022txirv,2022txirv_qm28,28,1,red,"['frc5682', 'frc8858', 'frc8580', 'frc3802', 'frc8816', 'frc4610']",red,frc5682,frc8858,frc8580,frc3802,frc8816,frc4610,No,None,2,1,18,0,44,Yes,3
+12864,qm,2022txcha,2022txcha_qm31,31,1,red,"['frc4639', 'frc324', 'frc5682', 'frc5829', 'frc7115', 'frc5414']",red,frc4639,frc324,frc5682,frc5829,frc7115,frc5414,Yes,None,0,1,2,15,46,Yes,1
+13364,qm,2022txirv,2022txirv_qm35,35,1,blue,"['frc5682', 'frc2848', 'frc7125', 'frc6672', 'frc6171', 'frc5411']",red,frc5682,frc2848,frc7125,frc6672,frc6171,frc5411,Yes,Mid,1,1,10,8,59,No,3
+12871,qm,2022txcha,2022txcha_qm38,38,1,red,"['frc4587', 'frc118', 'frc231', 'frc418', 'frc5923', 'frc5682']",blue,frc418,frc5923,frc5682,frc4587,frc118,frc231,No,None,0,0,0,0,14,No,1
+13370,qm,2022txirv,2022txirv_qm40,40,1,red,"['frc7125', 'frc4641', 'frc3035', 'frc5682', 'frc6901', 'frc3802']",blue,frc5682,frc6901,frc3802,frc7125,frc4641,frc3035,Yes,None,0,3,5,3,41,No,3
+12876,qm,2022txcha,2022txcha_qm42,42,1,blue,"['frc5427', 'frc5682', 'frc4587', 'frc324', 'frc8210', 'frc8576']",red,frc5427,frc5682,frc4587,frc324,frc8210,frc8576,No,None,0,0,7,3,15,No,1
+13377,qm,2022txirv,2022txirv_qm47,47,1,red,"['frc5682', 'frc3282', 'frc118', 'frc6357', 'frc7503', 'frc3355']",red,frc5682,frc3282,frc118,frc6357,frc7503,frc3355,Yes,Mid,1,2,5,5,49,Yes,3
+12881,qm,2022txcha,2022txcha_qm47,47,1,blue,"['frc5682', 'frc8210', 'frc1255', 'frc231', 'frc3035', 'frc8515']",red,frc5682,frc8210,frc1255,frc231,frc3035,frc8515,Yes,None,1,0,3,0,19,No,1
+12885,qm,2022txcha,2022txcha_qm50,50,1,red,"['frc5682', 'frc8515', 'frc5414', 'frc231', 'frc7418', 'frc4597']",red,frc5682,frc8515,frc5414,frc231,frc7418,frc4597,Yes,None,0,1,0,4,34,Yes,1
+12889,qm,2022txcha,2022txcha_qm54,54,1,red,"['frc8576', 'frc8177', 'frc8370', 'frc4332', 'frc7418', 'frc5682']",blue,frc4332,frc7418,frc5682,frc8576,frc8177,frc8370,No,Mid,0,1,0,0,26,No,1
+13387,qm,2022txirv,2022txirv_qm56,56,1,blue,"['frc6171', 'frc7121', 'frc6768', 'frc5431', 'frc5242', 'frc5682']",blue,frc5431,frc5242,frc5682,frc6171,frc7121,frc6768,Yes,Mid,2,1,0,2,47,Yes,3
+12897,qm,2022txcha,2022txcha_qm61,61,1,blue,"['frc1255', 'frc8515', 'frc5923', 'frc5829', 'frc5682', 'frc118']",blue,frc5829,frc5682,frc118,frc1255,frc8515,frc5923,Yes,None,0,3,9,11,74,Yes,1
+13394,qm,2022txirv,2022txirv_qm62,62,1,red,"['frc7121', 'frc5682', 'frc5212', 'frc4641', 'frc7091', 'frc3355']",red,frc7121,frc5682,frc5212,frc4641,frc7091,frc3355,Yes,Mid,2,0,0,5,41,Yes,3
+13401,qm,2022txirv,2022txirv_qm69,69,1,red,"['frc7091', 'frc5431', 'frc5212', 'frc6171', 'frc5682', 'frc5052']",blue,frc6171,frc5682,frc5052,frc7091,frc5431,frc5212,Yes,Low,0,0,0,5,34,No,3
+13409,qm,2022txirv,2022txirv_qm76,76,1,red,"['frc7119', 'frc2714', 'frc5682', 'frc6357', 'frc7535', 'frc4717']",red,frc7119,frc2714,frc5682,frc6357,frc7535,frc4717,Yes,Low,1,0,2,6,42,Yes,3
+13417,qm,2022txirv,2022txirv_qm83,83,1,red,"['frc7119', 'frc6357', 'frc5417', 'frc4717', 'frc5682', 'frc7319']",blue,frc4717,frc5682,frc7319,frc7119,frc6357,frc5417,Yes,None,1,1,0,6,22,No,3

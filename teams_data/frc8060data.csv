@@ -1,0 +1,12 @@
+level_0,comp_level,event_key,key,match_number,set_number,winning_alliance,team_keys,team_alliance,Teammate1,Teammate2,Teammate3,Opponent1,Opponent2,Opponent3,Taxied,Hang,TeamAutoLower,TeamAutoUpper,TeamTeleopLower,TeamTeleopUpper,TotalTeamPoints,WonGame,Week
+677,qm,2022cala,2022cala_qm4,4,1,blue,"['frc4470', 'frc4964', 'frc5089', 'frc1159', 'frc8060', 'frc702']",blue,frc1159,frc8060,frc702,frc4470,frc4964,frc5089,No,None,1,0,10,3,36,Yes,4
+649,qm,2022cala,2022cala_qm14,14,1,red,"['frc7185', 'frc4', 'frc980', 'frc8060', 'frc4501', 'frc589']",blue,frc8060,frc4501,frc589,frc7185,frc4,frc980,No,None,0,0,3,5,29,No,4
+657,qm,2022cala,2022cala_qm21,21,1,blue,"['frc5857', 'frc5669', 'frc1159', 'frc4', 'frc696', 'frc8060']",blue,frc4,frc696,frc8060,frc5857,frc5669,frc1159,No,None,2,4,1,21,92,Yes,4
+664,qm,2022cala,2022cala_qm28,28,1,blue,"['frc8060', 'frc5857', 'frc6000', 'frc5669', 'frc7840', 'frc1515']",red,frc8060,frc5857,frc6000,frc5669,frc7840,frc1515,Yes,None,0,1,1,10,35,No,4
+670,qm,2022cala,2022cala_qm33,33,1,red,"['frc1515', 'frc4201', 'frc8060', 'frc3749', 'frc5124', 'frc702']",red,frc1515,frc4201,frc8060,frc3749,frc5124,frc702,Yes,None,0,5,0,28,102,Yes,4
+675,qm,2022cala,2022cala_qm38,38,1,blue,"['frc1759', 'frc599', 'frc8060', 'frc6832', 'frc1515', 'frc1159']",red,frc1759,frc599,frc8060,frc6832,frc1515,frc1159,No,None,2,0,11,2,33,No,4
+682,qm,2022cala,2022cala_qm44,44,1,blue,"['frc4964', 'frc8060', 'frc968', 'frc3863', 'frc6904', 'frc4999']",red,frc4964,frc8060,frc968,frc3863,frc6904,frc4999,Yes,None,0,0,0,5,16,No,4
+689,qm,2022cala,2022cala_qm50,50,1,red,"['frc968', 'frc3408', 'frc1197', 'frc5802', 'frc8060', 'frc4999']",blue,frc5802,frc8060,frc4999,frc968,frc3408,frc1197,Yes,None,0,3,0,11,60,No,4
+697,qm,2022cala,2022cala_qm58,58,1,red,"['frc597', 'frc7157', 'frc2637', 'frc3863', 'frc8060', 'frc7840']",blue,frc3863,frc8060,frc7840,frc597,frc7157,frc2637,Yes,None,0,1,1,11,48,No,4
+709,qm,2022cala,2022cala_qm69,69,1,blue,"['frc8060', 'frc7042', 'frc606', 'frc5089', 'frc5802', 'frc4']",red,frc8060,frc7042,frc606,frc5089,frc5802,frc4,Yes,None,1,2,8,0,38,No,4
+716,qm,2022cala,2022cala_qm75,75,1,blue,"['frc3473', 'frc6658', 'frc8060', 'frc5089', 'frc3476', 'frc968']",red,frc3473,frc6658,frc8060,frc5089,frc3476,frc968,Yes,None,1,0,10,1,38,No,4

@@ -1,0 +1,12 @@
+level_0,comp_level,event_key,key,match_number,set_number,winning_alliance,team_keys,team_alliance,Teammate1,Teammate2,Teammate3,Opponent1,Opponent2,Opponent3,Taxied,Hang,TeamAutoLower,TeamAutoUpper,TeamTeleopLower,TeamTeleopUpper,TotalTeamPoints,WonGame,Week
+12228,qm,2022tant,2022tant_qm2,2,1,blue,"['frc8585', 'frc8595', 'frc6083', 'frc6947', 'frc6191', 'frc8806']",red,frc8585,frc8595,frc6083,frc6947,frc6191,frc8806,No,None,0,1,1,3,13,No,0
+12213,qf,2022tant,2022tant_qf3m3,3,3,blue,"['frc6998', 'frc8020', 'frc8585', 'frc8790', 'frc8723', 'frc7130']",red,frc6998,frc8020,frc8585,frc8790,frc8723,frc7130,Yes,Traversal,1,0,0,3,37,No,0
+12273,qm,2022tant,2022tant_qm7,7,1,blue,"['frc7673', 'frc8585', 'frc8270', 'frc8723', 'frc8569', 'frc8807']",red,frc7673,frc8585,frc8270,frc8723,frc8569,frc8807,No,None,0,1,1,0,9,No,0
+12221,qm,2022tant,2022tant_qm13,13,1,red,"['frc8503', 'frc8585', 'frc8723', 'frc7741', 'frc7130', 'frc7526']",red,frc8503,frc8585,frc8723,frc7741,frc7130,frc7526,No,None,1,2,0,5,24,Yes,0
+12226,qm,2022tant,2022tant_qm18,18,1,red,"['frc7632', 'frc7645', 'frc8584', 'frc6191', 'frc8805', 'frc8585']",blue,frc6191,frc8805,frc8585,frc7632,frc7645,frc8584,No,None,1,1,0,0,6,No,0
+12235,qm,2022tant,2022tant_qm26,26,1,blue,"['frc8894', 'frc7636', 'frc8725', 'frc8585', 'frc7497', 'frc7709']",blue,frc8585,frc7497,frc7709,frc8894,frc7636,frc8725,Yes,None,1,2,0,8,42,Yes,0
+12242,qm,2022tant,2022tant_qm32,32,1,blue,"['frc6083', 'frc7645', 'frc8121', 'frc6998', 'frc7551', 'frc8585']",blue,frc6998,frc7551,frc8585,frc6083,frc7645,frc8121,Yes,None,1,1,0,2,45,Yes,0
+12251,qm,2022tant,2022tant_qm40,40,1,red,"['frc8569', 'frc8020', 'frc8169', 'frc8585', 'frc7589', 'frc8725']",blue,frc8585,frc7589,frc8725,frc8569,frc8020,frc8169,Yes,Mid,2,0,2,1,20,No,0
+12254,qm,2022tant,2022tant_qm43,43,1,red,"['frc8020', 'frc7632', 'frc8585', 'frc8807', 'frc6083', 'frc8790']",red,frc8020,frc7632,frc8585,frc8807,frc6083,frc8790,Yes,Mid,2,1,2,11,71,Yes,0
+12265,qm,2022tant,2022tant_qm53,53,1,red,"['frc8585', 'frc4253', 'frc7636', 'frc8503', 'frc8807', 'frc8805']",red,frc8585,frc4253,frc7636,frc8503,frc8807,frc8805,Yes,Traversal,0,5,0,5,57,Yes,0
+12269,qm,2022tant,2022tant_qm57,57,1,blue,"['frc6191', 'frc8176', 'frc7589', 'frc8121', 'frc8585', 'frc8129']",blue,frc8121,frc8585,frc8129,frc6191,frc8176,frc7589,Yes,Mid,1,1,8,0,24,Yes,0

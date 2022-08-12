@@ -1,0 +1,11 @@
+level_0,comp_level,event_key,key,match_number,set_number,winning_alliance,team_keys,team_alliance,Teammate1,Teammate2,Teammate3,Opponent1,Opponent2,Opponent3,Taxied,Hang,TeamAutoLower,TeamAutoUpper,TeamTeleopLower,TeamTeleopUpper,TotalTeamPoints,WonGame,Week
+10,qm,2022alhu,2022alhu_qm1,1,1,blue,"['frc8232', 'frc6936', 'frc6366', 'frc547', 'frc7446', 'frc59']",blue,frc547,frc7446,frc59,frc8232,frc6936,frc6366,Yes,None,0,4,0,10,61,Yes,-1
+91,qm,2022alhu,2022alhu_qm9,9,1,blue,"['frc6366', 'frc6652', 'frc5045', 'frc547', 'frc364', 'frc7111']",blue,frc547,frc364,frc7111,frc6366,frc6652,frc5045,Yes,Low,0,6,0,25,105,Yes,-1
+22,qm,2022alhu,2022alhu_qm20,20,1,blue,"['frc4013', 'frc6107', 'frc547', 'frc5410', 'frc5484', 'frc7111']",red,frc4013,frc6107,frc547,frc5410,frc5484,frc7111,Yes,Low,1,0,1,5,21,No,-1
+34,qm,2022alhu,2022alhu_qm31,31,1,red,"['frc3490', 'frc547', 'frc8838', 'frc4471', 'frc8773', 'frc8823']",red,frc3490,frc547,frc8838,frc4471,frc8773,frc8823,Yes,Low,1,0,2,1,24,Yes,-1
+39,qm,2022alhu,2022alhu_qm36,36,1,red,"['frc547', 'frc6823', 'frc3959', 'frc3201', 'frc2556', 'frc3490']",red,frc547,frc6823,frc3959,frc3201,frc2556,frc3490,Yes,Low,1,4,2,16,66,Yes,-1
+47,qm,2022alhu,2022alhu_qm43,43,1,red,"['frc3201', 'frc3653', 'frc547', 'frc8413', 'frc5005', 'frc1038']",red,frc3201,frc3653,frc547,frc8413,frc5005,frc1038,Yes,Low,0,3,9,11,77,Yes,-1
+56,qm,2022alhu,2022alhu_qm51,51,1,red,"['frc6937', 'frc2010', 'frc325', 'frc547', 'frc34', 'frc8772']",blue,frc547,frc34,frc8772,frc6937,frc2010,frc325,Yes,None,1,0,0,7,30,No,-1
+64,qm,2022alhu,2022alhu_qm59,59,1,red,"['frc801', 'frc8823', 'frc108', 'frc141', 'frc3843', 'frc547']",blue,frc141,frc3843,frc547,frc801,frc8823,frc108,Yes,Low,0,1,0,13,56,No,-1
+75,qm,2022alhu,2022alhu_qm69,69,1,red,"['frc6517', 'frc547', 'frc120', 'frc8733', 'frc4013', 'frc7446']",red,frc6517,frc547,frc120,frc8733,frc4013,frc7446,Yes,Low,0,2,4,16,66,Yes,-1
+85,qm,2022alhu,2022alhu_qm78,78,1,blue,"['frc2556', 'frc547', 'frc8733', 'frc3843', 'frc8772', 'frc2973']",red,frc2556,frc547,frc8733,frc3843,frc8772,frc2973,Yes,Low,0,1,0,15,60,No,-1

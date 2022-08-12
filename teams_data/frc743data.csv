@@ -1,0 +1,11 @@
+level_0,comp_level,event_key,key,match_number,set_number,winning_alliance,team_keys,team_alliance,Teammate1,Teammate2,Teammate3,Opponent1,Opponent2,Opponent3,Taxied,Hang,TeamAutoLower,TeamAutoUpper,TeamTeleopLower,TeamTeleopUpper,TotalTeamPoints,WonGame,Week
+10281,qm,2022nyny,2022nyny_qm7,7,1,blue,"['frc7036', 'frc335', 'frc8597', 'frc369', 'frc7730', 'frc743']",blue,frc369,frc7730,frc743,frc7036,frc335,frc8597,Yes,None,0,0,6,0,27,Yes,-1
+10219,qm,2022nyny,2022nyny_qm13,13,1,blue,"['frc3017', 'frc3950', 'frc7668', 'frc8739', 'frc743', 'frc6911']",blue,frc8739,frc743,frc6911,frc3017,frc3950,frc7668,No,None,0,1,6,7,46,Yes,-1
+10224,qm,2022nyny,2022nyny_qm18,18,1,red,"['frc5298', 'frc8739', 'frc4122', 'frc743', 'frc7504', 'frc2344']",blue,frc743,frc7504,frc2344,frc5298,frc8739,frc4122,No,None,2,0,1,0,13,No,-1
+10232,qm,2022nyny,2022nyny_qm25,25,1,red,"['frc20', 'frc7036', 'frc743', 'frc4027', 'frc6911', 'frc5421']",red,frc20,frc7036,frc743,frc4027,frc6911,frc5421,No,None,0,1,0,12,48,Yes,-1
+10246,qm,2022nyny,2022nyny_qm38,38,1,blue,"['frc743', 'frc395', 'frc354', 'frc806', 'frc2344', 'frc6401']",red,frc743,frc395,frc354,frc806,frc2344,frc6401,Yes,None,1,0,17,0,37,No,-1
+10253,qm,2022nyny,2022nyny_qm44,44,1,blue,"['frc3760', 'frc1601', 'frc743', 'frc6636', 'frc694', 'frc4012']",red,frc3760,frc1601,frc743,frc6636,frc694,frc4012,No,None,0,0,0,4,14,No,-1
+10263,qm,2022nyny,2022nyny_qm53,53,1,red,"['frc743', 'frc3950', 'frc6873', 'frc3004', 'frc5806', 'frc395']",red,frc743,frc3950,frc6873,frc3004,frc5806,frc395,No,None,0,1,0,9,40,Yes,-1
+10269,qm,2022nyny,2022nyny_qm59,59,1,red,"['frc3419', 'frc743', 'frc4571', 'frc7730', 'frc3204', 'frc5123']",red,frc3419,frc743,frc4571,frc7730,frc3204,frc5123,No,None,0,2,0,14,54,Yes,-1
+10276,qm,2022nyny,2022nyny_qm65,65,1,red,"['frc4571', 'frc6593', 'frc2601', 'frc335', 'frc743', 'frc3004']",blue,frc335,frc743,frc3004,frc4571,frc6593,frc2601,No,None,0,0,0,0,2,No,-1
+10288,qm,2022nyny,2022nyny_qm76,76,1,red,"['frc743', 'frc7668', 'frc5298', 'frc334', 'frc7272', 'frc4299']",red,frc743,frc7668,frc5298,frc334,frc7272,frc4299,Yes,Mid,0,2,0,4,32,Yes,-1

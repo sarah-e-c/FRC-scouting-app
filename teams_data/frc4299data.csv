@@ -1,0 +1,11 @@
+level_0,comp_level,event_key,key,match_number,set_number,winning_alliance,team_keys,team_alliance,Teammate1,Teammate2,Teammate3,Opponent1,Opponent2,Opponent3,Taxied,Hang,TeamAutoLower,TeamAutoUpper,TeamTeleopLower,TeamTeleopUpper,TotalTeamPoints,WonGame,Week
+10226,qm,2022nyny,2022nyny_qm2,2,1,red,"['frc4299', 'frc2601', 'frc7504', 'frc4571', 'frc2344', 'frc6911']",red,frc4299,frc2601,frc7504,frc4571,frc2344,frc6911,Yes,None,1,3,2,8,52,Yes,-1
+10220,qm,2022nyny,2022nyny_qm14,14,1,blue,"['frc3204', 'frc354', 'frc6593', 'frc4299', 'frc1796', 'frc7036']",blue,frc4299,frc1796,frc7036,frc3204,frc354,frc6593,Yes,None,1,5,1,26,79,Yes,-1
+10229,qm,2022nyny,2022nyny_qm22,22,1,red,"['frc5123', 'frc354', 'frc4299', 'frc8346', 'frc6636', 'frc395']",red,frc5123,frc354,frc4299,frc8346,frc6636,frc395,No,None,2,0,9,0,25,Yes,-1
+10238,qm,2022nyny,2022nyny_qm30,30,1,red,"['frc7730', 'frc3760', 'frc3950', 'frc6880', 'frc4299', 'frc2895']",blue,frc6880,frc4299,frc2895,frc7730,frc3760,frc3950,Yes,None,0,0,1,0,15,No,-1
+10249,qm,2022nyny,2022nyny_qm40,40,1,blue,"['frc4299', 'frc6911', 'frc335', 'frc263', 'frc6969', 'frc5806']",red,frc4299,frc6911,frc335,frc263,frc6969,frc5806,Yes,None,3,0,10,0,34,No,-1
+10256,qm,2022nyny,2022nyny_qm47,47,1,red,"['frc334', 'frc3004', 'frc4027', 'frc4299', 'frc8597', 'frc3419']",blue,frc4299,frc8597,frc3419,frc334,frc3004,frc4027,Yes,None,1,2,2,9,42,No,-1
+10265,qm,2022nyny,2022nyny_qm55,55,1,blue,"['frc8739', 'frc4299', 'frc2344', 'frc1796', 'frc333', 'frc6880']",red,frc8739,frc4299,frc2344,frc1796,frc333,frc6880,Yes,None,1,1,1,4,35,No,-1
+10275,qm,2022nyny,2022nyny_qm64,64,1,blue,"['frc6873', 'frc4012', 'frc1155', 'frc3950', 'frc2265', 'frc4299']",blue,frc3950,frc2265,frc4299,frc6873,frc4012,frc1155,Yes,None,1,2,2,6,51,Yes,-1
+10282,qm,2022nyny,2022nyny_qm70,70,1,blue,"['frc369', 'frc4299', 'frc1155', 'frc3017', 'frc20', 'frc3419']",red,frc369,frc4299,frc1155,frc3017,frc20,frc3419,Yes,None,3,0,7,0,33,No,-1
+10288,qm,2022nyny,2022nyny_qm76,76,1,red,"['frc743', 'frc7668', 'frc5298', 'frc334', 'frc7272', 'frc4299']",blue,frc334,frc7272,frc4299,frc743,frc7668,frc5298,Yes,None,2,0,5,2,17,No,-1

@@ -1,0 +1,11 @@
+level_0,comp_level,event_key,key,match_number,set_number,winning_alliance,team_keys,team_alliance,Teammate1,Teammate2,Teammate3,Opponent1,Opponent2,Opponent3,Taxied,Hang,TeamAutoLower,TeamAutoUpper,TeamTeleopLower,TeamTeleopUpper,TotalTeamPoints,WonGame,Week
+8985,qm,2022ndgf,2022ndgf_qm2,2,1,blue,"['frc877', 'frc8188', 'frc2531', 'frc8255', 'frc8586', 'frc5653']",red,frc877,frc8188,frc2531,frc8255,frc8586,frc5653,No,None,1,0,0,1,28,No,3
+8976,qm,2022ndgf,2022ndgf_qm11,11,1,red,"['frc877', 'frc876', 'frc7677', 'frc3277', 'frc4480', 'frc2883']",red,frc877,frc876,frc7677,frc3277,frc4480,frc2883,No,None,1,4,8,13,75,Yes,3
+8983,qm,2022ndgf,2022ndgf_qm18,18,1,red,"['frc6175', 'frc7028', 'frc3130', 'frc3313', 'frc877', 'frc2508']",blue,frc3313,frc877,frc2508,frc6175,frc7028,frc3130,Yes,None,2,0,1,0,24,No,3
+8994,qm,2022ndgf,2022ndgf_qm28,28,1,red,"['frc4198', 'frc5913', 'frc3275', 'frc3293', 'frc4728', 'frc877']",blue,frc3293,frc4728,frc877,frc4198,frc5913,frc3275,Yes,None,0,4,0,6,49,No,3
+9001,qm,2022ndgf,2022ndgf_qm34,34,1,red,"['frc7048', 'frc7028', 'frc5172', 'frc3275', 'frc877', 'frc8298']",blue,frc3275,frc877,frc8298,frc7048,frc7028,frc5172,Yes,None,0,2,0,4,36,No,3
+9015,qm,2022ndgf,2022ndgf_qm47,47,1,blue,"['frc2538', 'frc877', 'frc3630', 'frc5653', 'frc4607', 'frc3058']",red,frc2538,frc877,frc3630,frc5653,frc4607,frc3058,Yes,None,0,2,0,5,43,No,3
+9021,qm,2022ndgf,2022ndgf_qm52,52,1,red,"['frc8887', 'frc2654', 'frc4674', 'frc6628', 'frc3300', 'frc877']",blue,frc6628,frc3300,frc877,frc8887,frc2654,frc4674,Yes,None,1,0,3,0,23,No,3
+9032,qm,2022ndgf,2022ndgf_qm62,62,1,blue,"['frc5929', 'frc877', 'frc5658', 'frc3630', 'frc4360', 'frc3297']",red,frc5929,frc877,frc5658,frc3630,frc4360,frc3297,Yes,None,0,0,2,0,6,No,3
+9039,qm,2022ndgf,2022ndgf_qm69,69,1,red,"['frc4239', 'frc8188', 'frc4728', 'frc3298', 'frc6175', 'frc877']",blue,frc3298,frc6175,frc877,frc4239,frc8188,frc4728,Yes,None,2,0,2,0,27,No,3
+9050,qm,2022ndgf,2022ndgf_qm79,79,1,red,"['frc4238', 'frc3293', 'frc4539', 'frc877', 'frc3130', 'frc8255']",blue,frc877,frc3130,frc8255,frc4238,frc3293,frc4539,Yes,None,0,2,1,10,49,No,3

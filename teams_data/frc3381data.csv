@@ -1,0 +1,12 @@
+level_0,comp_level,event_key,key,match_number,set_number,winning_alliance,team_keys,team_alliance,Teammate1,Teammate2,Teammate3,Opponent1,Opponent2,Opponent3,Taxied,Hang,TeamAutoLower,TeamAutoUpper,TeamTeleopLower,TeamTeleopUpper,TotalTeamPoints,WonGame,Week
+14349,qm,2022wila,2022wila_qm2,2,1,red,"['frc1091', 'frc2451', 'frc2826', 'frc3381', 'frc4655', 'frc2220']",blue,frc3381,frc4655,frc2220,frc1091,frc2451,frc2826,Yes,None,0,3,2,8,57,No,4
+14342,qm,2022wila,2022wila_qm13,13,1,blue,"['frc4054', 'frc3381', 'frc4531', 'frc7103', 'frc6166', 'frc5339']",red,frc4054,frc3381,frc4531,frc7103,frc6166,frc5339,Yes,Mid,0,1,1,3,33,No,4
+14353,qm,2022wila,2022wila_qm23,23,1,red,"['frc4655', 'frc7021', 'frc4009', 'frc8701', 'frc2977', 'frc3381']",blue,frc8701,frc2977,frc3381,frc4655,frc7021,frc4009,Yes,None,2,0,6,1,32,No,4
+14359,qm,2022wila,2022wila_qm29,29,1,blue,"['frc5339', 'frc8803', 'frc3381', 'frc2194', 'frc648', 'frc4655']",red,frc5339,frc8803,frc3381,frc2194,frc648,frc4655,Yes,Mid,1,1,2,5,36,No,4
+14368,qm,2022wila,2022wila_qm37,37,1,blue,"['frc4054', 'frc6574', 'frc8782', 'frc3381', 'frc7619', 'frc8700']",blue,frc3381,frc7619,frc8700,frc4054,frc6574,frc8782,Yes,High,1,0,1,15,63,Yes,4
+14378,qm,2022wila,2022wila_qm46,46,1,blue,"['frc5586', 'frc3090', 'frc2977', 'frc3381', 'frc2451', 'frc5442']",blue,frc3381,frc2451,frc5442,frc5586,frc3090,frc2977,Yes,High,1,5,0,18,84,Yes,4
+14384,qm,2022wila,2022wila_qm51,51,1,red,"['frc3381', 'frc2194', 'frc930', 'frc4011', 'frc4549', 'frc2169']",red,frc3381,frc2194,frc930,frc4011,frc4549,frc2169,Yes,Mid,1,5,0,14,85,Yes,4
+14394,qm,2022wila,2022wila_qm60,60,1,blue,"['frc648', 'frc3381', 'frc5903', 'frc8531', 'frc5442', 'frc3692']",red,frc648,frc3381,frc5903,frc8531,frc5442,frc3692,Yes,High,0,1,0,3,32,No,4
+14399,qm,2022wila,2022wila_qm65,65,1,blue,"['frc2169', 'frc2704', 'frc3381', 'frc8744', 'frc4531', 'frc5903']",red,frc2169,frc2704,frc3381,frc8744,frc4531,frc5903,Yes,Traversal,2,0,2,7,55,No,4
+14405,qm,2022wila,2022wila_qm70,70,1,red,"['frc1306', 'frc5148', 'frc3723', 'frc5914', 'frc3381', 'frc8744']",blue,frc5914,frc3381,frc8744,frc1306,frc5148,frc3723,Yes,High,2,1,17,0,60,No,4
+14420,qm,2022wila,2022wila_qm84,84,1,blue,"['frc8700', 'frc2039', 'frc1716', 'frc4549', 'frc6421', 'frc3381']",blue,frc4549,frc6421,frc3381,frc8700,frc2039,frc1716,Yes,Traversal,0,1,1,8,61,Yes,4
