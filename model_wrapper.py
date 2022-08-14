@@ -5,8 +5,13 @@ import data_setup as setup
 import optuna
 import os
 from sklearn.metrics import accuracy_score
+import logging
 
+logger = logging.getLogger(__name__)
 class FRCModel():
+    """
+    Class to be used like ML model.
+    """
     def __init__(self, model='XGBoost', mode='files', teams_directory='teams_data', late_weighting=False, event_data_filepath='about_all_events.json'):
         """
         model='XGBoost' -- either supported string or other model that supports fit() and transform()
@@ -28,6 +33,8 @@ class FRCModel():
         # modes
         if mode=='files':
             self.teams_directory = teams_directory
+        
+        logger.debug(f'FRCModel created. params:\n event data filepath: {event_data_filepath},\n mode: {self.mode}\n, late weighting: {self.late_weighting}, \n model: {self.model}')
         
 
     def fit(self, X=False, y=False, included_weeks=[], data_preloaded_filepath=False, write_data=False):
@@ -54,6 +61,7 @@ class FRCModel():
         #week by week mode: evaluating team stats based on data evaluated weekly (recommended)
         #WARNING: this mode is currently very time intensive and needs to be optomized
         elif self.mode == 'week_by_week':
+            logger.debug(f'Starting model fit in week by week mode. Fit weeks: {included_weeks}, Data preloaded: {data_preloaded_filepath}')
             all_events = pd.read_json(self.event_data_filepath)
             
             #user passed False
@@ -68,12 +76,14 @@ class FRCModel():
                 if write_data:
                     for df, week in zip(weeks_dfs, included_weeks):
                         df.to_csv(f'old code/data/match_data_by_cum_week/week-{week}-data')
+                logger.debug('Finished generating weekly stats sheets.')
             # user passed directory
             else:
                 weeks_dfs=[]
                 for file in os.scandir(f'{data_preloaded_filepath}/cumulative_week_data'):
                     weeks_dfs.append(pd.read_csv(file))
             
+
             # calculating averages 
             all_matches_weekly_list = []
             if not data_preloaded_filepath:
@@ -85,6 +95,7 @@ class FRCModel():
                 if write_data:
                     for df, week in zip(all_matches_weekly_list, included_weeks):
                         df.to_csv(f'old code/data/match_data_by_cum_week/week_{week}_match_data')
+                logger.debug('Finished generating match specific data sheets.')
             else:
                 for file in os.scandir(f'{data_preloaded_filepath}/match_data_by_cum_week'):
                     all_matches_weekly_list.append(pd.read_csv(file))
@@ -100,25 +111,28 @@ class FRCModel():
             
             self.X = pd.concat(completed_data)
             self.X.pop('event_key')
+            self.X.pop('Unnamed: 0')
             
             self.y = self.X.pop('winning_alliance')
             self.y = self.y.map(lambda x: x+1)
             
+            try:
+                self.model.fit(self.X,self.y)
+            except Exception as e:
+                logger.exception('Something went wrong fitting data.')
+                raise e
 
-            self.model.fit(self.X,self.y)
             self.fit_weeks = included_weeks
 
-            print(all_matches_weekly_list)
 
         elif self.mode == 'default':
             try:
                 self.model.fit(X, y)
             except Exception as e:
-                print(e)
-                print('Please pass valid values for X and y.')
+                logger.debug('Invalid values passed for X and y.', exc_info=True)
             
 
-    def predict(self, X=False, included_weeks=[], team_stats_filepath='all_team_stats.csv'):
+    def predict(self, X=False, included_weeks=[], verbose=True):
         """
         calls the model's predict method.
         X=False: pass arguments to directly call model's predict function
@@ -126,7 +140,9 @@ class FRCModel():
 
         if not X:
             all_events = pd.read_json(self.event_data_filepath)
-            team_stats = setup.team_stats_process(included_weeks=self.fit_weeks, team_stats_filepath=False, directory='teams_data')
+            team_stats = setup.team_stats_process(included_weeks=self.fit_weeks, team_stats_filepath=False, directory='teams_data', late_weighting=self.late_weighting)
+            logger.debug('Processed final team statistics.')
+
             def includedevents(x: int):
                 if x in included_weeks:
                     return True
@@ -135,9 +151,11 @@ class FRCModel():
                         return True
                 else:
                     return False
+            
             X = setup.load_matches_alliance_stats(all_matches_stats_filepath=False, event_keys=all_events.loc[all_events['key'].apply(includedevents)]['key'], verbose=True, 
                 team_stats_filepath=team_stats)
-            print(X.columns)
+            
+            logger.debug('Loaded per match statistics for test data.')
             
             self.y_test = X.pop('winning_alliance').map(lambda x: x+1)
             X.pop('event_key')
@@ -150,14 +168,17 @@ class FRCModel():
         Method that takes in both the actual values and the bad values,
         y_test=False -- pass False to use the data that was not predicted. Pass another value to have those compared
         """
+        logger.debug('Starting scoring...')
         predictions = self.predict(included_weeks=prediction_weeks)
         if not y_test:
             y_test = self.y_test
-        return accuracy_score(predictions, y_test)
+        score = accuracy_score(predictions, y_test)
+        logger.info(f'Test ran with params: late weighting: {self.late_weighting}, \n model: {type(self.model)}, \n training weeks: {self.fit_weeks},\n prediction weeks: {prediction_weeks}, \n score: {score}')
+        return score
 
     def optimize(self):
         """
-        uses optuna to create a study to optomize the model. Custom models cannot use this method.
+        Method that uses optuna to create a study to optomize the model. Custom models cannot use this method.
         """
         if self.mode == 'XGBoost':
             pass

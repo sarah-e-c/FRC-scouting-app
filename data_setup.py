@@ -7,22 +7,24 @@ import statistics
 import os
 import match_selector as selector
 import math
+import logging
 
 #must send key with header (please dont steal my key  :()
 HEADER = {'X-TBA-Auth-Key': 'j5psodzpSE2HyqjKqVQUfC35jmvDo8Cb0YFHZN6ky76Arm4rQ7H2xD370QSwEmsC'}
 YEAR = 2022
 
+logger = logging.getLogger(__name__)
 # first method
 def get_api_data(data_loaded=False, verbose=True, event_keys='default', match_data_filepath='all_matches_uncleaned.json'):
     """
     Method to grab all of the data needed for the program from the Blue Alliance api.
     data_loaded -- signify if data is loaded already. (mostly for testing, usually you wouldn't have to run this method at all)
-    verbose -- signify if print statements are wanted
+    verbose -- signify if print statements/logs are wanted
     event_keys -- pass 'default' for default list of events, pass 'all' for all good events for year, or pass in custom list of event keys
     match_data_filepath -- filepath where the wanted matches will be saved in a json
     """
     if verbose:
-        print('getting data from api...')
+        logger.debug('getting data from api...')
     def get_score_data(df, team_name):
 
         taxied_list = []
@@ -131,8 +133,7 @@ def get_api_data(data_loaded=False, verbose=True, event_keys='default', match_da
                     team_list.append('blue')
                 elif team_name in df.iloc[i]['alliances']['red']['team_keys']:
                     team_list.append('red')
-                else:
-                    print('Warning: Team name not found')
+                
             except:
                 team_list.append('red')
         return pd.Series(team_list, name='team_alliance')
@@ -187,11 +188,8 @@ def get_api_data(data_loaded=False, verbose=True, event_keys='default', match_da
                 event_matches = pd.read_json(requests.get(f'https://www.thebluealliance.com/api/v3//event/{event}/matches', HEADER).text)
                 all_matches.append(event_matches)
                 time.sleep(0.2) # being nice
-                print(event, ' is loaded!')
             
             # writing this to a csv so less requests
-            print('done requesting!')
-
             all_matches = pd.concat(all_matches).reset_index()
 
             all_matches.to_json(match_data_filepath)
@@ -245,7 +243,6 @@ def get_api_data(data_loaded=False, verbose=True, event_keys='default', match_da
             all_teams_matches[team].to_csv(f'teams_data/{team}data.csv', index=False)
         
 
-        print('all done!')
 
         
     def get_good_events(bad_events_filepath='bad_events.csv'):
@@ -282,8 +279,7 @@ def get_api_data(data_loaded=False, verbose=True, event_keys='default', match_da
         try:
             load_data(event_keys, data_preloaded=data_loaded)
         except:
-            print('unable to load in data.')
-
+            pass
 
 
 #second method for normal flow
@@ -299,7 +295,7 @@ def team_stats_process(directory='teams_data', verbose=True, team_stats_filepath
     """
 
     if verbose:
-        print('condensing team averages...')
+        logger.debug('Condensing team averages...')
     
     team_paths = []
 
@@ -389,6 +385,7 @@ def team_stats_process(directory='teams_data', verbose=True, team_stats_filepath
     if not team_stats_filepath:
         return total_scores_df
     total_scores_df.to_csv(team_stats_filepath, index=False)
+    logger.info('Fresh team statistics written to csv')
 
 #third method for normal flow
 def load_matches_alliance_stats(event_keys='default', verbose=True, team_stats_filepath='all_team_stats.csv', all_matches_filepath='all_matches_uncleaned.json', all_matches_stats_filepath='all_matches_stats.csv'):
@@ -403,7 +400,7 @@ def load_matches_alliance_stats(event_keys='default', verbose=True, team_stats_f
     """
 
     if verbose:
-        print('loading alliance stats...')
+        logger.debug('Loading alliance statistics...')
 
     def team_lookup_averages(team_list, team_stats_df):
         """
@@ -466,7 +463,6 @@ def load_matches_alliance_stats(event_keys='default', verbose=True, team_stats_f
         for i in range(match_df.shape[0]):
             red_teams_list.append(match_df.iloc[i]['alliances']['red']['team_keys'])
             blue_teams_list.append(match_df.iloc[i]['alliances']['blue']['team_keys'])
-        print(pd.DataFrame({'Red': red_teams_list, 'Blue': blue_teams_list}))
         return pd.DataFrame({'Red': red_teams_list, 'Blue': blue_teams_list})
 
 
@@ -491,7 +487,6 @@ def load_matches_alliance_stats(event_keys='default', verbose=True, team_stats_f
             return pd.DataFrame(series_list)
 
         teams_names_df = get_teams(match_df)
-        print(match_df)
         winner_series = match_df['winning_alliance'].map({'red': 1, '': 0, 'blue': -1})
 
         return get_team_averages(teams_names_df, team_stats_df).join(match_df['event_key']).join(winner_series)

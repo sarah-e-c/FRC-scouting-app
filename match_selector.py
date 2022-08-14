@@ -78,7 +78,6 @@ def select_by_event_district(district_list, match_data):
         district_list = [district_list]
 
     def in_district(x, district):
-        print(x)
         try:
             return x['key'] == district
         except:
@@ -88,7 +87,6 @@ def select_by_event_district(district_list, match_data):
     events_data = pd.read_json(EVENT_DATA_FILEPATH)
     events_in_all_districts = []
     for district in district_list:
-        print(events_data['district'].head(20))
         events_in_district = np.array(events_data.loc[events_data['district'].apply(lambda x: in_district(x, district))]['key'])
         events_in_all_districts.append(events_in_district)
     try:
