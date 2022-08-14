@@ -1,21 +1,25 @@
-
+#PyQt6
 from PyQt6.QtWidgets import (QApplication, QWidget, QMainWindow, QPushButton,
                              QVBoxLayout, QLabel, QMenu, QHBoxLayout, QToolBar, QStatusBar, QTabWidget, QCheckBox,
                              QComboBox, QMessageBox, QDoubleSpinBox)
 from PyQt6.QtCore import QSize, Qt
-import sys
 from PyQt6 import QtGui
 from PyQt6.QtGui import QAction
 from PyQt6.QtGui import QIcon
+from PyQt6.QtCore import QThread, QObject, pyqtSignal, QRunnable, QThreadPool
 
+# self-coded elements
 from gui.elements.home_elements import HomeButton
 from gui.elements.playground_elements import PlaygroundTextBox, PlaygroundWorker
 
+# self-coded other things :)
 from model_wrapper import FRCModel
 from gui.utils import ErrorDialog, Constants
-from PyQt6.QtCore import QThread, QObject, pyqtSignal, QRunnable, QThreadPool
 
+# general
 import logging
+import sys
+
 
 # I had to hard code all of this because of lack of support :(
 
@@ -33,7 +37,7 @@ class Window(QMainWindow):
             logging.root.removeHandler(handler)
         self.logger = logging.getLogger(__name__)
         self.logger.setLevel(logging.DEBUG)
-        
+
         format = logging.Formatter('%(process)d-%(levelname)s-%(name)s-%(message)s')
 
         # setting up file handler
