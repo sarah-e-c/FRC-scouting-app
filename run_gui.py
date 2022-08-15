@@ -19,6 +19,7 @@ from gui.utils import ErrorDialog, Constants
 # general
 import logging
 import sys
+import requests
 
 
 # I had to hard code all of this because of lack of support :(
@@ -275,6 +276,12 @@ class Window(QMainWindow):
         """
         Function to set the window to the upload data screen.
         """
+
+        outerLayout = QHBoxLayout()
+        file_upload_button = QPushButton('Upload data')
+        self.mainWidget = QWidget()
+        self.mainWidget.setLayout(outerLayout)
+        self.setCentralWidget(self.mainWidget)
         pass
 
     def sample_match_prediction_screen(self):

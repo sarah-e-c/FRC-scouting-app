@@ -1,3 +1,4 @@
+import os
 from PyQt6.QtWidgets import QMessageBox
 import PyQt6.QtCore as core
 class ErrorDialog():
@@ -11,6 +12,13 @@ class Constants:
     PRELOADED_DATA_FILEPATH = 'old code/data'
     APPLICATION_TITLE = 'ScoutingML'
     LATE_WEIGHTING = 2
+    if os.path.exists('key.txt'):
+        with open('key.txt') as f:
+            KEY = f.text
+    else: 
+        KEY = input('Enter TBA Auth key')
+        with open('key.txt', 'w') as f:
+            f.write(KEY)
 
 
 
