@@ -554,8 +554,7 @@ if __name__ == '__main__':
     # get_api_data(data_loaded=True, event_keys='all')
     #team_stats_process(late_weighting=1.5)
     #print(load_matches_alliance_stats(event_keys='all', all_matches_stats_filepath=False))
-    create_connection(r'sql_data.db')
-
+    pass
 
     # paths = []
     # for filename in os.scandir('teams_data'):

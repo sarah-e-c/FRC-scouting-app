@@ -66,7 +66,6 @@ def select_by_event_type(type_list, match_data):
     events_with_type = list(np.concatenate(events_with_type))
     return select_by_event(events_with_type, match_data)
 
-
 def select_by_event_district(district_list, match_data):
     """
     Method that returns the indices of matches in the match data (and the match stats data) that meet the criteria

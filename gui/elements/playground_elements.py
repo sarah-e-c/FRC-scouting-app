@@ -25,7 +25,12 @@ class PlaygroundWorker(QRunnable):
 
     def __init__(self, mode, fit_weeks, predict_weeks, late_weighting):
         super().__init__()
+
+        # logging
         self.logger = logging.getLogger(__name__)
+        
+
+
         self.mode = mode
         self.fit_weeks = fit_weeks
         self.predict_weeks = predict_weeks

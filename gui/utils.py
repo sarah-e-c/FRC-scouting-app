@@ -14,11 +14,12 @@ class Constants:
     LATE_WEIGHTING = 2
     if os.path.exists('key.txt'):
         with open('key.txt') as f:
-            KEY = f.text
+            KEY = str(f)
     else: 
         KEY = input('Enter TBA Auth key')
         with open('key.txt', 'w') as f:
             f.write(KEY)
+    SERVER_URL = "localhost:5000/"
 
 
 

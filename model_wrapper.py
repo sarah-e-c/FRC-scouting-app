@@ -1,3 +1,4 @@
+from xmlrpc.client import boolean
 import pandas as pd
 from xgboost import XGBClassifier
 import match_selector as selector
@@ -22,7 +23,11 @@ class FRCModel():
 
         self.event_data_filepath = event_data_filepath
         self.mode = mode
-        self.late_weighting = late_weighting
+        if late_weighting < 0.05:
+            self.late_weighting = False
+        else:
+            self.late_weighting = late_weighting
+
         # list of supported models
         if model =='XGBoost':
             self.model = XGBClassifier()
@@ -34,7 +39,7 @@ class FRCModel():
         if mode=='files':
             self.teams_directory = teams_directory
         
-        logger.debug(f'FRCModel created. params:\n event data filepath: {event_data_filepath},\n mode: {self.mode}\n, late weighting: {self.late_weighting}, \n model: {self.model}')
+        logger.debug(f'FRCModel created. params:\n event data filepath: {event_data_filepath},\n mode: {self.mode}\n, late weighting: {self.late_weighting}, \n model: {type(self.model)}')
         
 
     def fit(self, X=False, y=False, included_weeks=[], data_preloaded_filepath=False, write_data=False):
@@ -52,6 +57,8 @@ class FRCModel():
 
         if included_weeks == 'all':
             included_weeks = [0,1,2,3,4,5,-1] # all weeks represented
+        elif type(included_weeks) == str:
+            included_weeks = eval(included_weeks)
 
         # incomplete default files mode
         if self.mode == 'files':
@@ -122,6 +129,7 @@ class FRCModel():
                 logger.exception('Something went wrong fitting data.')
                 raise e
 
+            
             self.fit_weeks = included_weeks
 
 
@@ -138,27 +146,28 @@ class FRCModel():
         X=False: pass arguments to directly call model's predict function
         """
 
-        if not X:
-            all_events = pd.read_json(self.event_data_filepath)
-            team_stats = setup.team_stats_process(included_weeks=self.fit_weeks, team_stats_filepath=False, directory='teams_data', late_weighting=self.late_weighting)
-            logger.debug('Processed final team statistics.')
+        if type(X) == bool:
+            if not X:
+                all_events = pd.read_json(self.event_data_filepath)
+                team_stats = setup.team_stats_process(included_weeks=self.fit_weeks, team_stats_filepath=False, directory='teams_data', late_weighting=self.late_weighting)
+                logger.debug('Processed final team statistics.')
 
-            def includedevents(x: int):
-                if x in included_weeks:
-                    return True
-                elif -1 in included_weeks:
-                    if x not in [0,1,2,3,4,5]:
+                def includedevents(x: int):
+                    if x in included_weeks:
                         return True
-                else:
-                    return False
-            
-            X = setup.load_matches_alliance_stats(all_matches_stats_filepath=False, event_keys=all_events.loc[all_events['key'].apply(includedevents)]['key'], verbose=True, 
-                team_stats_filepath=team_stats)
-            
-            logger.debug('Loaded per match statistics for test data.')
-            
-            self.y_test = X.pop('winning_alliance').map(lambda x: x+1)
-            X.pop('event_key')
+                    elif -1 in included_weeks:
+                        if x not in [0,1,2,3,4,5]:
+                            return True
+                    else:
+                        return False
+                
+                X = setup.load_matches_alliance_stats(all_matches_stats_filepath=False, event_keys=all_events.loc[all_events['key'].apply(includedevents)]['key'], verbose=True, 
+                    team_stats_filepath=team_stats)
+                
+                logger.debug('Loaded per match statistics for test data.')
+                
+                self.y_test = X.pop('winning_alliance').map(lambda x: x+1)
+                X.pop('event_key')
 
         self.predict_weeks=included_weeks
         return self.model.predict(X)

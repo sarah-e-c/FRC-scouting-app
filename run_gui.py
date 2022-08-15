@@ -1,16 +1,20 @@
 #PyQt6
+
+from doctest import OutputChecker
 from PyQt6.QtWidgets import (QApplication, QWidget, QMainWindow, QPushButton,
                              QVBoxLayout, QLabel, QMenu, QHBoxLayout, QToolBar, QStatusBar, QTabWidget, QCheckBox,
-                             QComboBox, QMessageBox, QDoubleSpinBox)
+                             QComboBox, QMessageBox, QDoubleSpinBox, QFileDialog, QTextEdit)
 from PyQt6.QtCore import QSize, Qt
 from PyQt6 import QtGui
 from PyQt6.QtGui import QAction
 from PyQt6.QtGui import QIcon
-from PyQt6.QtCore import QThread, QObject, pyqtSignal, QRunnable, QThreadPool
+from PyQt6.QtCore import QThreadPool
 
 # self-coded elements
 from gui.elements.home_elements import HomeButton
 from gui.elements.playground_elements import PlaygroundTextBox, PlaygroundWorker
+from gui.elements.sample_match_test_elements import SampleMatchTextBox, SampleMatchWorker
+from gui.elements.settings_screen_elements import ImplementSettingsWorker
 
 # self-coded other things :)
 from model_wrapper import FRCModel
@@ -20,6 +24,7 @@ from gui.utils import ErrorDialog, Constants
 import logging
 import sys
 import requests
+import configparser
 
 
 # I had to hard code all of this because of lack of support :(
@@ -36,7 +41,7 @@ class Window(QMainWindow):
         # making sure theres no funny business with the logger
         for handler in logging.root.handlers[:]:
             logging.root.removeHandler(handler)
-        self.logger = logging.getLogger(__name__)
+        self.logger = logging.getLogger()
         self.logger.setLevel(logging.DEBUG)
 
         format = logging.Formatter('%(process)d-%(levelname)s-%(name)s-%(message)s')
@@ -52,6 +57,13 @@ class Window(QMainWindow):
         console_handler.setLevel(logging.DEBUG)
         console_handler.setFormatter(format)
         self.logger.addHandler(console_handler)
+        
+        #setting up defult model for fun testing and such
+        self.settings_config = configparser.ConfigParser()
+        self.settings_config.read('config.ini')
+        self.model_config = self.settings_config['model']
+        self.FRCmodel = FRCModel(mode=self.settings_config['model']['mode'], model=self.settings_config['model']['type'], late_weighting=self.model_config.getfloat('late_weighting'))
+        self.FRCmodel.fit(included_weeks=self.settings_config['model']['included_weeks'], data_preloaded_filepath='old code/data', write_data=False)
 
         # aesthetics
         self.setWindowTitle(Constants.APPLICATION_TITLE)
@@ -109,10 +121,17 @@ class Window(QMainWindow):
             'Predict Sample Match Button': HomeButton('Predict Sample Match', self, 'Predict Sample Match Button', handle_home_buttons),
             'Settings Button': HomeButton('Settings', self, 'Settings Button', handle_home_buttons),
         }
+        tooltips = [
+            'Experiment and test model accuracy on 2022 data.',
+            'Support the project by uploading data to the api.',
+            'See who would win in a fake match. Any team, any district!',
+            'Configure settings.'
+        ]
 
-        for _, button in self.home_buttons.items():
-            inner_layout.addWidget(button)
-
+        for tooltip, button in zip(tooltips, self.home_buttons.items()):
+            button[1].setStatusTip(tooltip)
+            inner_layout.addWidget(button[1])
+        
         self.home_label = QLabel('Scouting Predictions v.0.01')
         self.home_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         outer_layout.addWidget(self.home_label)
@@ -277,24 +296,229 @@ class Window(QMainWindow):
         Function to set the window to the upload data screen.
         """
 
-        outerLayout = QHBoxLayout()
+        
+        def file_upload(data):
+            try:
+                requests.post(Constants.SERVER_URL, data)
+            except Exception as e:
+                self.logger.warning(f'Error connecting to application server. {e}')
+        outerLayout = QVBoxLayout()
+        text_edit = QTextEdit()
+        text_edit_text = """
+        Upload data to the application api. Helps imporve predictions! \n
+        Guidelines: Our api takes input data in both flat json and csv formats. \n
+        Required columns:
+        team_name -- also acceptable 'teamName' or 'team_number' or 'teamNumber': The team that the scouter was focuesed on.
+        match_key (matchKey) \n
+        OR \n
+        match_number also acceptable matchNumber AND event_key also acceptable eventKey (unique identifier for event) \n
+        These allow us to match the scouted data to TBA data. \n
+        Suggested columns: \n
+        team_auto_upper_cargo -- also acceptable teamAutoUpperCargo: the amount of balls that the team scored in the upper goal during autonomous. \n
+        team_auto_lower_cargo -- also acceptable teamAutoLowerCargo: the amount of balls that the team scored in the lower goal during autonomous. \n
+        team_teleop_upper_cargo -- also acceptable teamTeleopUpperCargo: the amount of balls that the team scored in the upper goal during teleop.\n
+        team_teleop_lower_cargo -- also acceptable teamTeleopLowerCargo: the amount of balls that the team scored in the lower goal during teleop. \n
+        """
+        text_edit.setText(text_edit_text)
+        text_edit.setReadOnly(True)
+        outerLayout.addWidget(text_edit)
         file_upload_button = QPushButton('Upload data')
+        file_dialog = QFileDialog()
+        def file_dialog_get(window: Window):
+            #wrong
+            data = file_dialog.getOpenFileName(window, "Upload Data", 'Downloads', "Data Files (*.json, *.csv)")
+            file_upload(data)
+        file_upload_button.pressed.connect(lambda: file_dialog_get(self))
+        file_upload_button.setStatusTip('Select data to upload!')
+        outerLayout.addWidget(file_upload_button)
         self.mainWidget = QWidget()
         self.mainWidget.setLayout(outerLayout)
         self.setCentralWidget(self.mainWidget)
-        pass
+        
 
     def sample_match_prediction_screen(self):
         """
         Function to set the window to the sample match prediction screen.
         """
-        pass
+        def run_sample_match_test(window: Window):
+            window.sample_match_output_textbox.setText('Recieved input!')
+
+            # parsing weeks
+            try:
+                red_team_1 = window.red_selectors['team 1'].text()
+                red_team_2 = window.red_selectors['team 2'].text()
+                red_team_3 = window.red_selectors['team 3'].text()
+                blue_team_1 = window.blue_selectors['team 1'].text()
+                blue_team_2 = window.blue_selectors['team 2'].text()
+                blue_team_3 = window.blue_selectors['team 3'].text()
+            except Exception as e:
+                self.logger.debug(f'rejected user input from sample match data {e}')
+                window.make_error_dialog()
+                return
+        
+            
+            worker = SampleMatchWorker(red_team_1, red_team_2, red_team_3, blue_team_1, blue_team_2, blue_team_3, self.FRCmodel)
+            self.threadpool.start(worker)
+
+            worker.signals.result.connect(self.sample_match_output_textbox.setText)
+            self.sample_match_run_button.setEnabled(False)
+            worker.signals.finished.connect(lambda: self.sample_match_run_button.setEnabled(True))
+
+        selectionLayout = QVBoxLayout()
+
+        red_label = QLabel('Red Alliance')
+        blue_label = QLabel('Blue Alliance')
+
+        self.red_selectors = {
+            'team 1': '',
+            'team 2': '',
+            'team 3': ''
+        }
+        self.blue_selectors = {
+            'team 1': '',
+            'team 2': '',
+            'team 3': ''
+        }
+
+        selectionLayout.addWidget(red_label)
+
+        for name, _ in self.red_selectors.items():
+            mini_layout = QHBoxLayout()
+            label = QLabel(name)
+            textbox = SampleMatchTextBox(f'red_{name}')
+            mini_layout.addWidget(label)
+            mini_layout.addWidget(textbox)
+            self.red_selectors[name] = textbox
+            selectionLayout.addLayout(mini_layout)
+        
+        selectionLayout.addWidget(blue_label)
+        for name, _ in self.blue_selectors.items():
+            mini_layout = QHBoxLayout()
+            label = QLabel(name)
+            textbox = SampleMatchTextBox(f'blue_{name}')
+            mini_layout.addWidget(label)
+            mini_layout.addWidget(textbox)
+            self.blue_selectors[name] = textbox
+            selectionLayout.addLayout(mini_layout)
+        
+        outerLayout = QHBoxLayout()
+        outerLayout.addLayout(selectionLayout)
+        
+        outputLayout = QVBoxLayout()
+        
+        self.sample_match_output_textbox = QTextEdit()
+        self.sample_match_output_textbox.setReadOnly(True)
+        outputLayout.addWidget(self.sample_match_output_textbox)
+
+        self.sample_match_run_button = QPushButton('Run test!')
+        self.sample_match_run_button.pressed.connect(lambda: run_sample_match_test(self))
+        outputLayout.addWidget(self.sample_match_run_button)
+        
+        outerLayout.addLayout(outputLayout)
+
+        self.mainWidget = QWidget()
+        self.mainWidget.setLayout(outerLayout)
+        
+        self.setCentralWidget(self.mainWidget)
+        self.logger.debug('Sample match predict screen loaded')
+        
 
     def settings_screen(self):
         """
         Function to set the window to the settings screen.
         """
-        pass
+        
+
+        def change_settings():
+            if self.modelLateWeightingSpinBox.value() < 0.05:
+                self.settings_config['model']['late_weighting'] = '0.0'
+            else:
+                self.settings_config['model']['late_weighting'] = str(self.modelLateWeightingSpinBox.value())
+            
+            self.settings_config['model']['mode'] = self.modelFitModeComboBox.currentText()
+            self.settings_config['model']['type'] = self.modelTypeComboBox.currentText()
+
+            # still need to configure included weeks
+            self.settings_config['model']['included_weeks'] = 'all'
+
+            with open('config.ini', 'w') as configfile:
+                self.settings_config.write(configfile)
+            self.logger.debug('Settings changed.')
+            worker = ImplementSettingsWorker(self.settings_config['model']['type'], self.settings_config['model']['type'], self.model_config.getfloat('late_weighting'))
+
+            worker.signals.result.connect(self.changeSettingsOutput.setText)
+
+            self.changeSettingsButton.setEnabled(False)
+            def change_model(new_model):
+                self.FRCmodel = new_model
+            
+            worker.signals.model.connect(change_model)
+            worker.signals.finished.connect(lambda: self.changeSettingsButton.setEnabled(True))
+            self.threadpool.start(worker)
+
+
+        model_settings_label = QLabel('Configure default model')
+        
+        model_type_label = QLabel('Model type')
+        self.modelTypeComboBox = QComboBox()
+        self.modelTypeComboBox.addItem('XGBoost')
+        self.modelTypeComboBox.addItem('Winrate Comparison (not yet supported)')
+        self.modelTypeComboBox.addItem('Random Forest (not yet supported)')
+        self.modelTypeComboBox.addItem('Logistic Regression (not yet supported)')
+        self.modelTypeComboBox.setCurrentText(self.model_config['type'])
+
+        model_type_layout = QHBoxLayout()
+        model_type_layout.addWidget(model_type_label)
+        model_type_layout.addWidget(self.modelTypeComboBox)
+
+        first_settings_layout = QVBoxLayout()
+        first_settings_layout.addWidget(model_settings_label)
+        first_settings_layout.addLayout(model_type_layout)
+        
+        model_fit_mode_label = QLabel('Model fit mode')
+        self.modelFitModeComboBox = QComboBox()
+        self.modelFitModeComboBox.addItem('week_by_week')
+        self.modelFitModeComboBox.addItem('full_comparison')
+        self.modelFitModeComboBox.setCurrentText(self.model_config['mode'])
+
+        model_fit_mode_layout = QHBoxLayout()
+        model_fit_mode_layout.addWidget(model_fit_mode_label)
+        model_fit_mode_layout.addWidget(self.modelFitModeComboBox)
+
+
+        first_settings_layout.addLayout(model_fit_mode_layout)
+
+        model_late_weighting_label = QLabel('Model late weighting')
+        self.modelLateWeightingSpinBox = QDoubleSpinBox()
+        self.modelLateWeightingSpinBox.setMinimum(0.0)
+        self.modelLateWeightingSpinBox.setMaximum(10.0)
+        self.modelLateWeightingSpinBox.setSingleStep(0.1)
+        self.modelLateWeightingSpinBox.setValue(self.model_config.getfloat('late_weighting'))
+
+        model_late_weighting_layout = QHBoxLayout()
+        model_late_weighting_layout.addWidget(model_late_weighting_label)
+        model_late_weighting_layout.addWidget(self.modelLateWeightingSpinBox)
+
+        first_settings_layout.addLayout(model_late_weighting_layout)
+
+        output_and_button_layout = QVBoxLayout()
+        self.changeSettingsOutput = QTextEdit()
+        self.changeSettingsOutput.setReadOnly(True)
+        self.changeSettingsOutput.setText('Confirm Settings?')
+        output_and_button_layout.addWidget(self.changeSettingsOutput)
+        self.changeSettingsButton = QPushButton('Confirm Settings')
+        self.changeSettingsButton.pressed.connect(change_settings)
+        output_and_button_layout.addWidget(self.changeSettingsButton)
+
+        outerLayout = QHBoxLayout()
+
+        outerLayout.addLayout(first_settings_layout)
+        outerLayout.addLayout(output_and_button_layout)
+        self.mainWidget = QWidget()
+        self.mainWidget.setLayout(outerLayout)
+        
+        self.setCentralWidget(self.mainWidget)
+        self.logger.debug('Settings screen loaded')
 
     def make_error_dialog(self, message='An error occurred.', sub_message='Please try again.'):
         """
@@ -302,11 +526,10 @@ class Window(QMainWindow):
         """
         self.logger.debug('Error Dialog Created')
         ErrorDialog(self, main_message=message, sub_message=sub_message)
-    # other UI control
+        
 
 
-
-
+# run window
 
 app = QApplication(sys.argv)
 
