@@ -1,7 +1,8 @@
 import pandas as pd
 import numpy as np
+from gui.utils import Constants
 YEAR = 2022
-HEADER = {'X-TBA-Auth-Key': 'j5psodzpSE2HyqjKqVQUfC35jmvDo8Cb0YFHZN6ky76Arm4rQ7H2xD370QSwEmsC'}
+HEADER = {'X-TBA-Auth-Key': Constants.KEY}
 EVENT_DATA_FILEPATH = 'about_all_events.json'
 
 def select_by_team(team_list, match_data, returns='indexes'):

@@ -8,12 +8,17 @@ import os
 import match_selector as selector
 import math
 import logging
+import sqlite3
+from sqlite3 import Error
+from gui.utils import Constants
 
-#must send key with header (please dont steal my key  :()
-HEADER = {'X-TBA-Auth-Key': 'j5psodzpSE2HyqjKqVQUfC35jmvDo8Cb0YFHZN6ky76Arm4rQ7H2xD370QSwEmsC'}
+#must send key with header 
+HEADER = {'X-TBA-Auth-Key': Constants.KEY}
 YEAR = 2022
 
 logger = logging.getLogger(__name__)
+
+
 # first method
 def get_api_data(data_loaded=False, verbose=True, event_keys='default', match_data_filepath='all_matches_uncleaned.json'):
     """
@@ -548,7 +553,8 @@ if __name__ == '__main__':
     
     # get_api_data(data_loaded=True, event_keys='all')
     #team_stats_process(late_weighting=1.5)
-    print(load_matches_alliance_stats(event_keys='all', all_matches_stats_filepath=False))
+    #print(load_matches_alliance_stats(event_keys='all', all_matches_stats_filepath=False))
+    create_connection(r'sql_data.db')
 
 
     # paths = []

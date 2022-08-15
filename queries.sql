@@ -1,0 +1,118 @@
+-- making table with all team stats
+
+-- WITH red_team_1_table as(
+-- 	SELECT red_team_1, 
+-- 	AVG(red_total_score) as avg_score, 
+-- 	AVG(red_auto_cargo_lower) as avg_auto_lower,
+-- 	AVG(red_auto_cargo_upper) as avg_auto_upper,
+-- 	AVG(red_auto_cargo_points) as avg_cargo_points,
+-- 	AVG(red_teleop_cargo_lower) as avg_teleop_lower,
+-- 	AVG(red_teleop_cargo_upper) AS avg_teleop_upper,
+-- 	AVG(red_teleop_cargo_points) as avg_teleop_points,
+-- 	AVG(red_hang_1) as avg_hang_score,
+-- 	MAX(red_hang_1) as maximum_hang_score,
+-- 	AVG(winning_alliance) as avg_winrate
+-- 	FROM all_matches_uncleaned
+-- 	GROUP BY(red_team_1)
+-- ), red_team_2_table as (
+-- 	SELECT red_team_2
+-- 	AVG(red_total_score) as avg_score, 
+-- 	AVG(red_auto_cargo_lower) as avg_auto_lower,
+-- 	AVG(red_auto_cargo_upper) as avg_auto_upper,
+-- 	AVG(red_auto_cargo_points) as avg_cargo_points,
+-- 	AVG(red_teleop_cargo_lower) as avg_teleop_lower,
+-- 	AVG(red_teleop_cargo_upper) AS avg_teleop_upper,
+-- 	AVG(red_teleop_cargo_points) as avg_teleop_points,
+-- 	AVG(red_hang_2) as avg_hang_score,
+-- 	MAX(red_hang_2) as maximum_hang_score,
+-- 	AVG(winning_alliance) as avg_winrate
+-- 	FROM all_matches_uncleaned
+-- 	GROUP BY(red_team_2)
+-- ), red_team_3_table as (
+-- 	SELECT red_team_3
+-- 	AVG(red_total_score) as avg_score, 
+-- 	AVG(red_auto_cargo_lower) as avg_auto_lower,
+-- 	AVG(red_auto_cargo_upper) as avg_auto_upper,
+-- 	AVG(red_auto_cargo_points) as avg_cargo_points,
+-- 	AVG(red_teleop_cargo_lower) as avg_teleop_lower,
+-- 	AVG(red_teleop_cargo_upper) AS avg_teleop_upper,
+-- 	AVG(red_teleop_cargo_points) as avg_teleop_points,
+-- 	AVG(red_hang_3) as avg_hang_score,
+-- 	MAX(red_hang_3) as maximum_hang_score,
+-- 	AVG(winning_alliance) as avg_winrate
+-- 	FROM all_matches_uncleaned
+-- 	GROUP BY(red_team_3)
+-- ), blue_team_1_table as (
+-- 	SELECT blue_team_1
+-- 	AVG(blue_total_score) as avg_score, 
+-- 	AVG(blue_auto_cargo_lower) as avg_auto_lower,
+-- 	AVG(blue_auto_cargo_upper) as avg_auto_upper,
+-- 	AVG(blue_auto_cargo_points) as avg_cargo_points,
+-- 	AVG(blue_teleop_cargo_lower) as avg_teleop_lower,
+-- 	AVG(blue_teleop_cargo_upper) AS avg_teleop_upper,
+-- 	AVG(blue_teleop_cargo_points) as avg_teleop_points,
+-- 	AVG(blue_hang_1) as avg_hang_score,
+-- 	MAX(blue_hang_1) as maximum_hang_score,
+-- 	AVG(winning_alliance) * -1 as avg_winrate
+-- 	FROM all_matches_uncleaned
+-- 	GROUP BY(blue_team_1)
+-- ) blue_team_2_table as (
+-- 	SELECT blue_team_2
+-- 	AVG(blue_total_score) as avg_score, 
+-- 	AVG(blue_auto_cargo_lower) as avg_auto_lower,
+-- 	AVG(blue_auto_cargo_upper) as avg_auto_upper,
+-- 	AVG(blue_auto_cargo_points) as avg_cargo_points,
+-- 	AVG(blue_teleop_cargo_lower) as avg_teleop_lower,
+-- 	AVG(blue_teleop_cargo_upper) AS avg_teleop_upper,
+-- 	AVG(blue_teleop_cargo_points) as avg_teleop_points,
+-- 	AVG(blue_hang_2) as avg_hang_score,
+-- 	MAX(blue_hang_2) as maximum_hang_score,
+-- 	AVG(winning_alliance) * -1 as avg_winrate
+-- 	FROM all_matches_uncleaned
+-- 	GROUP BY (blue_team_2)
+-- ) blue_team_3_table as (
+-- 	SELECT blue_team_3
+-- 	AVG(blue_total_score) as avg_score, 
+-- 	AVG(blue_auto_cargo_lower) as avg_auto_lower,
+-- 	AVG(blue_auto_cargo_upper) as avg_auto_upper,
+-- 	AVG(blue_auto_cargo_points) as avg_cargo_points,
+-- 	AVG(blue_teleop_cargo_lower) as avg_teleop_lower,
+-- 	AVG(blue_teleop_cargo_upper) AS avg_teleop_upper,
+-- 	AVG(blue_teleop_cargo_points) as avg_teleop_points,
+-- 	AVG(blue_hang_3) as avg_hang_score,
+-- 	MAX(blue_hang_3) as maximum_hang_score,
+-- 	AVG(winning_alliance) * -1 as avg_winrate
+-- 	FROM all_matches_uncleaned
+-- 	GROUP BY (blue_team_3)
+-- ), all_teams_avg_table as (
+-- 	(SELECT * FROM red_team_1) A 
+-- 	LEFT OUTER JOIN 
+-- 	(SELECT * FROM red_team_2) B on A.red_team_1 = B.red_team_2
+-- 	FULL OUTER JOIN
+-- 	(SELECT * FROM red_team_3) C on A.red_team_1 = C.red_team_3
+-- 	FULL OUTER JOIN
+-- 	(SELECT * FROM blue_team_1) D on A.red_team_1 = D.blue_team_1
+-- 	FULL OUTER JOIN
+-- 	(SELECT * FROM blue_team_2) E on A.red_team_1 = E.blue_team_2
+-- 	FULL OUTER JOIN
+-- 	(SELECT * FROM blue_team_3) F on A.red_team_1 = F.blue_team_3
+-- ) SELECT AVG(avg_auto_lower)
+
+
+-- WITH red_team_1_table as(
+-- 	SELECT red_team_1, 
+-- 	AVG(red_total_score) as avg_score, 
+-- 	AVG(red_auto_cargo_lower) as avg_auto_lower,
+-- 	AVG(red_auto_cargo_upper) as avg_auto_upper,
+-- 	AVG(red_auto_cargo_points) as avg_cargo_points,
+-- 	AVG(red_teleop_cargo_lower) as avg_teleop_lower,
+-- 	AVG(red_teleop_cargo_upper) AS avg_teleop_upper,
+-- 	AVG(red_teleop_cargo_points) as avg_teleop_points,
+-- 	AVG(red_hang_1) as avg_hang_score,
+-- 	MAX(red_hang_1) as maximum_hang_score,
+-- 	AVG(winning_alliance) as avg_winrate
+-- 	FROM all_matches_uncleaned
+-- 	WHERE sred_team_1 in (
+-- 		SELECT DISTINCT ()
+-- 	)
+-- 	GROUP BY(red_team_1)
