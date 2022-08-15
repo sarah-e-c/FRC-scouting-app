@@ -1,4 +1,0 @@
-Current problems:
-
-week by week weighting in weeks where team was not there
-make code bettwe
