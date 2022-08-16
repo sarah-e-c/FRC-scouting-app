@@ -1,6 +1,5 @@
 #PyQt6
 
-from doctest import OutputChecker
 from PyQt6.QtWidgets import (QApplication, QWidget, QMainWindow, QPushButton,
                              QVBoxLayout, QLabel, QMenu, QHBoxLayout, QToolBar, QStatusBar, QTabWidget, QCheckBox,
                              QComboBox, QMessageBox, QDoubleSpinBox, QFileDialog, QTextEdit)
@@ -522,7 +521,9 @@ class Window(QMainWindow):
 
     def make_error_dialog(self, message='An error occurred.', sub_message='Please try again.'):
         """
-        Function to make an error dialogue
+        Function to make an error dialogue.
+        message='An error occurred' - message that appears in the title bar (invisible on macos)
+        sub_message = 'Please try again' - message that appears on the screen.
         """
         self.logger.debug('Error Dialog Created')
         ErrorDialog(self, main_message=message, sub_message=sub_message)

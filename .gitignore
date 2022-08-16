@@ -4,3 +4,12 @@
 /testing.py
 /logs.txt
 /key.txt
+/venv
+/about_all_events.json
+/all_matches_stats.csv
+/all_matches_uncleaned.json
+/bad_events.csv
+all_team_stats.csv
+config.ini
+gui/elements/__pycache__
+gui/__pycache__
