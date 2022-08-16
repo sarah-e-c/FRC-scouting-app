@@ -13,3 +13,4 @@ all_team_stats.csv
 config.ini
 gui/elements/__pycache__
 gui/__pycache__
+data.db
