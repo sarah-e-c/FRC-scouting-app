@@ -19,11 +19,14 @@ from gui.elements.settings_screen_elements import ImplementSettingsWorker
 from model_wrapper import FRCModel
 from gui.utils import ErrorDialog, Constants
 
+import data_handling
+
 # general
 import logging
 import sys
 import requests
 import configparser
+import os
 
 
 # I had to hard code all of this because of lack of support :(
@@ -56,13 +59,41 @@ class Window(QMainWindow):
         console_handler.setLevel(logging.DEBUG)
         console_handler.setFormatter(format)
         self.logger.addHandler(console_handler)
+
+        # making sure that data is loaded in
+        if not os.path.isfile('data.db'):
+            pass
+        else:
+            pass
+
         
         #setting up defult model for fun testing and such
         self.settings_config = configparser.ConfigParser()
         self.settings_config.read('config.ini')
-        self.model_config = self.settings_config['model']
-        self.FRCmodel = FRCModel(mode=self.settings_config['model']['mode'], model=self.settings_config['model']['type'], late_weighting=self.model_config.getfloat('late_weighting'))
-        self.FRCmodel.fit(included_weeks=self.settings_config['model']['included_weeks'], data_preloaded_filepath='old code/data', write_data=False)
+        try:
+            self.model_config = self.settings_config['model']
+        except Exception as e:
+            self.logger.exception(e)
+            self.settings_config.add_section('model')
+            self.settings_config.set('model','late_weighting', '0.0')
+            self.settings_config.set('model', 'mode', 'week_by_week')
+            self.settings_config.set('model', 'type', 'XGBoost')
+            # still need to configure included weeks
+            self.settings_config.set('model','included_weeks', 'all')
+            with open('config.ini', 'w') as configfile:
+                self.settings_config.write(configfile)
+            self.logger.debug('Settings changed.')
+            self.model_config = self.settings_config['model']
+            self.FRCmodel = FRCModel(mode=self.settings_config['model']['mode'], model=self.settings_config['model']['type'], late_weighting=self.model_config.getfloat('late_weighting'))
+            self.FRCmodel.fit(included_weeks=self.settings_config['model']['included_weeks'], data_preloaded_filepath='old code/data', write_data=False)
+        try:
+            self.FRCmodel = FRCModel(mode=self.settings_config['model']['mode'], model=self.settings_config['model']['type'], late_weighting=self.model_config.getfloat('late_weighting'))
+            self.FRCmodel.fit(included_weeks=self.settings_config['model']['included_weeks'], data_preloaded_filepath='old code/data', write_data=False)
+        except Exception as e:
+            self.logger.exception(e)
+
+        
+
 
         # aesthetics
         self.setWindowTitle(Constants.APPLICATION_TITLE)

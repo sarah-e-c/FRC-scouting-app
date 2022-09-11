@@ -14,3 +14,4 @@ config.ini
 gui/elements/__pycache__
 gui/__pycache__
 data.db
+data_handling/__pycache__
