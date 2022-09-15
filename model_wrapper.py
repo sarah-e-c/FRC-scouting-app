@@ -6,22 +6,31 @@ import optuna
 import os
 from sklearn.metrics import accuracy_score
 import logging
+from data_handling import models, session, engine
+from sqlalchemy import String, Integer, Float
+
 
 logger = logging.getLogger(__name__)
 class FRCModel():
     """
     Class to be used like ML model.
     """
-    def __init__(self, model='XGBoost', mode='files', teams_directory='teams_data', late_weighting=False, event_data_filepath='about_all_events.json'):
+    def __init__(self, model='XGBoost', mode='files', teams_directory='teams_data', late_weighting=False, event_data_filepath='about_all_events.json', enable_sql=True):
         """
         model='XGBoost' -- either supported string or other model that supports fit() and transform()
         mode- 'files' -- supported modes
         teams_directory='teams_data' -- directory where the teams are held
         late_weighting=False -- value for experimental late weighting for teams 
         """
+        self.enable_sql = enable_sql
 
-        self.event_data_filepath = event_data_filepath
+        if not enable_sql:
+            self.event_data_filepath = event_data_filepath
+        else:
+            self.event_data_filepath = 'sql'
+
         self.mode = mode
+
         if late_weighting < 0.05:
             self.late_weighting = False
         else:
@@ -37,7 +46,7 @@ class FRCModel():
         # modes
         if mode=='files':
             self.teams_directory = teams_directory
-        
+
         logger.debug(f'FRCModel created. params:\n event data filepath: {event_data_filepath},\n mode: {self.mode}\n, late weighting: {self.late_weighting}, \n model: {type(self.model)}')
         
 
@@ -45,6 +54,9 @@ class FRCModel():
         """
         \b
         |  method to fit the model. Calls the model's fit method. \n
+        |  PARAMETERS
+        |  ----------
+        |
         |  mode='default': 'default' - pass in X and y to directly fit the model, 'week_by_week' to use the files to load separate team stats for each week \n
         |  X=False: pass False if using file mode, but pass pandas DataFrame if using default method (an error will be thrown if not) \n
         |  y=False: pass False if using file mode, but pass pandas Series if using default method (an error will be thrown if not) \n
@@ -62,73 +74,164 @@ class FRCModel():
         # incomplete default files mode
         if self.mode == 'files':
             pass
+
             # setup.team_stats_process(late_weighting=False)
         
         #week by week mode: evaluating team stats based on data evaluated weekly (recommended)
         #WARNING: this mode is currently very time intensive and needs to be optomized
         elif self.mode == 'week_by_week':
-            logger.debug(f'Starting model fit in week by week mode. Fit weeks: {included_weeks}, Data preloaded: {data_preloaded_filepath}')
-            all_events = pd.read_json(self.event_data_filepath)
-            
-            #user passed False
-            if not data_preloaded_filepath:
-                weeks_processed = []
-                weeks_dfs = []
-                for week in included_weeks:
-                    weeks_processed.append(week)
-                    weeks_dfs.append(setup.team_stats_process(team_stats_filepath=False, included_weeks=weeks_processed, late_weighting=self.late_weighting, verbose=False))
+            if not self.enable_sql:
+                logger.debug(f'Starting model fit in week by week mode. Fit weeks: {included_weeks}, Data preloaded: {data_preloaded_filepath}')
+                all_events = pd.read_json(self.event_data_filepath)
                 
-                #write data just processed to csv for faster testing/use
-                if write_data:
-                    for df, week in zip(weeks_dfs, included_weeks):
-                        df.to_csv(f'old code/data/match_data_by_cum_week/week-{week}-data')
-                logger.debug('Finished generating weekly stats sheets.')
-            # user passed directory
-            else:
-                weeks_dfs=[]
-                for file in os.scandir(f'{data_preloaded_filepath}/cumulative_week_data'):
-                    weeks_dfs.append(pd.read_csv(file))
-            
+                #user passed False
+                if not data_preloaded_filepath:
+                    weeks_processed = []
+                    weeks_dfs = []
+                    for week in included_weeks:
+                        weeks_processed.append(week)
+                        weeks_dfs.append(setup.team_stats_process(team_stats_filepath=False, included_weeks=weeks_processed, late_weighting=self.late_weighting, verbose=False))
+                    
+                    #write data just processed to csv for faster testing/use
+                    if write_data:
+                        for df, week in zip(weeks_dfs, included_weeks):
+                            df.to_csv(f'old code/data/match_data_by_cum_week/week-{week}-data')
+                    logger.debug('Finished generating weekly stats sheets.')
+                # user passed directory
+                else:
+                    weeks_dfs=[]
+                    for file in os.scandir(f'{data_preloaded_filepath}/cumulative_week_data'):
+                        weeks_dfs.append(pd.read_csv(file))
+                
 
-            # calculating averages 
-            all_matches_weekly_list = []
-            if not data_preloaded_filepath:
+                # calculating averages 
+                all_matches_weekly_list = []
+                if not data_preloaded_filepath:
+                    for index, week in enumerate(included_weeks):
+                        if week != -1:
+                            all_matches_weekly_list.append(setup.load_matches_alliance_stats(team_stats_filepath=weeks_dfs[index], event_keys=all_events.loc[all_events['week'] == week]['key'], verbose=True, all_matches_stats_filepath=False))
+                        else: 
+                            all_matches_weekly_list.append(setup.load_matches_alliance_stats(team_stats_filepath=weeks_dfs[index], event_keys=all_events.loc[all_events['week'].apply(lambda x: x not in [0,1,2,3,4,5])]['key'], verbose=True, all_matches_stats_filepath=False))
+                    if write_data:
+                        for df, week in zip(all_matches_weekly_list, included_weeks):
+                            df.to_csv(f'old code/data/match_data_by_cum_week/week_{week}_match_data')
+                    logger.debug('Finished generating match specific data sheets.')
+                else:
+                    for file in os.scandir(f'{data_preloaded_filepath}/match_data_by_cum_week'):
+                        all_matches_weekly_list.append(pd.read_csv(file))
+                
+                #combining all of the matches into one DataFrame based on the week that they occurred
+
+                #returning a single DataFrame with all matches
+                completed_data = []
                 for index, week in enumerate(included_weeks):
-                    if week != -1:
-                        all_matches_weekly_list.append(setup.load_matches_alliance_stats(team_stats_filepath=weeks_dfs[index], event_keys=all_events.loc[all_events['week'] == week]['key'], verbose=True, all_matches_stats_filepath=False))
-                    else: 
-                        all_matches_weekly_list.append(setup.load_matches_alliance_stats(team_stats_filepath=weeks_dfs[index], event_keys=all_events.loc[all_events['week'].apply(lambda x: x not in [0,1,2,3,4,5])]['key'], verbose=True, all_matches_stats_filepath=False))
-                if write_data:
-                    for df, week in zip(all_matches_weekly_list, included_weeks):
-                        df.to_csv(f'old code/data/match_data_by_cum_week/week_{week}_match_data')
-                logger.debug('Finished generating match specific data sheets.')
-            else:
-                for file in os.scandir(f'{data_preloaded_filepath}/match_data_by_cum_week'):
-                    all_matches_weekly_list.append(pd.read_csv(file))
-            
-            #combining all of the matches into one DataFrame based on the week that they occurred
+                    #print(len(all_matches_weekly_list), 'dfs')
+                    #print(included_weeks)
+                    completed_data.append(all_matches_weekly_list[index].iloc[selector.select_by_event_week([week], all_matches_weekly_list[index])])
+                
+                self.X = pd.concat(completed_data)
+                self.X.pop('event_key')
+                self.X.pop('Unnamed: 0')
+                
+                self.y = self.X.pop('winning_alliance')
+                self.y = self.y.map(lambda x: x+1)
+                
+                try:
+                    self.model.fit(self.X,self.y)
+                except Exception as e:
+                    logger.exception('Something went wrong fitting data.')
+                    raise e
 
-            #returning a single DataFrame with all matches
-            completed_data = []
-            for index, week in enumerate(included_weeks):
-                #print(len(all_matches_weekly_list), 'dfs')
-                #print(included_weeks)
-                completed_data.append(all_matches_weekly_list[index].iloc[selector.select_by_event_week([week], all_matches_weekly_list[index])])
-            
-            self.X = pd.concat(completed_data)
-            self.X.pop('event_key')
-            self.X.pop('Unnamed: 0')
-            
-            self.y = self.X.pop('winning_alliance')
-            self.y = self.y.map(lambda x: x+1)
-            
-            try:
-                self.model.fit(self.X,self.y)
-            except Exception as e:
-                logger.exception('Something went wrong fitting data.')
-                raise e
+                
+            elif self.enable_sql:
+                logger.debug(f'Starting model fit in week by week mode. Fit weeks: {included_weeks}, Data preloaded: {data_preloaded_filepath} SQL mode: {self.enable_sql}')
+                
+                #user passed False
+                if not data_preloaded_filepath:
+                    weeks_processed = []
+                    weeks_dfs = []
+                    for week in included_weeks:
+                        weeks_processed.append(week)
+                        weeks_dfs.append(setup.team_stats_process(team_stats_filepath=False, included_weeks=weeks_processed, late_weighting=self.late_weighting, verbose=False, directory='match_expanded_tba'))
+                    
+                    #write data just processed to csv for faster testing/use
+                    if write_data:
+                        for df, week in zip(weeks_dfs, included_weeks):
+                            if week == -1:
+                                table_name = 'teams_profile_all_weeks' # may be problematic
+                            else:
+                                table_name = f'teams_profile_week_{week}'
+                            df.to_sql(table_name, engine,
+                                index=False,
+                                 if_exists='replace',
+                                 dtype={
+                                    'team_name': String,
+                                    'win_rate': Float,
+                                    'team_auto_lower': Float,
+                                    'team_auto_upper': Float,
+                                    'team_teleop_lower': Float,
+                                    'team_teleop_upper': Float,
+                                    'hang_score': Float,
+                                    'highest_comp_level': Integer
+                                 })
+                    logger.debug('Finished generating weekly stats sheets.')
+                # user passed directory
+                else:
+                    
+                    weeks_dfs=[]
+                    for week in included_weeks:
+                        if week == -1:
+                            table_name = 'teams_profile_all_weeks' # may be problematic
+                        else:
+                            table_name = f'teams_profile_week_{week}'
+                        weeks_dfs.append(pd.read_sql(table_name, engine))
+                
+                # calculating averages 
+                all_matches_weekly_list = []
 
-            
+                if not data_preloaded_filepath:
+                    for index, week in enumerate(included_weeks):
+                        if week != -1:
+                            all_matches_weekly_list.append(setup.load_matches_alliance_stats(team_stats_filepath=weeks_dfs[index], event_keys=all_events.loc[all_events['week'] == week]['key'], verbose=True, all_matches_stats_filepath=False, enable_sql=False))
+                        else:
+                            all_matches_weekly_list.append(setup.load_matches_alliance_stats(team_stats_filepath=weeks_dfs[index], event_keys=all_events.loc[all_events['week'].apply(lambda x: x not in [0,1,2,3,4,5])]['key'], verbose=True, all_matches_stats_filepath=False, enable_sql=False))
+                    if write_data:
+                        for df, week in zip(all_matches_weekly_list, included_weeks):
+                            if week == -1:
+                                table_name = 'all_matches_stats_all_weeks'
+                            else:
+                                table_name = f'all_matches_stats_week_{week}'
+                            df.to_sql(table_name, engine)
+                    logger.debug('Finished generating match specific data sheets.')
+                else: # data is preloaded
+                    for week in included_weeks:
+                        if week == -1:
+                            table_name = 'all_matches_stats_all_weeks'
+                        else:
+                            table_name = f'all_matches_stats_week_{week}'
+                        all_matches_weekly_list.append(pd.read_sql(table_name, engine))
+                
+                #combining all of the matches into one DataFrame based on the week that they occurred
+
+                #returning a single DataFrame with all matches
+                completed_data = []
+                for index, week in enumerate(included_weeks):
+                    #print(len(all_matches_weekly_list), 'dfs')
+                    #print(included_weeks)
+                    completed_data.append(all_matches_weekly_list[index].iloc[selector.select_by_event_week([week], all_matches_weekly_list[index])])
+                
+                self.X = pd.concat(completed_data)
+                self.X.pop('event_key')
+                #self.X.pop('Unnamed: 0')
+                
+                self.y = self.X.pop('winning_alliance')
+                self.y = self.y.map(lambda x: x+1)
+                
+                try:
+                    self.model.fit(self.X,self.y)
+                except Exception as e:
+                    logger.exception('Something went wrong fitting data.')
+                    raise e
             self.fit_weeks = included_weeks
 
 

@@ -14,11 +14,13 @@ from gui.elements.home_elements import HomeButton
 from gui.elements.playground_elements import PlaygroundTextBox, PlaygroundWorker
 from gui.elements.sample_match_test_elements import SampleMatchTextBox, SampleMatchWorker
 from gui.elements.settings_screen_elements import ImplementSettingsWorker
+from gui.elements.data_workers import PingerWorker, DictionaryDataWorker, TBADataWorker, UserDataWorker, EventsDataWorker
 
 # self-coded other things :)
 from model_wrapper import FRCModel
 from gui.utils import ErrorDialog, Constants
-
+import secrets
+import first_time_setup
 import data_handling
 
 # general
@@ -27,6 +29,7 @@ import sys
 import requests
 import configparser
 import os
+
 
 
 # I had to hard code all of this because of lack of support :(
@@ -60,11 +63,9 @@ class Window(QMainWindow):
         console_handler.setFormatter(format)
         self.logger.addHandler(console_handler)
 
-        # making sure that data is loaded in
+        # making sure that data is loaded in -- if not, then run first time setup
         if not os.path.isfile('data.db'):
-            pass
-        else:
-            pass
+            first_time_setup.setup_application()
 
         
         #setting up defult model for fun testing and such
@@ -73,27 +74,14 @@ class Window(QMainWindow):
         try:
             self.model_config = self.settings_config['model']
         except Exception as e:
-            self.logger.exception(e)
-            self.settings_config.add_section('model')
-            self.settings_config.set('model','late_weighting', '0.0')
-            self.settings_config.set('model', 'mode', 'week_by_week')
-            self.settings_config.set('model', 'type', 'XGBoost')
-            # still need to configure included weeks
-            self.settings_config.set('model','included_weeks', 'all')
-            with open('config.ini', 'w') as configfile:
-                self.settings_config.write(configfile)
-            self.logger.debug('Settings changed.')
-            self.model_config = self.settings_config['model']
-            self.FRCmodel = FRCModel(mode=self.settings_config['model']['mode'], model=self.settings_config['model']['type'], late_weighting=self.model_config.getfloat('late_weighting'))
-            self.FRCmodel.fit(included_weeks=self.settings_config['model']['included_weeks'], data_preloaded_filepath='old code/data', write_data=False)
+            self.logger.warn(e, 'application is not set up yet.')
+            # setting up the ini file -- probably reshape this a little bit
         try:
-            self.FRCmodel = FRCModel(mode=self.settings_config['model']['mode'], model=self.settings_config['model']['type'], late_weighting=self.model_config.getfloat('late_weighting'))
+            self.FRCmodel = FRCModel(mode=self.settings_config['model']['mode'], model=self.settings_config['model']['type'], late_weighting=self.model_config.getfloat('late_weighting'), enable_sql=True)
             self.FRCmodel.fit(included_weeks=self.settings_config['model']['included_weeks'], data_preloaded_filepath='old code/data', write_data=False)
         except Exception as e:
             self.logger.exception(e)
-
-        
-
+            raise e
 
         # aesthetics
         self.setWindowTitle(Constants.APPLICATION_TITLE)
@@ -118,6 +106,17 @@ class Window(QMainWindow):
 
         self.setStatusBar(QStatusBar(self))
         self.threadpool = QThreadPool()
+                # setting up pinger
+        pinger = PingerWorker()
+        self.threadpool.start(pinger)
+
+        pinger.signals.needs_update_signal.connect(self.update_notification)
+        pinger.signals.needs_tba_data_signal.connect(self.get_new_tba_data)
+        pinger.signals.needs_dictionary_data_signal.connect(self.get_new_dictionary_data)
+        pinger.signals.needs_user_submitted_data_signal.connect(self.get_new_user_submitted_data)
+        pinger.signals.needs_event_data_signal.connect(self.get_new_events_data)
+        pinger.signals.disconnected_signal.connect(self.notify_disconnect)
+        pinger.signals.reconnected_signal.connect(self.notify_reconnect)
 
         self.mainWidget = QWidget()
         self.home_screen()
@@ -558,8 +557,35 @@ class Window(QMainWindow):
         """
         self.logger.debug('Error Dialog Created')
         ErrorDialog(self, main_message=message, sub_message=sub_message)
-        
+    
+    def update_notification(self):
+        self.make_error_dialog(message='An update is available.', sub_message='An update is available. Please download the new version.')
 
+    def get_new_dictionary_data(self):
+        # needs worker
+        worker = DictionaryDataWorker() # can connect a finsihed signal to something
+        self.threadpool.start(worker)
+
+    def get_new_tba_data(self):
+        # needs worker
+        worker = TBADataWorker() # can connect a finsihed signal to something
+        self.threadpool.start(worker)
+
+
+    def get_new_events_data(self):
+        # needs worker
+        worker = EventsDataWorker() # can connect a finsihed signal to something
+        self.threadpool.start(worker)
+
+    def get_new_user_submitted_data(self):
+        # needs worker
+        worker = UserDataWorker() # can connect a finsihed signal to something
+        self.threadpool.start(worker)
+
+    def notify_disconnect(self):
+        pass
+    def notify_reconnect(self):
+        pass
 
 # run window
 

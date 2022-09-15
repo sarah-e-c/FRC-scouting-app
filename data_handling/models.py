@@ -1,7 +1,48 @@
 from data_handling import Base
 from data_handling import engine
-from sqlalchemy import Column, Integer, String, Float
+from sqlalchemy import Column, Integer, String, Float, ForeignKey
+from sqlalchemy.orm import relationship
 
+
+class MatchDictionary(Base):
+    __tablename__ = 'match_dictionary'
+    key = Column(String, primary_key=True)
+    red_team_1 = Column(String)
+    red_team_2 = Column(String)
+    red_team_3 = Column(String)
+    blue_team_1 = Column(String)
+    blue_team_2 = Column(String)
+    blue_team_3 = Column(String)
+    year = Column(Integer)
+    occurred = Column(Integer)
+    event_key = Column(String, ForeignKey('events.key'))
+    comp_level = Column(String)
+    winning_alliance = Column(String, nullable=True)
+    event = relationship('Event', back_populates='matches')
+    extra_data = relationship('MatchExtraData', back_populates='dictionary_entry')
+    tba_data = relationship('MatchExpandedTBA', back_populates='dictionary_entry')
+
+class Event(Base): 
+    __tablename__ = 'events'
+    key = Column(String, primary_key=True)
+    week = Column(Integer)
+    year = Column(Integer)
+    matches = relationship('MatchDictionary', back_populates='event')
+    district = Column(String)
+    
+class MatchExtraData(Base):
+    __tablename__ = 'match_extra_data'
+    index = Column(Integer, primary_key=True)
+    key = Column(String, ForeignKey('match_dictionary.key'))
+    key_tba = Column(String, ForeignKey('match_expanded_tba.key'))
+    dictionary_entry = relationship('MatchDictionary', back_populates='extra_data')
+    team_name = Column(String)
+    match_number = Column(Integer)
+    team_auto_lower = Column(Integer)
+    team_auto_upper = Column(Integer)
+    team_teleop_lower = Column(Integer)
+    team_teleop_upper = Column(Integer)
+    tba_data = relationship('MatchExpandedTBA', back_populates='extra_data')
 
 class MatchExpandedTBA(Base):
     """
@@ -13,7 +54,7 @@ class MatchExpandedTBA(Base):
     team_name = Column(String)
     comp_level = Column(String)
     event_key = Column(String)
-    key  = Column(String)
+    key  = Column(String, ForeignKey('match_dictionary.key'))
     match_number = Column(Integer)
     set_number = Column(Integer)
     winning_alliance = Column(String)
@@ -38,6 +79,8 @@ class MatchExpandedTBA(Base):
     # team_teleop_upper = Column(Integer)
     won_game = Column(Integer)
     week = Column(Integer)
+    dictionary_entry = relationship('MatchDictionary', back_populates='tba_data')
+    extra_data = relationship('MatchExtraData', back_populates='tba_data')
 
 
 class TeamsProfileAllWeeks(Base):
@@ -53,7 +96,20 @@ class TeamsProfileAllWeeks(Base):
     team_teleop_upper = Column(Float)
     hang_score = Column(Float)
     highest_comp_level = Column(Integer)
-    
+
+class TeamsProfileWeek0(Base):
+    """
+    represents the table of the meta stats of the teams calculated from first through fifth weeks
+    """
+    __tablename__ = 'teams_profile_week_0'
+    team_name = Column(String, primary_key=True)
+    win_rate = Column(Float)
+    team_auto_lower = Column(Float)
+    team_auto_upper = Column(Float)
+    team_teleop_lower = Column(Float)
+    team_teleop_upper = Column(Float)
+    hang_score = Column(Float)
+    highest_comp_level = Column(Integer)
 
 class TeamsProfileWeek1(Base):
     """
@@ -131,6 +187,29 @@ class AllMatchesStatsAllWeeks(Base):
     represents the table of all matches' stats for training data
     """
     __tablename__ = 'all_matches_stats_all_weeks'
+    key = Column(String, primary_key=True)
+    avg_winrate = Column(Float)
+    highest_avg_winrate = Column(Float)
+    lowest_avg_winrate = Column(Float)
+    avg_auto_lower = Column(Float)
+    highest_auto_lower = Column(Float)
+    avg_auto_upper = Column(Float)
+    highest_auto_upper = Column(Float)
+    avg_teleop_lower = Column(Float)
+    highest_teleop_lower = Column(Float)
+    avg_teleop_upper = Column(Float)
+    highest_teleop_upper = Column(Float)
+    lowest_teleop_upper = Column(Float)
+    avg_hang_score = Column(Float)
+    avg_highest_comp_level = Column(Float)
+    event_key = Column(String)
+    winning_alliance = Column(Integer)
+
+class AllMatchesStatsWeek0(Base):
+    """
+    represents the table of all matches' stats just for week 0 for training data
+    """
+    __tablename__ = 'all_matches_stats_week_0'
     key = Column(String, primary_key=True)
     avg_winrate = Column(Float)
     highest_avg_winrate = Column(Float)

@@ -7,11 +7,13 @@ class ErrorDialog():
         if button == QMessageBox.StandardButton.Ok:
             pass
 class Constants:
+    VERSION = '0.001' # update for each version
+    VERSION_TYPE = 'Unstable Dev' # update for each version
     YEAR = 2022
-    KEY = ''
     PRELOADED_DATA_FILEPATH = 'old code/data'
     APPLICATION_TITLE = 'ScoutingML'
     LATE_WEIGHTING = 2
+    API_ENDPOINT = 'http://127.0.0.1:5000'
     if os.path.exists('key.txt'):
         with open('key.txt') as f:
             KEY = str(f)
