@@ -1,5 +1,5 @@
 # this is a file that is a bit better! 
-from cgitb import enable
+from multiprocessing import Event
 import pandas as pd
 import requests
 import time
@@ -11,10 +11,13 @@ import math
 import logging
 import sqlite3
 from sqlite3 import Error
-from gui.utils import Constants
-from data_handling import engine
+from utils import Constants
+from data_handling import Session, engine, Base
+from data_handling import models
 from sqlalchemy.sql import text
 from sqlalchemy import Integer, String, Float
+import statistics
+
 
 #must send key with header 
 HEADER = {'X-TBA-Auth-Key': Constants.KEY}
@@ -65,7 +68,7 @@ def get_api_data(data_loaded=False, verbose=True, event_keys='default', match_da
                 if df.iloc[i]['Teammate3'] == team_name:
                     taxied_list.append(data_list['taxiRobot3'])
                     endgames_list.append(data_list['endgameRobot3'])
-            except:
+            except Exception as e:
                 taxied_list.append(None)
                 endgames_list.append(None)
             
@@ -386,22 +389,22 @@ def team_stats_process(directory='teams_data',
         else: # sql mode on
             try:
                 if included_weeks != 'all':
-                    df = df.loc[df['week'].apply(lambda x: x in included_weeks)]
+                    df = df.loc[df['week'].apply(lambda x: x in included_weeks)] # this looks bad
                 if not late_weighting:
-                    mapping = {'Yes': 1, 'Tie': 0.5, 'No': 0}
+                    mapping = {1: 1, np.nan: 0.5, 0: 0}
                     winrate_list.append(df['won_game'].map(mapping).mean())
                     mapping_2 = {'None': 0, 'Low': 4, 'Mid': 8, 'High': 12, 'Traversal': 15}
-                    hang_score_list.append(df['hang'].map(mapping_2).mean())
+                    hang_score_list.append(df['hang'].map(mapping_2).mean()) # hang score loaded in correctly?
                     team_auto_lower_list.append(df['alliance_auto_cargo_lower'].mean())
                     team_auto_upper_list.append(df['alliance_auto_cargo_upper'].mean())
                     team_tele_lower_list.append(df['alliance_teleop__cargo_lower'].mean())
                     team_tele_upper_list.append(df['alliance_teleop__cargo_upper'].mean())
-                    mapping_3 = {'f': 5, 'sf': 3, 'qm': 0}
+                    mapping_3 = {'f': 7, 'sf': 5, 'qm': 0, 'qf': 3}
                     highest_comp_level_list.append(df['comp_level'].map(mapping_3).max())
                 else:
                     mapping_win = {'Yes': 1, 'Tie': 0.5, 'No': 0}
                     mapping_climb = {'None': 0, 'Low': 4, 'Mid': 8, 'High': 12, 'Traversal': 15}
-                    mapping_match_level = {'f': 5, 'sf': 3, 'qm': 0}
+                    mapping_match_level = {'f': 6, 'sf': 5, 'qm': 0, 'qf': 3}
 
                     # getting orders of the weeks that they are in
                     all_weeks = np.unique(df['week'])
@@ -475,6 +478,14 @@ def team_stats_process(directory='teams_data',
         raise e
     
     if not team_stats_filepath:
+        total_scores_df.rename({'TeamName': 'team_name',
+                                'WinRate': 'win_rate',
+                                'TeamAutoLower': 'team_auto_lower',
+                                'TeamAutoUpper': 'team_auto_upper',
+                                'TeamTeleopLower': 'team_teleop_lower',
+                                'TeamTeleopUpper': 'team_teleop_upper',
+                                'HangScore': 'hang_score',
+                                'HighestCompLevel': 'highest_comp_level'}, inplace=True, axis='columns')
         return total_scores_df
     if team_stats_filepath.endswith('.csv'):
         total_scores_df.to_csv(team_stats_filepath, index=False)
@@ -503,6 +514,7 @@ def team_stats_process(directory='teams_data',
                                  })
                                  
         logger.info('Fresh team statistics written to sql')
+        return total_scores_df
 
 #third method for normal flow
 def load_matches_alliance_stats(event_keys='default', 
@@ -549,7 +561,7 @@ def load_matches_alliance_stats(event_keys='default',
                 team_teleop_upper_list.append(float(team_stats_df.loc[team_stats_df['TeamName'] == team]['TeamTeleopUpper']))
                 team_hang_score_list.append(float(team_stats_df.loc[team_stats_df['TeamName'] == team]['HangScore']))
                 team_highest_comp_level_list.append(float(team_stats_df.loc[team_stats_df['TeamName'] == team]['HighestCompLevel']))
-        else:
+        else: # sql enabled
             for team in team_list:
                 try:
                     team_winrate_list.append(float(team_stats_df.loc[team_stats_df['team_name'] == team]['win_rate']))
@@ -559,19 +571,20 @@ def load_matches_alliance_stats(event_keys='default',
                     team_teleop_upper_list.append(float(team_stats_df.loc[team_stats_df['team_name'] == team]['team_teleop_upper']))
                     team_hang_score_list.append(float(team_stats_df.loc[team_stats_df['team_name'] == team]['hang_score']))
                     team_highest_comp_level_list.append(float(team_stats_df.loc[team_stats_df['team_name'] == team]['highest_comp_level']))
-                except:
-                    logger.warning(team, ' may be problematic')
+                except Exception as e:
+                    logger.warning(e)
                     team_winrate_list.append(0)
                     team_auto_lower_list.append(0)
                     team_auto_upper_list.append(0)
-                    team_teleop_lower_list.append(0)
+                    team_teleop_lower_list.append(0) # need to make this for each one --
                     team_teleop_upper_list.append(0)
                     team_hang_score_list.append(0)
                     team_highest_comp_level_list.append(0)
         
         # returning the wanted meta statistics in a series (for a dataframe)
-        return pd.Series({
+        return_series =  pd.Series({
                             #'' TODO
+                            
                             'AvgWinrate': statistics.mean(team_winrate_list),
                             'HighestAvgWinrate': max(team_winrate_list),
                             'LowestAvgWinrate': min(team_winrate_list),
@@ -594,8 +607,9 @@ def load_matches_alliance_stats(event_keys='default',
 
                             'AvgHighestCompLevel': statistics.mean(team_highest_comp_level_list),
 
-
                             })
+        logger.debug(return_series)
+        return return_series
 
     def get_teams(match_df):
         """
@@ -639,20 +653,24 @@ def load_matches_alliance_stats(event_keys='default',
             return pd.DataFrame(series_list)
         
         teams_names_df = get_teams(match_df)
-        winner_series = match_df['winning_alliance'].map({'red': 1, '': 0, 'blue': -1})
+        winner_series = match_df['winning_alliance'].map({'red': 1, '': 0, 'blue': -1, None:0})
         key_series = match_df['key']
+        event_key_series = match_df['event_key']
 
-        return get_team_averages(teams_names_df, team_stats_df).join(match_df['event_key']).join(winner_series).join(key_series)
+        return get_team_averages(teams_names_df, team_stats_df).join(match_df['event_key']).join(winner_series).join(key_series).join(event_key_series)
     
     # checking if it is a csv file
-    if team_stats_filepath.endswith('.csv'):
-        team_stats_dataframe = pd.read_csv(team_stats_filepath)
-    # if not csv, then is sql table
-    elif type(team_stats_filepath) == str:
-        team_stats_dataframe = pd.read_sql(team_stats_filepath, engine)
-    # if not this, then is dataframe
-    else:
+    try:
+        if team_stats_filepath.endswith('.csv'):
+            team_stats_dataframe = pd.read_csv(team_stats_filepath)
+        # if not csv, then is sql table
+        elif type(team_stats_filepath) == str:
+            team_stats_dataframe = pd.read_sql(team_stats_filepath, engine)
+    except:
+        # if its not a string, its a dataframe
         team_stats_dataframe = team_stats_filepath
+    # if not this, then is dataframe
+
 
     if type(event_keys) == str:
         if event_keys == 'default':
@@ -675,13 +693,14 @@ def load_matches_alliance_stats(event_keys='default',
                 temp_df = pd.read_sql(all_matches_filepath, engine)
             else:
                 temp_df = all_matches_filepath
+
             matches_data = temp_df
     else:
 
         if all_matches_filepath.endswith('json'):
             temp_df = pd.read_json(all_matches_filepath)
         elif type(all_matches_filepath) == str:
-            temp_df = pd.read_sql(all_matches_filepath, connection=engine)
+            temp_df = pd.read_sql(all_matches_filepath, engine)
         else:
             temp_df = all_matches_filepath
             matches_data = temp_df
@@ -695,18 +714,60 @@ def load_matches_alliance_stats(event_keys='default',
     
     matches_data = temp_df
     all_matches_data = []
-    all_matches_data.append(get_team_stats(matches_data, team_stats_dataframe))    
+    all_matches_data.append(get_team_stats(matches_data, team_stats_dataframe))
 
     # all_matches_data is a list of dataframes
     try:
         all_matches_df = pd.concat(all_matches_data)
     except Exception as e:
-        logger.warning(e)
+        logger.critical(e)
         all_matches_df = None
         raise e
-    if all_matches_stats_filepath.endswith('.csv'):
-        all_matches_df.to_csv(all_matches_stats_filepath)
-    elif type(all_matches_stats_filepath) == str:
+    try: 
+        if all_matches_stats_filepath.endswith('.csv'):
+            all_matches_df.to_csv(all_matches_stats_filepath)
+        elif type(all_matches_stats_filepath) == str:
+            all_matches_df.rename({'AvgWinrate': 'avg_winrate',
+                                    'HighestAvgWinrate': 'highest_avg_winrate',
+                                    'LowestAvgWinrate': 'lowest_avg_winrate',
+                                    'AvgAutoLower': 'avg_auto_lower',
+                                    'HighestAutoLower': 'highest_auto_lower',                       
+                                    'AvgAutoUpper': 'avg_auto_upper',
+                                    'HighestAutoUpper': 'highest_auto_upper',             
+                                    'AvgTeleopLower': 'avg_teleop_lower',
+                                    'HighestTelopLower': 'highests_teleop_lower',
+                                    'AvgTelopUpper': 'avg_teleop_upper',
+                                    'HighestTelopUpper': 'highest_teleop_upper',
+                                    'LowestTelopUpper': 'lowest_teleop_upper',
+                                    'AvgHangScore': 'avg_hang_score',      
+                                    'AvgHighestCompLevel': 'avg_highest_comp_level'}, 
+                                    inplace=True, 
+                                    axis='columns')
+            all_matches_df.to_sql(all_matches_stats_filepath, engine,
+                                index=False, if_exists='replace',
+                                dtype={
+                                        'key': String,
+                                        'avg_winrate': Float,
+                                        'highest_avg_winrate': Float,
+                                        'lowest_avg_winrate': Float,
+                                        'avg_auto_lower': Float,
+                                        'highest_auto_lower': Float,
+                                        'avg_auto_upper': Float,
+                                        'highest_auto_upper': Float,
+                                        'avg_teleop_lower': Float,
+                                        'highest_teleop_lower': Float,
+                                        'avg_teleop_upper': Float,
+                                        'highest_teleop_upper': Float,
+                                        'lowest_teleop_upper': Float,
+                                        'avg_hang_score': Float,
+                                        'avg_highest_comp_level': Float,
+                                        'event_key': String,
+                                        'winning_alliance': Integer
+                                })
+            logger.debug('written to sql.')
+    except Exception as e:
+        logger.debug('caught exception -- returning dataframe')
+        logger.debug(all_matches_df.sample(5))
         all_matches_df.rename({'AvgWinrate': 'avg_winrate',
                                 'HighestAvgWinrate': 'highest_avg_winrate',
                                 'LowestAvgWinrate': 'lowest_avg_winrate',
@@ -723,33 +784,315 @@ def load_matches_alliance_stats(event_keys='default',
                                 'AvgHighestCompLevel': 'avg_highest_comp_level'}, 
                                 inplace=True, 
                                 axis='columns')
-        all_matches_df.to_sql(all_matches_stats_filepath, engine,
-                            index=False, if_exists='replace',
-                            dtype={
-                                    'key': String,
-                                    'avg_winrate': Float,
-                                    'highest_avg_winrate': Float,
-                                    'lowest_avg_winrate': Float,
-                                    'avg_auto_lower': Float,
-                                    'highest_auto_lower': Float,
-                                    'avg_auto_upper': Float,
-                                    'highest_auto_upper': Float,
-                                    'avg_teleop_lower': Float,
-                                    'highest_teleop_lower': Float,
-                                    'avg_teleop_upper': Float,
-                                    'highest_teleop_upper': Float,
-                                    'lowest_teleop_upper': Float,
-                                    'avg_hang_score': Float,
-                                    'avg_highest_comp_level': Float,
-                                    'event_key': String,
-                                    'winning_alliance': Integer
-                            })
-        logger.debug('written to sql.')
-    else:
         return all_matches_df
 
+# replacement for event selector
+
+
+class FilterObject():
+    """
+    Class to streamline filtering match data. This will pass all of the information necessary to filter out data.
+    """
+    def __init__(self, event_filter=False, week_filter=False, district_filter=False, team_filter=False):
+        self.event_filter = event_filter
+        self.week_filter = week_filter
+        self.district_filter = district_filter
+        self.team_filter = team_filter
+
+    def give_matches_sqlalchemy_objects(self, TableModel:Base, EventsTable: Base):
+        """
+        Method that is used to give the models of the matches sqlalchemy objects
+        TableModel: sqlalchemy model of table getting from
+        """
+        logger.debug(self.get_events_by_week(EventsTable)) # this is broken
+        session = Session()
+        return session.query(TableModel).filter(TableModel.event_key.in_(self.get_events()), TableModel.event_key.in_(self.get_events_by_week(EventsTable))).all() # TODO use _in instead of in
+            
+    
+    def give_matches_sqlalchemy_objects_one_column(self, TableModel:Base, column_name:str) -> list:
+        """
+        Method that is used to give the values of a single column.
+        TableModel: sqlalchemy model of the given table
+        column_name: name of column wanted
+        """
+        return_list = []
+        session = Session()
+        all_objects = session.query(TableModel).filter(TableModel.event_key.in_(self.get_events()), TableModel.week_filter in self.get_weeks())
+        for object in all_objects:
+            return_list.append(object.__getattr__(column_name))
+        return return_list
+
+
+    def add_event_filter(self, included_events=[]):
+        """
+        Method to replace the included events of the event filter
+        """
+        self.event_filter.replace_event_filter(included_events)
+
+    def add_week_filter(self, included_weeks=[]):
+        """
+        Method to replace the filter for included weeks
+        """
+        self.week_fliter.replace_week_filter(included_weeks)
+
+    def get_weeks(self,to_string=False):
+        """
+        wrapper method around the event filter getweeks
+        """
+        if not not self.week_filter: # if the week filter isn't False
+            return self.week_filter.get_weeks(to_string=to_string)
+        else:
+            if to_string:
+                return '-1, 0, 1, 2, 3, 4, 5'
+            return [-1,0,1,2,3,4,5]
+
+    def get_events_by_week(self, EventsTable: Base, to_string=False):
+        """
+        getting keys for events by the filter they were from.
+        EventsTable: Base -- the table where all of the events data is held
+        """
+        if not not self.week_filter:
+            return self.week_filter.get_events_by_week()
+        else:
+            session = Session()
+            return_list = []
+            events = session.query(EventsTable.event_key).all()
+            return events
+
+
+    def get_events(self, to_string=False):
+        if not not self.event_filter:
+            return self.event_filter.get_events(to_string=to_string)
+        else:
+            if to_string:
+                0 # TODO
+            return 0
+
+class EventFilterObject():
+    """
+    Event filter object
+    """
+    def __init__(self, DictionaryModel:Base, included_events=[-1,0,1,2 ,3,4,5], complex=False):
+        self.complex = complex
+        if included_events == 'all':
+            session = Session()
+            events = []
+            q_result = session.query(DictionaryModel).all()
+            for item in q_result:
+                events.append(item.event_key)
+            self.included_events= list(np.unique(events))
+        else:
+            self.included_events = included_events
+    
+    def get_events(self, to_string=False):
+        if not self.complex:
+            if not to_string:
+                return self.included_events
+            else: # to_string is true
+                return str(self.included_events).split('[')[1].split(']')[0]
+
+    
+    def replace_event_filter(self, included_events):
+        """
+        method to replace the event filter with a new one with different included events
+        included_events: list of event keys
+        """
+        self.included_events = included_events
+        logger.debug('replaced event filter')
+
+class WeekFilterObject():
+    """
+    Event filter object
+    """
+    def __init__(self, EventTableModel, included_weeks=[-1,0,1,2,3,4,5], complex=False):
+        self.complex = complex
+        if included_weeks == 'all':
+            included_weeks = [-1,0,1,2,3,4,5]
+        self.included_weeks = included_weeks
+        self.EventsTableModel = EventTableModel
+    def get_weeks(self, to_string=False):
+        if not self.complex:
+            if not to_string:
+                return self.included_weeks
+            else: # to_string is true
+                return str(self.included_weeks).split('[')[1].split(']')[0]
+        
+    def get_events_by_week(self, to_string=False):
+        if self.included_weeks == 'all':
+            session = Session()
+            events = []
+            q_result = session.query(self.EventsTableModel).all()
+            for item in q_result:
+                events.append(item.key)
+            return list(np.unique(events))
+        else:
+            session = Session()
+            events = []
+            q_result = session.query(self.EventsTableModel.key).filter(self.EventsTableModel.week.in_(self.included_weeks)).all()
+            for item in q_result:
+                events.append(item.key)
+            if not to_string:
+                return list(np.unique(events))
+            else: # to_string is true
+                return str(events).split('[')[1].split(']')[0]
+
+
+    
+    def replace_week_filter(self, included_weeks):
+        self.included_weeks = included_weeks
+        logger.debug('replaced week filter')
+
+
+
+def get_basic_filter(included_weeks=False, included_events=False) -> FilterObject:
+    """
+    A method to create a basic filter object
+    """
+    if not not included_events: # idk if this works or not
+        event_filter = EventFilterObject(included_events=included_events, DictionaryModel=models.MatchDictionary)
+    if not not included_weeks:
+        week_filter = WeekFilterObject(included_weeks=included_weeks, EventTableModel=models.Event)
+    return FilterObject(event_filter=event_filter, week_filter=week_filter)
+    
+
+
+def team_stats_process_full_sql(matches_table_name='match_expanded_tba',
+                                output_table_name='teams_profile_all_weeks',
+                                filter=get_basic_filter(included_events='all', included_weeks='all')):
+    """
+    A method to process team stats using full sql.
+    matches_table_name = table name with all of the match data -- usually match_expanded_tba
+    output_table_name = table name where the new data will be pushed to
+    """
+
+    valid_weeks_string = filter.get_weeks(to_string=True)
+    valid_events_string = filter.get_events(to_string=True)
+    query_one = f"""
+    DELETE FROM {output_table_name};
+    """
+
+    query = f"""INSERT INTO {output_table_name} (team_name, win_rate, highest_comp_level, team_auto_lower, team_auto_upper, team_teleop_lower, team_teleop_upper, hang_score)
+    SELECT team_name,
+    AVG(won_game) AS win_rate,
+    MAX(CASE comp_level WHEN 'qm' THEN 0 WHEN 'qf' THEN 3 WHEN 'sf' THEN 5 WHEN 'f' THEN 7 ELSE 0 END) AS highest_comp_level,
+    AVG(alliance_auto_cargo_lower) AS team_auto_lower,
+    AVG(alliance_auto_cargo_upper) AS team_auto_upper,
+    AVG(alliance_teleop__cargo_lower) AS team_teleop_lower,
+    AVG(alliance_teleop__cargo_lower) AS team_teleop_upper,
+    AVG(hang) AS hang_score
+    FROM {matches_table_name}
+    WHERE week IN ({valid_weeks_string}) AND event_key in ({valid_events_string})
+    GROUP BY team_name;
+    """
+    con = engine.connect()
+
+    con.execute(query_one)
+    logger.debug('previous data dropped from table')
+    con.execute(query)
+    logger.debug('teams data processed')
+    
+    
+def load_matches_alliance_stats_full_sql(matches_dictionary_table_name='match_dictionary',
+                                         team_stats_table_name='teams_profile_all_weeks',
+                                         output_table_name='all_matches_stats_all_weeks',
+                                         events_table_name='events',
+                                         filter=get_basic_filter(included_events='all', included_weeks='all')):
+    """
+    matches_dictionary_table_name = 'match_dictionary' name of table of dictionary of matches 
+    team_stats_table_name = 'teams_profile_all_weeks' name of table of teams profile
+    output_table_name = 'all_matches_stats_all_weeks' name of table of output
+    """
+    MatchesDictionaryModel  = models.table_name_to_model[matches_dictionary_table_name]
+    TeamStatsModel = models.table_name_to_model[team_stats_table_name]
+    OutputTableModel = models.table_name_to_model[output_table_name]
+    EventsTableModel = models.table_name_to_model[events_table_name]
+    con = engine.connect()
+
+    # deleting existing records if they exist =
+    dlt_stmt = f"""
+    DELETE FROM {output_table_name};
+    """
+    con.execute(dlt_stmt)
+    default_team_stat = TeamStatsModel(
+        win_rate=0,
+        team_auto_lower=0,
+        team_auto_upper=0,
+        team_teleop_lower=0,
+        team_teleop_upper=0,
+        hang_score=0,
+        highest_comp_level=0
+    )
+    session = Session()
+    logger.debug('previous data deleted.')
+    problematic_team_names = []
+    for match in filter.give_matches_sqlalchemy_objects(MatchesDictionaryModel, EventsTableModel):
+        try:
+            red_team_1_stat = session.query(TeamStatsModel).filter_by(team_name=match.red_team_1).one()
+        except Exception as e:
+            logger.warning(match.red_team_1)
+            problematic_team_names.append(match.red_team_1)
+            red_team_1_stat = default_team_stat
+        
+        try:
+            red_team_2_stat = session.query(TeamStatsModel).filter_by(team_name=match.red_team_2).one()
+        except Exception as e:
+            logger.warning(match.red_team_2)
+            red_team_2_stat = default_team_stat
+        try: 
+            red_team_3_stat = session.query(TeamStatsModel).filter_by(team_name=match.red_team_3).one()
+        except Exception as e:
+            logger.warning(match.red_team_3)
+            red_team_2_stat = default_team_stat
+        
+        try:
+            blue_team_1_stat = session.query(TeamStatsModel).filter_by(team_name=match.blue_team_1).one()
+        except Exception as e:
+            logger.warning(match.blue_team_1)
+            blue_team_1_stat = default_team_stat
+        
+        try:
+            blue_team_2_stat = session.query(TeamStatsModel).filter_by(team_name=match.blue_team_2).one()
+        except Exception as e:
+            logger.warning(match.blue_team_2)
+            blue_team_2_stat = default_team_stat
+        
+        try:
+            blue_team_3_stat = session.query(TeamStatsModel).filter_by(team_name=match.blue_team_3).one()
+        except Exception as e:
+            logger.warning(match.blue_team_3)
+            blue_team_3_stat = default_team_stat
+        try:
+            match_stats = OutputTableModel(
+                key = match.key,
+                avg_winrate = statistics.mean([red_team_1_stat.win_rate, red_team_2_stat.win_rate, red_team_3_stat.win_rate]) - statistics.mean([blue_team_1_stat.win_rate, blue_team_2_stat.win_rate, blue_team_3_stat.win_rate]),
+                highest_avg_winrate = max([red_team_1_stat.win_rate, red_team_2_stat.win_rate, red_team_3_stat.win_rate]) - max([blue_team_1_stat.win_rate, blue_team_2_stat.win_rate, blue_team_3_stat.win_rate]),
+                lowest_avg_winrate = min([red_team_1_stat.win_rate, red_team_2_stat.win_rate, red_team_3_stat.win_rate]) - min([blue_team_1_stat.win_rate, blue_team_2_stat.win_rate, blue_team_3_stat.win_rate]),
+                avg_auto_lower = statistics.mean([red_team_1_stat.team_auto_lower, red_team_2_stat.team_auto_lower, red_team_3_stat.team_auto_lower]) - statistics.mean([blue_team_1_stat.team_auto_lower, blue_team_2_stat.team_auto_lower, blue_team_3_stat.team_auto_lower]),
+                highest_auto_lower = max([red_team_1_stat.team_auto_lower, red_team_2_stat.team_auto_lower, red_team_3_stat.team_auto_lower]) - max([blue_team_1_stat.team_auto_lower, blue_team_2_stat.team_auto_lower, blue_team_3_stat.team_auto_lower]),
+                avg_auto_upper = statistics.mean([red_team_1_stat.team_auto_upper, red_team_2_stat.team_auto_upper, red_team_3_stat.team_auto_upper]) - statistics.mean([blue_team_1_stat.team_auto_upper, blue_team_2_stat.team_auto_upper, blue_team_3_stat.team_auto_upper]),
+                highest_auto_upper = max([red_team_1_stat.team_auto_upper, red_team_2_stat.team_auto_upper, red_team_3_stat.team_auto_upper]) - max([blue_team_1_stat.team_auto_upper, blue_team_2_stat.team_auto_upper, blue_team_3_stat.team_auto_upper]),
+                avg_teleop_lower = statistics.mean([red_team_1_stat.team_teleop_lower, red_team_2_stat.team_teleop_lower, red_team_3_stat.team_teleop_lower]) - statistics.mean([blue_team_1_stat.team_teleop_lower, blue_team_2_stat.team_teleop_lower, blue_team_3_stat.team_teleop_lower]),
+                highest_teleop_lower = max([red_team_1_stat.team_teleop_lower, red_team_2_stat.team_teleop_lower, red_team_3_stat.team_teleop_lower]) - max([blue_team_1_stat.team_teleop_lower, blue_team_2_stat.team_teleop_lower, blue_team_3_stat.team_teleop_lower]),
+                avg_teleop_upper = statistics.mean([red_team_1_stat.team_teleop_upper, red_team_2_stat.team_teleop_upper, red_team_3_stat.team_teleop_upper]) - statistics.mean([blue_team_1_stat.team_teleop_upper, blue_team_2_stat.team_teleop_upper, blue_team_3_stat.team_teleop_upper]),
+                highest_teleop_upper = max([red_team_1_stat.team_teleop_upper, red_team_2_stat.team_teleop_upper, red_team_3_stat.team_teleop_upper]) - max([blue_team_1_stat.team_teleop_upper, blue_team_2_stat.team_teleop_upper, blue_team_3_stat.team_teleop_upper]),
+                lowest_teleop_upper = min([red_team_1_stat.team_teleop_upper, red_team_2_stat.team_teleop_upper, red_team_3_stat.team_teleop_upper]) - min([blue_team_1_stat.team_teleop_upper, blue_team_2_stat.team_teleop_upper, blue_team_3_stat.team_teleop_upper]),
+                avg_hang_score = statistics.mean([red_team_1_stat.hang_score, red_team_2_stat.hang_score, red_team_3_stat.hang_score]) - max([blue_team_1_stat.hang_score, blue_team_2_stat.hang_score, blue_team_3_stat.hang_score]),
+                avg_highest_comp_level = statistics.mean([red_team_1_stat.highest_comp_level, red_team_2_stat.highest_comp_level, red_team_3_stat.highest_comp_level]) - statistics.mean([blue_team_1_stat.highest_comp_level, blue_team_2_stat.highest_comp_level, blue_team_3_stat.highest_comp_level]),
+                event_key = match.event_key,
+                winning_alliance = match.winning_alliance
+            )
+            session.add(match_stats)
+        except:
+            logger.critical(match)
+    session.commit()
+    logger.debug('written to sql')
+
 if __name__ == '__main__':
-    pass
+    import time
+    start = time.time()
+    team_stats_process_full_sql()
+    load_matches_alliance_stats_full_sql()
+    print('total time: ', start - time.time())
     # get_api_data(data_loaded=True, event_keys='all')
     #team_stats_process(late_weighting=False, sql_mode=True, team_stats_filepath='teams_profile_all_weeks', directory='match_expanded_tba')
     #print(load_matches_alliance_stats(event_keys='all', all_matches_stats_filepath=False))
