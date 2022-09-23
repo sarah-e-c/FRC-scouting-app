@@ -2,6 +2,7 @@ from PyQt6.QtWidgets import QLineEdit
 from PyQt6.QtCore import QObject, pyqtSignal, QRunnable
 import logging
 import pandas as pd
+from data_handling import engine
 
 from model_wrapper import FRCModel
 import statistics
@@ -33,7 +34,7 @@ class SampleMatchWorker(QRunnable):
 
     def run(self):
         self.logger.debug('Starting sample match...')
-        stats_df = pd.read_csv('all_team_stats.csv')
+        stats_df = pd.read_sql('teams_profile_all_weeks', engine)
         
         
 
@@ -53,36 +54,36 @@ class SampleMatchWorker(QRunnable):
             
             #iterating through teams and grabbing wanted stats
             for team in team_list:
-                team_winrate_list.append(float(team_stats_df.loc[team_stats_df['TeamName'] == team]['WinRate']))
-                team_auto_lower_list.append(float(team_stats_df.loc[team_stats_df['TeamName'] == team]['TeamAutoLower']))
-                team_auto_upper_list.append(float(team_stats_df.loc[team_stats_df['TeamName'] == team]['TeamAutoUpper']))
-                team_teleop_lower_list.append(float(team_stats_df.loc[team_stats_df['TeamName'] == team]['TeamTeleopLower']))
-                team_teleop_upper_list.append(float(team_stats_df.loc[team_stats_df['TeamName'] == team]['TeamTeleopUpper']))
-                team_hang_score_list.append(float(team_stats_df.loc[team_stats_df['TeamName'] == team]['HangScore']))
-                team_highest_comp_level_list.append(float(team_stats_df.loc[team_stats_df['TeamName'] == team]['HighestCompLevel']))
+                team_winrate_list.append(float(team_stats_df.loc[team_stats_df['team_name'] == team]['win_rate']))
+                team_auto_lower_list.append(float(team_stats_df.loc[team_stats_df['team_name'] == team]['team_auto_lower']))
+                team_auto_upper_list.append(float(team_stats_df.loc[team_stats_df['team_name'] == team]['team_auto_upper']))
+                team_teleop_lower_list.append(float(team_stats_df.loc[team_stats_df['team_name'] == team]['team_teleop_lower']))
+                team_teleop_upper_list.append(float(team_stats_df.loc[team_stats_df['team_name'] == team]['team_teleop_upper']))
+                team_hang_score_list.append(float(team_stats_df.loc[team_stats_df['team_name'] == team]['hang_score']))
+                team_highest_comp_level_list.append(float(team_stats_df.loc[team_stats_df['team_name'] == team]['highest_comp_level']))
             
             # returning the wanted meta statistics in a series (for a dataframe)
-            return pd.Series({'AvgWinrate': statistics.mean(team_winrate_list),
-                                'HighestAvgWinrate': max(team_winrate_list),
-                                'LowestAvgWinrate': min(team_winrate_list),
+            return pd.Series({'avg_winrate': statistics.mean(team_winrate_list),
+                                'highest_avg_winrate': max(team_winrate_list),
+                                'lowest_avg_winrate': min(team_winrate_list),
 
-                                'AvgAutoLower': statistics.mean(team_auto_lower_list),
-                                'HighestAutoLower': max(team_auto_lower_list),
+                                'avg_auto_lower': statistics.mean(team_auto_lower_list),
+                                'highest_auto_lower': max(team_auto_lower_list),
 
-                                'AvgAutoUpper': statistics.mean(team_auto_upper_list),
-                                'HighestAutoUpper': max(team_auto_upper_list),
+                                'avg_auto_upper': statistics.mean(team_auto_upper_list),
+                                'highest_auto_upper': max(team_auto_upper_list),
 
-                                'AvgTeleopLower': statistics.mean(team_teleop_lower_list),
-                                'HighestTelopLower': max(team_teleop_lower_list),
+                                'avg_teleop_lower': statistics.mean(team_teleop_lower_list),
+                                'highest_teleop_lower': max(team_teleop_lower_list),
 
-                                'AvgTelopUpper': statistics.mean(team_teleop_upper_list),
-                                'HighestTelopUpper': max(team_teleop_upper_list),
-                                'LowestTelopUpper': min(team_teleop_upper_list),
+                                'avg_teleop_upper': statistics.mean(team_teleop_upper_list),
+                                'highest_teleop_upper': max(team_teleop_upper_list),
+                                'lowest_teleop_upper': min(team_teleop_upper_list),
 
 
-                                'AvgHangScore': statistics.mean(team_hang_score_list),
+                                'avg_hang_score': statistics.mean(team_hang_score_list),
 
-                                'AvgHighestCompLevel': statistics.mean(team_highest_comp_level_list),
+                                'avg_highest_comp_level': statistics.mean(team_highest_comp_level_list),
                                 })
         
         red_stats = team_lookup_averages([self.red_team_1, self.red_team_2, self.red_team_3], stats_df)

@@ -10,7 +10,7 @@ class Constants:
     VERSION = '0.001' # update for each version
     VERSION_TYPE = 'Unstable Dev' # update for each version
     YEAR = 2022
-    PRELOADED_DATA_FILEPATH = 'old code/data'
+    PRELOADED_DATA_FILEPATH = False
     APPLICATION_TITLE = 'ScoutingML'
     LATE_WEIGHTING = 2
     API_ENDPOINT = 'http://127.0.0.1:5000'

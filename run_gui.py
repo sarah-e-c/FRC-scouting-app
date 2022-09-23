@@ -18,7 +18,7 @@ from gui.elements.data_workers import PingerWorker, DictionaryDataWorker, TBADat
 
 # self-coded other things :)
 from model_wrapper import FRCModel
-from gui.utils import ErrorDialog, Constants
+from utils import ErrorDialog, Constants
 import secrets
 import first_time_setup
 import data_handling
@@ -31,7 +31,7 @@ import configparser
 import os
 
 
-
+logging.basicConfig(level=logging.DEBUG)
 # I had to hard code all of this because of lack of support :(
 
 
@@ -78,7 +78,7 @@ class Window(QMainWindow):
             # setting up the ini file -- probably reshape this a little bit
         try:
             self.FRCmodel = FRCModel(mode=self.settings_config['model']['mode'], model=self.settings_config['model']['type'], late_weighting=self.model_config.getfloat('late_weighting'), enable_sql=True)
-            self.FRCmodel.fit(included_weeks=self.settings_config['model']['included_weeks'], data_preloaded_filepath='old code/data', write_data=False)
+            self.FRCmodel.fit(included_weeks=self.settings_config['model']['included_weeks'], data_preloaded_filepath=True, matches_data_preloaded_filepath=True, write_data=True)
         except Exception as e:
             self.logger.exception(e)
             raise e
@@ -559,26 +559,37 @@ class Window(QMainWindow):
         ErrorDialog(self, main_message=message, sub_message=sub_message)
     
     def update_notification(self):
+        """
+        makes a popup error notification
+        """
         self.make_error_dialog(message='An update is available.', sub_message='An update is available. Please download the new version.')
 
     def get_new_dictionary_data(self):
-        # needs worker
+        """
+        Starts a thread to get the new dictionary data from the api
+        """
         worker = DictionaryDataWorker() # can connect a finsihed signal to something
         self.threadpool.start(worker)
 
     def get_new_tba_data(self):
-        # needs worker
+        """
+        Starts a thread to get the new Blue Alliance data from the api
+        """
         worker = TBADataWorker() # can connect a finsihed signal to something
         self.threadpool.start(worker)
 
 
     def get_new_events_data(self):
-        # needs worker
+        """
+        Starts a thread to get the new events data from the api
+        """
         worker = EventsDataWorker() # can connect a finsihed signal to something
         self.threadpool.start(worker)
 
     def get_new_user_submitted_data(self):
-        # needs worker
+        """
+        Starts a thread to get user submitted data from the api
+        """
         worker = UserDataWorker() # can connect a finsihed signal to something
         self.threadpool.start(worker)
 

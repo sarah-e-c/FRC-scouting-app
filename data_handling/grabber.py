@@ -2,7 +2,7 @@ import logging
 import json
 from data_handling import models, session
 import requests
-from gui.utils import Constants
+from utils import Constants
 import configparser
 
 logger = logging.getLogger(__name__)
@@ -86,6 +86,7 @@ def get_match_dictionary() -> None:
             blue_team_3 = item['blue_team_3'],
             occurred = item['occurred'],
             winning_alliance = item['winning_alliance'],
+            event_key = item['event_key'],
             comp_level = item['comp_level'],
             year = item['year']
         )

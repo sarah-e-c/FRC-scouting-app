@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from gui.utils import Constants
+from utils import Constants
 YEAR = 2022
 HEADER = {'X-TBA-Auth-Key': Constants.KEY}
 EVENT_DATA_FILEPATH = 'about_all_events.json'
@@ -27,7 +27,6 @@ def select_by_team(team_list, match_data, returns='indexes'):
     return list(all_matches_indexes)
 
 
-
 def select_by_event(event_list, match_data):
     """
     Method that returns the a list of indices in the match data (and the match stats data) that meet the criteria
@@ -44,8 +43,6 @@ def select_by_event(event_list, match_data):
         all_matches_indexes.append(np.array(match_data.loc[match_data['event_key'] == event].index))
     
     return list(np.concatenate(all_matches_indexes))
-
-
 
 def select_by_event_type(type_list, match_data):
     """
@@ -115,6 +112,8 @@ def select_by_event_week(week_list, match_data):
 
     events_with_type = list(np.concatenate(events_with_type))
     return select_by_event(events_with_type, match_data)
+
+
 
 
 if __name__ == '__main__':

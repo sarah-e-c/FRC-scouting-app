@@ -5,6 +5,9 @@ from sqlalchemy.orm import relationship
 
 
 class MatchDictionary(Base):
+    """
+    Model for the match_dictionary table
+    """
     __tablename__ = 'match_dictionary'
     key = Column(String, primary_key=True)
     red_team_1 = Column(String)
@@ -342,3 +345,24 @@ class AllMatchesStatsWeek5(Base):
     avg_highest_comp_level = Column(Float)
     event_key = Column(String)
     winning_alliance = Column(Integer)
+
+table_name_to_model = {
+    'match_dictionary': MatchDictionary,
+    'events': Event,
+    'match_extra_data': MatchExtraData,
+    'match_expanded_tba': MatchExpandedTBA,
+    'teams_profile_all_weeks': TeamsProfileAllWeeks,
+    'teams_profile_week_0': TeamsProfileWeek0,
+    'teams_profile_week_1': TeamsProfileWeek1,
+    'teams_profile_week_2': TeamsProfileWeek2,
+    'teams_profile_week_3': TeamsProfileWeek3,
+    'teams_profile_week_4': TeamsProfileWeek4,
+    'teams_profile_week_5': TeamsProfileWeek5,
+    'all_matches_stats_all_weeks': AllMatchesStatsAllWeeks,
+    'all_matches_stats_week_0': AllMatchesStatsWeek0,
+    'all_matches_stats_week_1': AllMatchesStatsWeek1,
+    'all_matches_stats_week_2': AllMatchesStatsWeek2,
+    'all_matches_stats_week_3': AllMatchesStatsWeek3,
+    'all_matches_stats_week_4': AllMatchesStatsWeek4,
+    'all_matches_stats_week_5': AllMatchesStatsWeek5
+}

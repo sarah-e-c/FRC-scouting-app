@@ -1,7 +1,7 @@
 # run this file when running the app for the first time.
 import configparser
 import secrets
-from gui.utils import Constants
+from utils import Constants
 import logging
 import os
 import json
@@ -102,8 +102,9 @@ def setup_application():
             blue_team_3 = item['blue_team_3'],
             occurred = item['occurred'],
             winning_alliance= item['winning_alliance'],
+            event_key = item['event_key'],
             comp_level = item['comp_level'],
-            year = item['year']
+            year = item['year'],
         )
         to_add.append(new_entry)
     session.add_all(to_add)

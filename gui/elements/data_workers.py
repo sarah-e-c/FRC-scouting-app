@@ -2,7 +2,7 @@ from PyQt6.QtWidgets import QLineEdit
 from PyQt6.QtCore import QObject, pyqtSignal, QRunnable
 import requests
 import time
-from gui.utils import Constants
+from utils import Constants
 import configparser
 import logging
 from data_handling import grabber

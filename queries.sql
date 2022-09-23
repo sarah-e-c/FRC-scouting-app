@@ -115,4 +115,6 @@
 -- 	WHERE sred_team_1 in (
 -- 		SELECT DISTINCT ()
 -- 	)
--- 	GROUP BY(red_team_1)
+-- 	GROUP BY(red_team_1);
+
+

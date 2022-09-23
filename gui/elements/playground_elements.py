@@ -1,7 +1,7 @@
 from PyQt6.QtWidgets import QLineEdit
 from PyQt6.QtCore import QObject, pyqtSignal, QRunnable
 import logging
-from gui.utils import Constants
+from utils import Constants
 
 from model_wrapper import FRCModel
 
@@ -41,7 +41,7 @@ class PlaygroundWorker(QRunnable):
         model = FRCModel(mode=self.mode, late_weighting=self.late_weighting)
         self.logger.debug('Started model fitting...')
         model.fit(included_weeks=self.fit_weeks,
-                  data_preloaded_filepath=Constants.PRELOADED_DATA_FILEPATH)
+                  data_preloaded_filepath=False, write_data=True)
         self.logger.debug('Finished model fitting, starting scoring...')
         self.signals.result.emit('Finished model fitting, starting scoring...')
         score = model.score(prediction_weeks=self.predict_weeks)
@@ -51,3 +51,7 @@ class PlaygroundWorker(QRunnable):
 class PlaygroundWorkerSignals(QObject):
     result = pyqtSignal(object)
     finished = pyqtSignal()
+
+if __name__ == '__main__':
+    worker = PlaygroundWorker(mode='week_by_week', fit_weeks=[1,2,3], predict_weeks=[4,5], late_weighting=False)
+    worker.run()
