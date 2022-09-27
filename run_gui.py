@@ -19,6 +19,7 @@ from gui.elements.data_workers import PingerWorker, DictionaryDataWorker, TBADat
 # self-coded other things :)
 from model_wrapper import FRCModel
 from utils import ErrorDialog, Constants
+from first_time_setup import fill_perm_tables
 import secrets
 import first_time_setup
 import data_handling
@@ -31,7 +32,6 @@ import configparser
 import os
 
 
-logging.basicConfig(level=logging.DEBUG)
 # I had to hard code all of this because of lack of support :(
 
 
@@ -77,8 +77,8 @@ class Window(QMainWindow):
             self.logger.warn(e, 'application is not set up yet.')
             # setting up the ini file -- probably reshape this a little bit
         try:
-            self.FRCmodel = FRCModel(mode=self.settings_config['model']['mode'], model=self.settings_config['model']['type'], late_weighting=self.model_config.getfloat('late_weighting'), enable_sql=True)
-            self.FRCmodel.fit(included_weeks=self.settings_config['model']['included_weeks'], data_preloaded_filepath=True, matches_data_preloaded_filepath=True, write_data=True)
+            self.FRCmodel = FRCModel(mode=self.settings_config['model']['mode'], model=self.settings_config['model']['type'], late_weighting=self.model_config.getfloat('late_weighting'))
+            self.FRCmodel.fit(fit_weeks=self.settings_config['model']['included_weeks'])
         except Exception as e:
             self.logger.exception(e)
             raise e
@@ -107,16 +107,16 @@ class Window(QMainWindow):
         self.setStatusBar(QStatusBar(self))
         self.threadpool = QThreadPool()
                 # setting up pinger
-        pinger = PingerWorker()
-        self.threadpool.start(pinger)
+        # pinger = PingerWorker()
+        # self.threadpool.start(pinger)
 
-        pinger.signals.needs_update_signal.connect(self.update_notification)
-        pinger.signals.needs_tba_data_signal.connect(self.get_new_tba_data)
-        pinger.signals.needs_dictionary_data_signal.connect(self.get_new_dictionary_data)
-        pinger.signals.needs_user_submitted_data_signal.connect(self.get_new_user_submitted_data)
-        pinger.signals.needs_event_data_signal.connect(self.get_new_events_data)
-        pinger.signals.disconnected_signal.connect(self.notify_disconnect)
-        pinger.signals.reconnected_signal.connect(self.notify_reconnect)
+        # pinger.signals.needs_update_signal.connect(self.update_notification)
+        # pinger.signals.needs_tba_data_signal.connect(self.get_new_tba_data)
+        # pinger.signals.needs_dictionary_data_signal.connect(self.get_new_dictionary_data)
+        # pinger.signals.needs_user_submitted_data_signal.connect(self.get_new_user_submitted_data)
+        # pinger.signals.needs_event_data_signal.connect(self.get_new_events_data)
+        # pinger.signals.disconnected_signal.connect(self.notify_disconnect)
+        # pinger.signals.reconnected_signal.connect(self.notify_reconnect)
 
         self.mainWidget = QWidget()
         self.home_screen()
@@ -326,11 +326,15 @@ class Window(QMainWindow):
         """
 
         
-        def file_upload(data):
+        def file_upload(file_name):
             try:
-                requests.post(Constants.SERVER_URL, data)
+                with open(file_name[0], 'r') as f:
+                    files = {'extra_data_file':f.read()}
+                response = requests.post(f'{Constants.API_ENDPOINT}/upload', files=files, headers={'auth_key': self.settings_config.get('user', 'auth_key')})
+                self.logger.info(response.text)
             except Exception as e:
                 self.logger.warning(f'Error connecting to application server. {e}')
+                raise e
         outerLayout = QVBoxLayout()
         text_edit = QTextEdit()
         text_edit_text = """
@@ -352,10 +356,9 @@ class Window(QMainWindow):
         text_edit.setReadOnly(True)
         outerLayout.addWidget(text_edit)
         file_upload_button = QPushButton('Upload data')
-        file_dialog = QFileDialog()
         def file_dialog_get(window: Window):
             #wrong
-            data = file_dialog.getOpenFileName(window, "Upload Data", 'Downloads', "Data Files (*.json, *.csv)")
+            data = QFileDialog.getOpenFileName(window, "Upload Data", 'Downloads', "Data Files (*.json, *.csv)")
             file_upload(data)
         file_upload_button.pressed.connect(lambda: file_dialog_get(self))
         file_upload_button.setStatusTip('Select data to upload!')
@@ -364,7 +367,6 @@ class Window(QMainWindow):
         self.mainWidget.setLayout(outerLayout)
         self.setCentralWidget(self.mainWidget)
         
-
     def sample_match_prediction_screen(self):
         """
         Function to set the window to the sample match prediction screen.
@@ -473,7 +475,8 @@ class Window(QMainWindow):
             with open('config.ini', 'w') as configfile:
                 self.settings_config.write(configfile)
             self.logger.debug('Settings changed.')
-            worker = ImplementSettingsWorker(self.settings_config['model']['type'], self.settings_config['model']['type'], self.model_config.getfloat('late_weighting'))
+            self.logger.debug(self.settings_config['model']['mode'])
+            worker = ImplementSettingsWorker(self.settings_config['model']['type'], self.settings_config['model']['mode'], self.model_config.getfloat('late_weighting'))
 
             worker.signals.result.connect(self.changeSettingsOutput.setText)
 
@@ -507,7 +510,7 @@ class Window(QMainWindow):
         model_fit_mode_label = QLabel('Model fit mode')
         self.modelFitModeComboBox = QComboBox()
         self.modelFitModeComboBox.addItem('week_by_week')
-        self.modelFitModeComboBox.addItem('full_comparison')
+        self.modelFitModeComboBox.addItem('all_at_once')
         self.modelFitModeComboBox.setCurrentText(self.model_config['mode'])
 
         model_fit_mode_layout = QHBoxLayout()
@@ -599,11 +602,12 @@ class Window(QMainWindow):
         pass
 
 # run window
+if __name__ == '__main__':
+    logging.basicConfig(level=logging.INFO)
+    app = QApplication(sys.argv)
 
-app = QApplication(sys.argv)
+    window = Window()
 
-window = Window()
+    window.show()
 
-window.show()
-
-sys.exit(app.exec())
+    sys.exit(app.exec())

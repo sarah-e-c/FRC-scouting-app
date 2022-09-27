@@ -40,8 +40,7 @@ class PlaygroundWorker(QRunnable):
     def run(self):
         model = FRCModel(mode=self.mode, late_weighting=self.late_weighting)
         self.logger.debug('Started model fitting...')
-        model.fit(included_weeks=self.fit_weeks,
-                  data_preloaded_filepath=False, write_data=True)
+        model.fit(fit_weeks=self.fit_weeks,)
         self.logger.debug('Finished model fitting, starting scoring...')
         self.signals.result.emit('Finished model fitting, starting scoring...')
         score = model.score(prediction_weeks=self.predict_weeks)

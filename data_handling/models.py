@@ -206,7 +206,7 @@ class AllMatchesStatsAllWeeks(Base):
     avg_hang_score = Column(Float)
     avg_highest_comp_level = Column(Float)
     event_key = Column(String)
-    winning_alliance = Column(Integer)
+    winning_alliance = Column(String)
 
 class AllMatchesStatsWeek0(Base):
     """
@@ -229,7 +229,7 @@ class AllMatchesStatsWeek0(Base):
     avg_hang_score = Column(Float)
     avg_highest_comp_level = Column(Float)
     event_key = Column(String)
-    winning_alliance = Column(Integer)
+    winning_alliance = Column(String)
 
 class AllMatchesStatsWeek1(Base):
     """
@@ -252,7 +252,7 @@ class AllMatchesStatsWeek1(Base):
     avg_hang_score = Column(Float)
     avg_highest_comp_level = Column(Float)
     event_key = Column(String)
-    winning_alliance = Column(Integer)
+    winning_alliance = Column(String)
 
 class AllMatchesStatsWeek2(Base):
     """
@@ -275,7 +275,7 @@ class AllMatchesStatsWeek2(Base):
     avg_hang_score = Column(Float)
     avg_highest_comp_level = Column(Float)
     event_key = Column(String)
-    winning_alliance = Column(Integer)
+    winning_alliance = Column(String)
 
 class AllMatchesStatsWeek3(Base):
     """
@@ -298,7 +298,7 @@ class AllMatchesStatsWeek3(Base):
     avg_hang_score = Column(Float)
     avg_highest_comp_level = Column(Float)
     event_key = Column(String)
-    winning_alliance = Column(Integer)
+    winning_alliance = Column(String)
 
 class AllMatchesStatsWeek4(Base):
     """
@@ -321,7 +321,7 @@ class AllMatchesStatsWeek4(Base):
     avg_hang_score = Column(Float)
     avg_highest_comp_level = Column(Float)
     event_key = Column(String)
-    winning_alliance = Column(Integer)
+    winning_alliance = Column(String)
 
 class AllMatchesStatsWeek5(Base):
     """
@@ -344,7 +344,107 @@ class AllMatchesStatsWeek5(Base):
     avg_hang_score = Column(Float)
     avg_highest_comp_level = Column(Float)
     event_key = Column(String)
-    winning_alliance = Column(Integer)
+    winning_alliance = Column(String)
+
+# temp models (for data processing)
+
+class TempMatch(Base):
+    __tablename__ = 'temp_matches'
+    key = Column(String, primary_key=True)
+    avg_winrate = Column(Float)
+    highest_avg_winrate = Column(Float)
+    lowest_avg_winrate = Column(Float)
+    avg_auto_lower = Column(Float)
+    highest_auto_lower = Column(Float)
+    avg_auto_upper = Column(Float)
+    highest_auto_upper = Column(Float)
+    avg_teleop_lower = Column(Float)
+    highest_teleop_lower = Column(Float)
+    avg_teleop_upper = Column(Float)
+    highest_teleop_upper = Column(Float)
+    lowest_teleop_upper = Column(Float)
+    avg_hang_score = Column(Float)
+    avg_highest_comp_level = Column(Float)
+    event_key = Column(String)
+    winning_alliance = Column(String)
+
+class TempTeamsProfileWeek0(Base):
+    __tablename__ = 'temp_teams_profile_week_0'
+    team_name = Column(String, primary_key=True)
+    win_rate = Column(Float)
+    team_auto_lower = Column(Float)
+    team_auto_upper = Column(Float)
+    team_teleop_lower = Column(Float)
+    team_teleop_upper = Column(Float)
+    hang_score = Column(Float)
+    highest_comp_level = Column(Integer)
+
+class TempTeamsProfileWeek1(Base):
+    __tablename__ = 'temp_teams_profile_week_1'
+    team_name = Column(String, primary_key=True)
+    win_rate = Column(Float)
+    team_auto_lower = Column(Float)
+    team_auto_upper = Column(Float)
+    team_teleop_lower = Column(Float)
+    team_teleop_upper = Column(Float)
+    hang_score = Column(Float)
+    highest_comp_level = Column(Integer)
+
+class TempTeamsProfileWeek2(Base):
+    __tablename__ = 'temp_teams_profile_week_2'
+    team_name = Column(String, primary_key=True)
+    win_rate = Column(Float)
+    team_auto_lower = Column(Float)
+    team_auto_upper = Column(Float)
+    team_teleop_lower = Column(Float)
+    team_teleop_upper = Column(Float)
+    hang_score = Column(Float)
+    highest_comp_level = Column(Integer)
+
+class TempTeamsProfileWeek3(Base):
+    __tablename__ = 'temp_teams_profile_week_3'
+    team_name = Column(String, primary_key=True)
+    win_rate = Column(Float)
+    team_auto_lower = Column(Float)
+    team_auto_upper = Column(Float)
+    team_teleop_lower = Column(Float)
+    team_teleop_upper = Column(Float)
+    hang_score = Column(Float)
+    highest_comp_level = Column(Integer)
+
+class TempTeamsProfileWeek4(Base):
+    __tablename__ = 'temp_teams_profile_week_4'
+    team_name = Column(String, primary_key=True)
+    win_rate = Column(Float)
+    team_auto_lower = Column(Float)
+    team_auto_upper = Column(Float)
+    team_teleop_lower = Column(Float)
+    team_teleop_upper = Column(Float)
+    hang_score = Column(Float)
+    highest_comp_level = Column(Integer)
+
+class TempTeamsProfileWeek5(Base):
+    __tablename__ = 'temp_teams_profile_week_5'
+    team_name = Column(String, primary_key=True)
+    win_rate = Column(Float)
+    team_auto_lower = Column(Float)
+    team_auto_upper = Column(Float)
+    team_teleop_lower = Column(Float)
+    team_teleop_upper = Column(Float)
+    hang_score = Column(Float)
+    highest_comp_level = Column(Integer)
+
+class TempTeamsProfileWeek10(Base):
+    __tablename__ = 'temp_teams_profile_week_10'
+    team_name = Column(String, primary_key=True)
+    win_rate = Column(Float)
+    team_auto_lower = Column(Float)
+    team_auto_upper = Column(Float)
+    team_teleop_lower = Column(Float)
+    team_teleop_upper = Column(Float)
+    hang_score = Column(Float)
+    highest_comp_level = Column(Integer)
+
 
 table_name_to_model = {
     'match_dictionary': MatchDictionary,
@@ -363,6 +463,18 @@ table_name_to_model = {
     'all_matches_stats_week_1': AllMatchesStatsWeek1,
     'all_matches_stats_week_2': AllMatchesStatsWeek2,
     'all_matches_stats_week_3': AllMatchesStatsWeek3,
-    'all_matches_stats_week_4': AllMatchesStatsWeek4,
-    'all_matches_stats_week_5': AllMatchesStatsWeek5
+    'all_matches_stats_week_4': AllMatchesStatsWeek4, 
+    'all_matches_stats_week_5': AllMatchesStatsWeek5,
+    'temp_matches': TempMatch,
+    'temp_teams_profile_week_0': TempTeamsProfileWeek0,
+    'temp_teams_profile_week_1': TempTeamsProfileWeek1,
+    'temp_teams_profile_week_2': TempTeamsProfileWeek2,
+    'temp_teams_profile_week_3': TempTeamsProfileWeek3,
+    'temp_teams_profile_week_4': TempTeamsProfileWeek4,
+    'temp_teams_profile_week_5': TempTeamsProfileWeek5,
+    'temp_teams_profile_week_10': TempTeamsProfileWeek10 # TODO integrate no matches constant
+
+     # temp models
 }
+
+

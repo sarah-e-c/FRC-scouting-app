@@ -82,7 +82,6 @@ class SampleMatchWorker(QRunnable):
 
 
                                 'avg_hang_score': statistics.mean(team_hang_score_list),
-
                                 'avg_highest_comp_level': statistics.mean(team_highest_comp_level_list),
                                 })
         
@@ -91,9 +90,15 @@ class SampleMatchWorker(QRunnable):
         total_stats = red_stats - blue_stats
         raw_num = self.model.predict(pd.DataFrame([total_stats]))
         mapping = {0: 'Blue', 1:'Tie', 2: 'Red'}
+        self.logger.debug(f'{mapping[raw_num[0]]} wins!')
         self.signals.result.emit(f'{mapping[raw_num[0]]} wins!')
         self.signals.finished.emit()
 
 class SampleMatchWorkerSignals(QObject):
     result = pyqtSignal(object)
     finished = pyqtSignal()
+
+if __name__ == '__main__':
+    model = FRCModel('XGBoost', 'week_by_week', 1.5)
+    model.fit(fit_weeks='all')
+    worker = SampleMatchWorker('frc422', 'frc422', 'frc422', 'frc1086', 'frc1086', 'frc1086', 'frc1086', FRCModel('XGBoost', 'week_by_week', 1.5))

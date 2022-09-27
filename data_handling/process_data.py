@@ -23,7 +23,6 @@ import statistics
 HEADER = {'X-TBA-Auth-Key': Constants.KEY}
 YEAR = 2022
 
-logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 
@@ -804,7 +803,7 @@ class FilterObject():
         Method that is used to give the models of the matches sqlalchemy objects
         TableModel: sqlalchemy model of table getting from
         """
-        logger.debug(self.get_events_by_week(EventsTable)) # this is broken
+        # TODO make this better 
         session = Session()
         return session.query(TableModel).filter(TableModel.event_key.in_(self.get_events()), TableModel.event_key.in_(self.get_events_by_week(EventsTable))).all() # TODO use _in instead of in
             
@@ -950,6 +949,7 @@ def get_basic_filter(included_weeks=False, included_events=False) -> FilterObjec
     """
     if not not included_events: # idk if this works or not
         event_filter = EventFilterObject(included_events=included_events, DictionaryModel=models.MatchDictionary)
+
     if not not included_weeks:
         week_filter = WeekFilterObject(included_weeks=included_weeks, EventTableModel=models.Event)
     return FilterObject(event_filter=event_filter, week_filter=week_filter)
@@ -958,108 +958,228 @@ def get_basic_filter(included_weeks=False, included_events=False) -> FilterObjec
 
 def team_stats_process_full_sql(matches_table_name='match_expanded_tba',
                                 output_table_name='teams_profile_all_weeks',
-                                filter=get_basic_filter(included_events='all', included_weeks='all')):
+                                filter=get_basic_filter(included_events='all', included_weeks='all'),
+                                late_weighting = False):
     """
     A method to process team stats using full sql.
     matches_table_name = table name with all of the match data -- usually match_expanded_tba
     output_table_name = table name where the new data will be pushed to
+    late_weighting = False: determine whether to weight the later weeks more. results in different
     """
 
     valid_weeks_string = filter.get_weeks(to_string=True)
     valid_events_string = filter.get_events(to_string=True)
-    query_one = f"""
+
+    create_output_query = f"""
+    CREATE TABLE IF NOT EXISTS {output_table_name} (
+        team_name TEXT,
+        win_rate FLOAT,
+        highest_comp_level INTEGER,
+        team_auto_lower FLOAT,
+        team_auto_upper FLOAT,
+        team_teleop_lower FLOAT,
+        team_teleop_upper FLOAT,
+        hang_score FLOAT
+    )
+
+    """
+    dlt_query = f"""
     DELETE FROM {output_table_name};
     """
-
-    query = f"""INSERT INTO {output_table_name} (team_name, win_rate, highest_comp_level, team_auto_lower, team_auto_upper, team_teleop_lower, team_teleop_upper, hang_score)
-    SELECT team_name,
-    AVG(won_game) AS win_rate,
-    MAX(CASE comp_level WHEN 'qm' THEN 0 WHEN 'qf' THEN 3 WHEN 'sf' THEN 5 WHEN 'f' THEN 7 ELSE 0 END) AS highest_comp_level,
-    AVG(alliance_auto_cargo_lower) AS team_auto_lower,
-    AVG(alliance_auto_cargo_upper) AS team_auto_upper,
-    AVG(alliance_teleop__cargo_lower) AS team_teleop_lower,
-    AVG(alliance_teleop__cargo_lower) AS team_teleop_upper,
-    AVG(hang) AS hang_score
-    FROM {matches_table_name}
-    WHERE week IN ({valid_weeks_string}) AND event_key in ({valid_events_string})
-    GROUP BY team_name;
-    """
     con = engine.connect()
-
-    con.execute(query_one)
+    con.execute(create_output_query)
+    con.execute(dlt_query)
     logger.debug('previous data dropped from table')
-    con.execute(query)
+
+
+
+    if not late_weighting: # makes no distinction between weeks
+        query = f"""INSERT INTO {output_table_name} (team_name, win_rate, highest_comp_level, team_auto_lower, team_auto_upper, team_teleop_lower, team_teleop_upper, hang_score)
+        SELECT team_name,
+        AVG(won_game) AS win_rate,
+        MAX(CASE comp_level WHEN 'qm' THEN 0 WHEN 'qf' THEN 3 WHEN 'sf' THEN 5 WHEN 'f' THEN 7 ELSE 0 END) AS highest_comp_level,
+        AVG(alliance_auto_cargo_lower) AS team_auto_lower,
+        AVG(alliance_auto_cargo_upper) AS team_auto_upper,
+        AVG(alliance_teleop__cargo_lower) AS team_teleop_lower,
+        AVG(alliance_teleop__cargo_upper) AS team_teleop_upper,
+        AVG(hang) AS hang_score
+        FROM {matches_table_name}
+        WHERE week IN ({valid_weeks_string}) AND event_key in ({valid_events_string})
+        GROUP BY team_name;
+        """
+        con.execute(query)
+    else:
+        TEMP_TABLE_NAME = 'temp_data_processing'
+        query_create = f"""
+        CREATE TABLE IF NOT EXISTS {TEMP_TABLE_NAME} (
+            team_name TEXT,
+            win_rate FLOAT,
+            highest_comp_level INTEGER,
+            team_auto_lower FLOAT,
+            team_auto_upper FLOAT,
+            team_teleop_lower FLOAT,
+            team_teleop_upper FLOAT,
+            hang_score FLOAT,
+            weight FLOAT
+        );
+        """
+        con.execute(query_create)
+        
+
+        # creating weights
+        weights = []
+        for index, week in enumerate(filter.get_weeks()):
+            weights.append((index + 1) ** late_weighting)
+        
+        # for each week, calculate the averages, then combine all of them
+        for weight, week in zip(weights, filter.get_weeks()):
+            step_query = f"""INSERT INTO {TEMP_TABLE_NAME} (team_name, win_rate, highest_comp_level, team_auto_lower, team_auto_upper, team_teleop_lower, team_teleop_upper, hang_score, weight)
+            SELECT team_name,
+            AVG(won_game) AS win_rate,
+            MAX(CASE comp_level WHEN 'qm' THEN 0 WHEN 'qf' THEN 3 WHEN 'sf' THEN 5 WHEN 'f' THEN 7 ELSE 0 END) AS highest_comp_level,
+            AVG(alliance_auto_cargo_lower) AS team_auto_lower,
+            AVG(alliance_auto_cargo_upper) AS team_auto_upper,
+            AVG(alliance_teleop__cargo_lower) AS team_teleop_lower,
+            AVG(alliance_teleop__cargo_upper) AS team_teleop_upper,
+            AVG(hang) AS hang_score,
+            {weight} AS weight
+            FROM {matches_table_name}
+            WHERE week = {week} AND event_key in ({valid_events_string})
+            GROUP BY team_name;
+            """
+            con.execute(step_query)
+            logger.debug(f'week {week} data processed -- getting to be late weighted.')
+        
+
+        compression_query = f"""
+            INSERT INTO {output_table_name} (team_name, win_rate, highest_comp_level, team_auto_lower, team_auto_upper, team_teleop_lower, team_teleop_upper, hang_score)
+            SELECT team_name,
+            SUM(win_rate * weight) / SUM(weight) AS win_rate,
+            MAX(highest_comp_level * weight)/ SUM(weight) AS highest_comp_level,
+            SUM(team_auto_lower * weight)/ SUM(weight) AS team_auto_lower,
+            SUM(team_auto_upper * weight)/ SUM(weight) AS team_auto_upper,
+            SUM(team_teleop_lower * weight)/ SUM(weight) AS team_teleop_lower,
+            SUM(team_teleop_upper * weight)/ SUM(weight) AS team_teleop_upper,
+            SUM(hang_score * weight)/ SUM(weight) AS hang_score
+            FROM {TEMP_TABLE_NAME}
+            GROUP BY team_name;
+        
+        """
+        con.execute(compression_query)
+        logger.debug('weighted query submitted')
+
+        dlt_temp_query = f"""
+        DROP TABLE {TEMP_TABLE_NAME}
+        """
+        con.execute(dlt_temp_query)
+    
+    
     logger.debug('teams data processed')
     
-    
+
 def load_matches_alliance_stats_full_sql(matches_dictionary_table_name='match_dictionary',
                                          team_stats_table_name='teams_profile_all_weeks',
                                          output_table_name='all_matches_stats_all_weeks',
                                          events_table_name='events',
-                                         filter=get_basic_filter(included_events='all', included_weeks='all')):
+                                         filter=get_basic_filter(included_events='all', included_weeks='all'),
+                                         delete_existing=True):
     """
     matches_dictionary_table_name = 'match_dictionary' name of table of dictionary of matches 
     team_stats_table_name = 'teams_profile_all_weeks' name of table of teams profile
     output_table_name = 'all_matches_stats_all_weeks' name of table of output
+    filter - FilterObject used to get the wanted data
+    delete_existing=True: if set to false, then the existing data in the table will not be deleted before inserting rest
     """
+
+    # getting model classes from names
     MatchesDictionaryModel  = models.table_name_to_model[matches_dictionary_table_name]
     TeamStatsModel = models.table_name_to_model[team_stats_table_name]
     OutputTableModel = models.table_name_to_model[output_table_name]
     EventsTableModel = models.table_name_to_model[events_table_name]
-    con = engine.connect()
 
-    # deleting existing records if they exist =
+    con = engine.connect() # connection 
+
+    # creating the output table if it doesn't exist yet
+    crt_stmt = f"""
+    CREATE TABLE IF NOT EXISTS {output_table_name} (
+        key TEXT,
+        avg_winrate  FLOAT,
+        highest_avg_winrate FLOAT,
+        lowest_avg_winrate  FLOAT,
+        avg_auto_lower FLOAT,
+        highest_auto_lower  FLOAT,
+        avg_auto_upper  FLOAT,
+        highest_auto_upper  FLOAT,
+        avg_teleop_lower FLOAT,
+        highest_teleop_lower FLOAT,
+        avg_teleop_upper FLOAT,
+        highest_teleop_upper FLOAT,
+        lowest_teleop_upper FLOAT,
+        avg_hang_score  FLOAT,
+        avg_highest_comp_level FLOAT,
+        event_key TEXT,
+        winning_alliance TEXT
+    );
+    """
+    # deleting existing records if they exist
     dlt_stmt = f"""
     DELETE FROM {output_table_name};
     """
-    con.execute(dlt_stmt)
+
+
+    con.execute(crt_stmt) # creating the table if its not there
+
+    if delete_existing:
+        con.execute(dlt_stmt) # deleting from the table
+        logger.debug('existing data deleted from matches table')
+
+    # default if team name cannot be found
     default_team_stat = TeamStatsModel(
-        win_rate=0,
+        win_rate=0.25,
         team_auto_lower=0,
-        team_auto_upper=0,
+        team_auto_upper=1,
         team_teleop_lower=0,
-        team_teleop_upper=0,
+        team_teleop_upper=5,
         hang_score=0,
         highest_comp_level=0
     )
     session = Session()
-    logger.debug('previous data deleted.')
     problematic_team_names = []
+    problematic_matches = []
     for match in filter.give_matches_sqlalchemy_objects(MatchesDictionaryModel, EventsTableModel):
         try:
             red_team_1_stat = session.query(TeamStatsModel).filter_by(team_name=match.red_team_1).one()
         except Exception as e:
-            logger.warning(match.red_team_1)
             problematic_team_names.append(match.red_team_1)
             red_team_1_stat = default_team_stat
         
         try:
             red_team_2_stat = session.query(TeamStatsModel).filter_by(team_name=match.red_team_2).one()
         except Exception as e:
-            logger.warning(match.red_team_2)
+            problematic_team_names.append(match.red_team_2)
             red_team_2_stat = default_team_stat
         try: 
             red_team_3_stat = session.query(TeamStatsModel).filter_by(team_name=match.red_team_3).one()
         except Exception as e:
-            logger.warning(match.red_team_3)
-            red_team_2_stat = default_team_stat
+            problematic_team_names.append(match.red_team_3)
+            red_team_3_stat = default_team_stat
         
         try:
             blue_team_1_stat = session.query(TeamStatsModel).filter_by(team_name=match.blue_team_1).one()
         except Exception as e:
-            logger.warning(match.blue_team_1)
+            problematic_team_names.append(match.blue_team_1)
             blue_team_1_stat = default_team_stat
         
         try:
             blue_team_2_stat = session.query(TeamStatsModel).filter_by(team_name=match.blue_team_2).one()
         except Exception as e:
-            logger.warning(match.blue_team_2)
+            problematic_team_names.append(match.blue_team_2)
             blue_team_2_stat = default_team_stat
         
         try:
             blue_team_3_stat = session.query(TeamStatsModel).filter_by(team_name=match.blue_team_3).one()
         except Exception as e:
-            logger.warning(match.blue_team_3)
+            problematic_team_names.append(match.blue_team_3)
             blue_team_3_stat = default_team_stat
         try:
             match_stats = OutputTableModel(
@@ -1082,17 +1202,34 @@ def load_matches_alliance_stats_full_sql(matches_dictionary_table_name='match_di
                 winning_alliance = match.winning_alliance
             )
             session.add(match_stats)
-        except:
-            logger.critical(match)
+        except Exception as e:
+            problematic_matches.append(match.key)
     session.commit()
     logger.debug('written to sql')
+    if len(problematic_team_names) > 0:
+        logger.warning(f'problematic team names: {list(np.unique(problematic_team_names))}')
+    if len(problematic_matches) > 0:
+        logger.warning(f'problematic matches: {list(np.unique(problematic_matches))}')
+
+def clear_temp_tables():
+    session = Session()
+    session.query(models.TempMatch).delete()
+    session.query(models.TempTeamsProfileWeek0).delete()
+    session.query(models.TempTeamsProfileWeek1).delete()
+    session.query(models.TempTeamsProfileWeek2).delete()
+    session.query(models.TempTeamsProfileWeek3).delete()
+    session.query(models.TempTeamsProfileWeek4).delete()
+    session.query(models.TempTeamsProfileWeek5).delete()
+    session.query(models.TempTeamsProfileWeek10).delete()
+    session.commit()
+    session.close()
 
 if __name__ == '__main__':
     import time
     start = time.time()
-    team_stats_process_full_sql()
+    team_stats_process_full_sql(late_weighting=1.5)
     load_matches_alliance_stats_full_sql()
-    print('total time: ', start - time.time())
+    print('total time: ', time.time() - start, ' seconds')
     # get_api_data(data_loaded=True, event_keys='all')
     #team_stats_process(late_weighting=False, sql_mode=True, team_stats_filepath='teams_profile_all_weeks', directory='match_expanded_tba')
     #print(load_matches_alliance_stats(event_keys='all', all_matches_stats_filepath=False))
